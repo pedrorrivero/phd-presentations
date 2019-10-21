@@ -1,0 +1,6 @@
+**/.DS_Store
+**/build/*
+!**/build/presentation.pdf
+**/LOGOS/OTHER
+**/LOGOS/ANL_long.jpg
+**/LOGOS/ANL_short.jpg
