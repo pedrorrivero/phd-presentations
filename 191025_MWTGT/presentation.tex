@@ -147,6 +147,29 @@
 
 	\subsection{Qubit Mapping}
 	
+	\begin{frame}{Qubit Mapping}
+	
+		In order to simulate a quantum system on a quantum device, we need to map its degrees of freedom onto the qubits of the device. To do so, in this case, we can use the \textbf{Jordan-Wigner transformations} to map the creation/annihilation operators onto Pauli matrices, which can be easily studied in a quantum circuit.
+		
+		\begin{align*}
+			a^{\dagger}_{n} \rightarrow \frac{1}{2} \left[ \prod^{n-1}_{j=0} -Z_j \right] (X_n - i Y_n) 
+			\hspace{40pt} 
+			a_{n} \rightarrow \frac{1}{2} \left[ \prod^{n-1}_{j=0} -Z_j \right] (X_n + i Y_n)
+		\end{align*}
+		
+		Where a spin up $\ket{\uparrow}$ on qubit $n$ represents zero deuteron in state $\ket{n}$, and a spin down $\ket{\downarrow}$ one deuteron. For different values of $N$, this returns:
+		
+		\begin{align*}
+			H_1 &= 0.218291(Z_0 - I) \\
+			H_2 &= 5.906709 I + 0.218291 Z_0 - 6.125 Z_1 - 2.143304(X_0 X_1 + Y_0 Y_1) \\
+			H_3 &= H_2 + 9.625(I-Z_2) - 3.913119(X_1 X_2 + Y_1 Y_2) \\
+			&\cdots
+		\end{align*}
+	
+		\vspace{-20pt}
+	
+	\end{frame}
+	
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 	\subsection{Unitary Coupled Cluster}
