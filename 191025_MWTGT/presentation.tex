@@ -253,6 +253,24 @@
 
 \section{Optimization}
 
+\begin{frame}{Optimization}
+
+	Running the entire optimization process from the VQE algorithm is \textbf{computationally expensive}. We are required to iterate several times asking the quantum processor to evaluate the hamiltonian for as many states as iterration steps are needed (up to a constant factor).
+
+	\medskip
+
+	In order to imporve on this, we asked ourselves what was the \textbf{minimum number of quantum evaluations} that suficed to perfectly reproduce the expectation value function on the desiered region of Hilbert-space. We found the answer in Fourier Analysis, along with the \textbf{Nyquist-Shannon Sampling Theorem}:
+
+	\begin{block}{Nyquist-Shannon Sampling Theorem}
+		\emph{If a function $x(t)$ contains no frequencies higher than $B$ hertz, it is completely determined by giving its ordinates at a series of points spaced $1/(2B)$ seconds apart.}
+		\medskip
+		\begin{align*}
+			f_{\text{sampling}} > 2B
+		\end{align*}
+	\end{block}
+
+\end{frame}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 	\subsection{New Results}
