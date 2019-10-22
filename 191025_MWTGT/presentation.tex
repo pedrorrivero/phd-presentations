@@ -216,11 +216,37 @@
 
 		Now we need a way of finding the state which \textbf{minimizes this energy}, which will correspond by definition to the ground-state. To do so, we make use of a quantum-classical hybrid algorithm called \textbf{VQE algorithm}:
 
-	\end{frame}{}
+	\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 	\subsection{Results}
+
+	\begin{frame}{Results for the two Hamiltonians}
+
+		The results we get from this strategy are the following:
+
+		\bigskip
+
+		\texttt{
+			GROUND-STATE ENERGY (H2): \\
+			Minimum \underline{'E2 = -1.8100 (MeV)'} found at 'theta = 0.6202 (rad)' \\
+			>> ERROR = 3.5\% }
+		\medskip
+		\texttt{
+			GROUND-STATE ENERGY (H3): \\
+			Minimum \underline{'E3 = -2.0513 (MeV)'} found at '[theta, eta] = [0.2819, 0.3040] (rad)' \\
+			>> ERROR = 0.3\% }
+
+		\bigskip
+
+		Which we can verify by plotting the expected energy for the entire region of space in both cases:
+
+		\begin{multicols}{2}
+			\columnbreak
+		\end{multicols}
+
+	\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
