@@ -238,35 +238,29 @@
 
 	\begin{frame}{Results for the two Hamiltonians}
 
-		The results we get from this strategy are the following:
-
-		\bigskip
-
-		\texttt{ \small
-			GROUND-STATE ENERGY (H2): \\
-			Minimum \underline{'E2 = -1.8100 (MeV)'} found at 'theta = 0.6202 (rad)' \\
-			>> ERROR = 3.5\% }
-
-		\medskip
-
-		\texttt{ \small
-			GROUND-STATE ENERGY (H3): \\
-			Minimum \underline{'E3 = -2.0513 (MeV)'} found at '[theta, eta] = [0.2819, 0.3040] (rad)' \\
-			>> ERROR = 0.3\% }
-
-		% \bigskip
-		%
-		% Which we can verify by plotting the expected energy for the entire region of space in both cases:
+		The results we get from this strategy can verify by plotting the expected energy for the entire region of space in both cases:
 
 		\begin{multicols}{2}
 
 			\begin{center}
+				\texttt{ \small
+					GROUND-STATE ENERGY (H2): \\
+					Minimum \underline{'E2 = -1.8100 (MeV)'} \\
+					'theta = 0.6202 (rad)' \\
+					>> ERROR = 3.5\% } \\
+				\smallskip
 				\includegraphics[height=.40\paperheight]{Figures/h2_result}
 			\end{center}
 
 			\columnbreak
 
 			\begin{center}
+				\texttt{ \small
+					GROUND-STATE ENERGY (H3): \\
+					Minimum \underline{'E3 = -2.0513 (MeV)'} \\
+					'[theta, eta] = [0.2819, 0.3040] (rad)' \\
+					>> ERROR = 0.3\% } \\
+				\smallskip
 				\includegraphics[height=.40\paperheight]{Figures/h3_result}
 			\end{center}
 
@@ -299,16 +293,38 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-	\subsection{New Results}
+	\subsection{Optimized Results}
 
-	\begin{frame}{New Results for the two Hamiltonians}
+	\begin{frame}{Optimized Results for the two Hamiltonians}
 
-		We can now compare the results produced in the previous way, with the ones produced making use of Fourier Analysis and the Sampling Theorem:
+		We can now compare the results produced in the previous way, with the ones produced making use of \textbf{Fourier Analysis} and the Sampling Theorem:
 
 		\begin{multicols}{2}
-			$32$ samples $\rightarrow$ $3$ samples
+
+			\begin{center}
+				\texttt{ \small
+					GROUND-STATE ENERGY (H2): \\
+					Minimum \underline{'E2 = -1.7322 (MeV)'} \\
+					'theta = 0.5933 (rad)' \\
+					>> ERROR = 1.0\% } \\
+				\smallskip
+				\includegraphics[width=.34\paperwidth]{Figures/h2_optimization} \\
+				\small{$32$ samples $\rightarrow$ $3$ samples}
+			\end{center}
+
 			\columnbreak
-			$400$ samples $\rightarrow$ $25$ samples
+
+			\begin{center}
+				\texttt{ \small
+					GROUND-STATE ENERGY (H3): \\
+					Minimum \underline{'E3 = -2.0509 (MeV)'} \\
+					'[theta, eta] = [0.2688, 0.3631] (rad)' \\
+					>> ERROR = 0.2\% } \\
+				\smallskip
+				\includegraphics[width=.34\paperwidth]{Figures/h3_optimization} \\
+				\small{$400$ samples $\rightarrow$ $25$ samples}
+			\end{center}
+
 		\end{multicols}
 
 	\end{frame}
