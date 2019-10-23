@@ -45,6 +45,8 @@
 
 	\begin{frame}{What is Quantum Computing?}
 
+		\medskip
+
 		Quantum Computing is the application of \textbf{Quantum Information Science (QIS)} to the development of \textit{machines} capable of performing operations and calculations based on quantum logic instead of the usual classical logic.
 
 		\medskip
@@ -92,19 +94,27 @@
 
 	\begin{frame}{The Abacus Effect}
 
-		To try to understand the power of Quantum Computing in abstract, we can resort to what might be called \textbf{"The Abacus Effect"}.
-
 		\medskip
 
-		Before the abacus was invented, the only way of counting was through a "thermometer-like" scale, which was highly inefficient as it meant adding one physical bead per unit. The abacus did something great: it introduced the concept of \textbf{digits}, which was later put into an even more concise notation by the Arabs through the introduction of \textbf{numerals}.
+		Before the abacus was invented, the only way of counting was through a "thermometer-like" scale. This device introduced the concept of \textbf{digits}, which was later put into the even more concise notation of \textbf{numerals}. This meant that, instead of counting up to $N$ using $N$ elements, we could count using only $\text{log}_b (N)$ abacus elements ---where $b$ is the base of our number system (i.e. the amount of beads per row in the abacus).
 
-		\medskip
+		\begin{multicols}{2}
 
-		This means that, instead of counting up to $N$ using $N$ raw elements, we can count using only $\text{log}_b (N)$ abacus elements ---where $b$ is the base of our number system (i.e. the amount of beads per row in the abacus). Therefore, for $b\geq2$, the abacus introduced an \textbf{exponential decrease in resource requirements} to represent the exact same thing.
+		 	Therefore, for $b\geq2$, the abacus introduced an \textbf{exponential decrease in resource requirements}.
 
-		\medskip
+			\medskip
 
-		Quantum computers do something analogous. To represent the quantum state of a system made out of $N$ subsystems ---each of which with $b$ degrees of freedom--- we would usually need $b^N$ classical elements (i.e. numbers). By using quantum systems for this representation, we would only need $N$ quantum elements (i.e. each subsystem). Again, an exponential decrease in resource requirements.
+			Quantum computers do something analogous. To represent the quantum state of a system made out of $N$ subsystems ---with $b$ degrees of freedom each--- we would usually need $b^N$ classical elements (i.e. numbers). By using quantum systems for this representation, we would only need $N$ quantum elements (i.e. each subsystem).
+
+			\columnbreak
+
+			\begin{center}
+				\includegraphics[width=.30\paperwidth]{Figures/abacus} \\
+				\vspace{10pt}
+				\includegraphics[width=.34\paperwidth]{Figures/qubits}
+			\end{center}
+
+		\end{multicols}
 
 	\end{frame}
 
@@ -282,7 +292,7 @@
 					Minimum \underline{'E2 = -1.8100 (MeV)'} \\
 					'theta = 0.6202 (rad)' \\
 					>> ERROR = 3.5\% } \\
-				\bigskip 
+				\bigskip
 				\includegraphics[height=.40\paperheight]{Figures/h2_result}
 			\end{center}
 
