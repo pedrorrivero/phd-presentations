@@ -149,7 +149,15 @@
 			H_N = \sum^{N-1}_{n,n'=0} \mel{n'}{(T+V)}{n}a^{\dagger}_{n'}a_{n}
 		\end{align*}
 
-		Where $N$ is the basis dimension for a discrete variable representation in the harmonic oscillator basis.
+		Where $N$ is the dimension for a discrete variable representation in the harmonic oscillator basis.
+
+		\begin{gather*}
+			\mel{n'}{T}{n} = \frac{\hbar \omega}{2} \left[
+				\left( 2n + \frac{3}{2} \right) \delta_n^{n'} -
+				\sqrt{ n \left( n + \frac{1}{2} \right) } \delta_n^{n'+1} -
+				\sqrt{ \left( n + 1 \right) \left( n + \frac{3}{2} \right) } \delta_n^{n'-1} \right] \\
+			\mel{n'}{V}{n} = V_0 \delta_n^0 \delta_n^{n'}
+		\end{gather*}
 
 	\end{frame}
 
