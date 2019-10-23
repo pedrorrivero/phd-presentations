@@ -114,6 +114,8 @@
 
 	\begin{frame}{Quantum Software: IBM's Qiskit}
 
+		\medskip
+
 		Working with quantum systems is extremely difficult, and in many cases very expensive, this makes quantum computing research unavailable to many groups and institutions. In order to solve this problem, IBM has developed \textbf{Qiskit}, a python framework for quantum computation and quantum information.
 
 		\begin{multicols}{2}
@@ -202,6 +204,8 @@
 
 	\begin{frame}{Quantum Circuits}
 
+		\medskip
+
 		Once we have the unitary operators which get us from an initial state to some other state in the region of interest, we can implement them as \textbf{quantum circuits} and run them through qiskit.
 
 		\begin{multicols}{2}
@@ -218,7 +222,21 @@
 
 		\end{multicols}
 
-		These circuits implement the transformations given by the previously introduced unitary operators from the UCC ansatz.
+		These circuits implement the transformations given by the previously introduced unitary operators from the UCC ansatz. Afterwards, the states are \textbf{measured}:
+
+		\begin{multicols}{2}
+
+			\begin{center}
+				\includegraphics[height=.24\paperheight]{Figures/u2_measure}
+			\end{center}
+
+			\columnbreak
+
+			\begin{center}
+				\includegraphics[height=.24\paperheight]{Figures/u3_measure}
+			\end{center}
+
+		\end{multicols}
 
 	\end{frame}
 
