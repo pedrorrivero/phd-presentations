@@ -179,7 +179,7 @@
 
 	\begin{frame}{Hamiltonian Mapping onto qubits}
 
-		In order to simulate a quantum system on a quantum computer, we need to map its Hamiltonian onto the qubits of the device. To do so, in this case, we can use the \textbf{Jordan-Wigner transformations} which map the creation/annihilation operators onto Pauli matrices. This is necesarry as no direct measurement of a general quantum operator can be performed in a quanutm computer. However, it is possible to perform Pauli measurements with ease.
+		In order to simulate a quantum system on a quantum computer, we need to map its Hamiltonian onto the qubits of the device. To do so, in this case, we can use the \textbf{Jordan-Wigner transformations} which map the creation/annihilation operators onto Pauli matrices. This is necesarry as no direct measurement of a general quantum operator can be performed in a quantum computer. However, it is possible to perform Pauli measurements with ease.
 
 		\begin{align*}
 			a^{\dagger}_{n} \rightarrow \frac{1}{2} \left[ \prod^{n-1}_{j=0} -Z_j \right] (X_n - i Y_n)
@@ -321,11 +321,11 @@
 
 \begin{frame}{Optimization}
 
-	Running the entire optimization process from the VQE algorithm is \textbf{computationally expensive}. We are required to iterate several times asking the quantum processor to evaluate the hamiltonian for as many states as iterration steps are needed (up to a constant factor).
+	Running the entire optimization process from the VQE algorithm is \textbf{computationally expensive}. We are required to iterate several times asking the quantum processor to evaluate the hamiltonian for as many states as iteration steps are needed (up to a constant factor).
 
 	\medskip
 
-	In order to imporve on this, we asked ourselves what was the \textbf{minimum number of quantum evaluations} that suficed to perfectly reproduce the expectation value function on the desiered region of Hilbert-space. We found the answer in Fourier Analysis, along with the \textbf{Nyquist-Shannon Sampling Theorem}:
+	In order to improve on this, we asked ourselves what was the \textbf{minimum number of quantum evaluations} that suficed to perfectly reproduce the expectation value function on the desiered region of Hilbert-space. We found the answer in Fourier Analysis, along with the \textbf{Nyquist-Shannon Sampling Theorem}:
 
 	\begin{block}{Nyquist-Shannon Sampling Theorem}
 		\emph{If a function $x(t)$ contains no frequencies higher than $B$ hertz, it is completely determined by giving its ordinates at a series of points spaced $1/(2B)$ seconds apart.}
