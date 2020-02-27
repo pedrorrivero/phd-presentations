@@ -18,21 +18,27 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%----------------------------------------------------------------------------------------
+%--------------------------------------------------------------------------------
 %	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
-%----------------------------------------------------------------------------------------
+%--------------------------------------------------------------------------------
 
 \documentclass[final]{beamer}
 
-\usepackage[scale=1.24]{beamerposter} % Use the beamerposter package for laying out the poster
+% Use the beamerposter package for laying out the poster
+\usepackage[scale=1.24, size=a0]{beamerposter}
 
-\usetheme{confposter} % Use the confposter theme supplied with this template
+% Use the confposter theme supplied with this template
+\usetheme{confposter}
 
-\setbeamercolor{block title}{fg=ngreen,bg=white} % Colors of the block titles
-\setbeamercolor{block body}{fg=black,bg=white} % Colors of the body of blocks
-\setbeamercolor{block alerted title}{fg=white,bg=dblue!70} % Colors of the highlighted block titles
-\setbeamercolor{block alerted body}{fg=black,bg=dblue!10} % Colors of the body of highlighted blocks
 % Many more colors are available for use in beamerthemeconfposter.sty
+% Colors of the block titles
+\setbeamercolor{block title}{fg=YellowOrange,bg=white}
+% Colors of the body of blocks
+\setbeamercolor{block body}{fg=black,bg=white}
+% Colors of the highlighted block titles
+\setbeamercolor{block alerted title}{fg=white,bg=dblue!70}
+% Colors of the body of highlighted blocks
+\setbeamercolor{block alerted body}{fg=black,bg=dblue!10}
 
 %-----------------------------------------------------------
 % Define the column widths and overall poster size
@@ -52,24 +58,27 @@
 \setlength{\onecolwid}{0.22\paperwidth} % Width of one column
 \setlength{\twocolwid}{0.464\paperwidth} % Width of two columns
 \setlength{\threecolwid}{0.708\paperwidth} % Width of three columns
-\setlength{\topmargin}{-0.5in} % Reduce the top margin size
+\setlength{\topmargin}{-1.3in} % Reduce the top margin size
 %-----------------------------------------------------------
 
 \usepackage{graphicx}  % Required for including images
 
 \usepackage{booktabs} % Top and bottom rules for tables
 
-%----------------------------------------------------------------------------------------
+%--------------------------------------------------------------------------------
 %	TITLE SECTION
-%----------------------------------------------------------------------------------------
+%--------------------------------------------------------------------------------
 
-\title{Unnecessarily Complicated Research Title} % Poster title
+\title{Toward Understanding Mass Using a Quantum Computer} % Poster title
 
-\author{John Smith, James Smith and Jane Smith} % Author(s)
+\author{Pedro Rivero Ramírez$^\text{1,2}$, Ian C. Cloët$^\text{1}$, and Zack Sullivan$^\text{2}$} % Author(s)
 
-\institute{Department and University Name} % Institution(s)
+\institute{
+  $^\text{1}$Physics Division, Argonne National Laboratory, Lemont, IL 60439, USA \\
+  $^\text{2}$Department of Physics, Illinois Institute of Technology, Chicago, IL 60616, USA
+  } % Institution(s)
 
-%----------------------------------------------------------------------------------------
+%--------------------------------------------------------------------------------
 
 \begin{document}
 
@@ -87,9 +96,9 @@
 
 \begin{column}{\onecolwid} % The first column
 
-%----------------------------------------------------------------------------------------
+%--------------------------------------------------------------------------------
 %	OBJECTIVES
-%----------------------------------------------------------------------------------------
+%--------------------------------------------------------------------------------
 
 \begin{alertblock}{Objectives}
 
@@ -103,9 +112,9 @@ Lorem ipsum dolor sit amet, consectetur, nunc tellus pulvinar tortor, commodo el
 
 \end{alertblock}
 
-%----------------------------------------------------------------------------------------
+%--------------------------------------------------------------------------------
 %	INTRODUCTION
-%----------------------------------------------------------------------------------------
+%--------------------------------------------------------------------------------
 
 \begin{block}{Introduction}
 
@@ -118,11 +127,11 @@ This statement requires citation \cite{Smith:2012qr}.
 %------------------------------------------------
 
 \begin{figure}
-\includegraphics[width=0.8\linewidth]{placeholder.jpg}
+\includegraphics[width=0.8\linewidth]{Figures/placeholder.jpg}
 \caption{Figure caption}
 \end{figure}
 
-%----------------------------------------------------------------------------------------
+%--------------------------------------------------------------------------------
 
 \end{column} % End of the first column
 
@@ -134,9 +143,9 @@ This statement requires citation \cite{Smith:2012qr}.
 
 \begin{column}{\onecolwid}\vspace{-.6in} % The first column within column 2 (column 2.1)
 
-%----------------------------------------------------------------------------------------
+%--------------------------------------------------------------------------------
 %	MATERIALS
-%----------------------------------------------------------------------------------------
+%--------------------------------------------------------------------------------
 
 \begin{block}{Materials}
 
@@ -160,15 +169,15 @@ The materials were prepared according to the steps outlined below:
 
 \end{block}
 
-%----------------------------------------------------------------------------------------
+%--------------------------------------------------------------------------------
 
 \end{column} % End of column 2.1
 
 \begin{column}{\onecolwid}\vspace{-.6in} % The second column within column 2 (column 2.2)
 
-%----------------------------------------------------------------------------------------
+%--------------------------------------------------------------------------------
 %	METHODS
-%----------------------------------------------------------------------------------------
+%--------------------------------------------------------------------------------
 
 \begin{block}{Methods}
 
@@ -176,15 +185,15 @@ Lorem ipsum dolor \textbf{sit amet}, consectetur adipiscing elit. Sed laoreet ac
 
 \end{block}
 
-%----------------------------------------------------------------------------------------
+%--------------------------------------------------------------------------------
 
 \end{column} % End of column 2.2
 
 \end{columns} % End of the split of column 2 - any content after this will now take up 2 columns width
 
-%----------------------------------------------------------------------------------------
+%--------------------------------------------------------------------------------
 %	IMPORTANT RESULT
-%----------------------------------------------------------------------------------------
+%--------------------------------------------------------------------------------
 
 \begin{alertblock}{Important Result}
 
@@ -192,15 +201,15 @@ Lorem ipsum dolor \textbf{sit amet}, consectetur adipiscing elit. Sed commodo mo
 
 \end{alertblock}
 
-%----------------------------------------------------------------------------------------
+%--------------------------------------------------------------------------------
 
 \begin{columns}[t,totalwidth=\twocolwid] % Split up the two columns wide column again
 
 \begin{column}{\onecolwid} % The first column within column 2 (column 2.1)
 
-%----------------------------------------------------------------------------------------
+%--------------------------------------------------------------------------------
 %	MATHEMATICAL SECTION
-%----------------------------------------------------------------------------------------
+%--------------------------------------------------------------------------------
 
 \begin{block}{Mathematical Section}
 
@@ -220,26 +229,26 @@ Nam quis odio enim, in molestie libero. Vivamus cursus mi at nulla elementum sol
 
 Nam quis odio enim, in molestie libero. Vivamus cursus mi at nulla elementum sollicitudin. Nam quis odio enim, in molestie libero. Vivamus cursus mi at nulla elementum sollicitudin.
 
-\begin{equation}
-\kappa =\frac{\xi}{E_{\mathrm{max}}} %\mathbb{ZNR}
-\end{equation}
+% \begin{equation}
+% \kappa =\frac{\xi}{E_{\mathrm{max}}} %\mathbb{ZNR}
+% \end{equation}
 
 \end{block}
 
-%----------------------------------------------------------------------------------------
+%--------------------------------------------------------------------------------
 
 \end{column} % End of column 2.1
 
 \begin{column}{\onecolwid} % The second column within column 2 (column 2.2)
 
-%----------------------------------------------------------------------------------------
+%--------------------------------------------------------------------------------
 %	RESULTS
-%----------------------------------------------------------------------------------------
+%--------------------------------------------------------------------------------
 
 \begin{block}{Results}
 
 \begin{figure}
-\includegraphics[width=0.8\linewidth]{placeholder.jpg}
+\includegraphics[width=0.8\linewidth]{Figures/placeholder.jpg}
 \caption{Figure caption}
 \end{figure}
 
@@ -261,7 +270,7 @@ Treatment 3 & 0.0009271 & 0.296 \\
 
 \end{block}
 
-%----------------------------------------------------------------------------------------
+%--------------------------------------------------------------------------------
 
 \end{column} % End of column 2.2
 
@@ -273,9 +282,9 @@ Treatment 3 & 0.0009271 & 0.296 \\
 
 \begin{column}{\onecolwid} % The third column
 
-%----------------------------------------------------------------------------------------
+%--------------------------------------------------------------------------------
 %	CONCLUSION
-%----------------------------------------------------------------------------------------
+%--------------------------------------------------------------------------------
 
 \begin{block}{Conclusion}
 
@@ -283,9 +292,9 @@ Nunc tempus venenatis facilisis. \textbf{Curabitur suscipit} consequat eros non 
 
 \end{block}
 
-%----------------------------------------------------------------------------------------
+%--------------------------------------------------------------------------------
 %	ADDITIONAL INFORMATION
-%----------------------------------------------------------------------------------------
+%--------------------------------------------------------------------------------
 
 \begin{block}{Additional Information}
 
@@ -298,23 +307,24 @@ Maecenas ultricies feugiat velit non mattis. Fusce tempus arcu id ligula varius 
 
 \end{block}
 
-%----------------------------------------------------------------------------------------
+%--------------------------------------------------------------------------------
 %	REFERENCES
-%----------------------------------------------------------------------------------------
+%--------------------------------------------------------------------------------
 
 \begin{block}{References}
 
 \nocite{*} % Insert publications even if they are not cited in the poster
 \small{\bibliographystyle{unsrt}
 \bibliography{sample}\vspace{0.75in}}
+\vspace{-0.5in}
 
 \end{block}
 
-%----------------------------------------------------------------------------------------
+%--------------------------------------------------------------------------------
 %	ACKNOWLEDGEMENTS
-%----------------------------------------------------------------------------------------
+%--------------------------------------------------------------------------------
 
-\setbeamercolor{block title}{fg=red,bg=white} % Change the block title color
+\setbeamercolor{block title}{fg=RedOrange,bg=white} % Change the block title color
 
 \begin{block}{Acknowledgements}
 
@@ -322,30 +332,31 @@ Maecenas ultricies feugiat velit non mattis. Fusce tempus arcu id ligula varius 
 
 \end{block}
 
-%----------------------------------------------------------------------------------------
-%	CONTACT INFORMATION
-%----------------------------------------------------------------------------------------
+\begin{center}
+\begin{tabular}{ccc}
+\includegraphics[height=0.25\linewidth]{LOGOS/LOGO-3.png} & \hfill & \includegraphics[height=0.25\linewidth]{LOGOS/LOGO-4.png}
+\end{tabular}
+\end{center}
 
-\setbeamercolor{block alerted title}{fg=black,bg=norange} % Change the alert block title colors
+%--------------------------------------------------------------------------------
+%	CONTACT INFORMATION
+%--------------------------------------------------------------------------------
+
+\setbeamercolor{block alerted title}{fg=black,bg=SpringGreen} % Change the alert block title colors
 \setbeamercolor{block alerted body}{fg=black,bg=white} % Change the alert block body colors
 
 \begin{alertblock}{Contact Information}
 
 \begin{itemize}
-\item Web: \href{http://www.university.edu/smithlab}{http://www.university.edu/smithlab}
-\item Email: \href{mailto:john@smith.com}{john@smith.com}
-\item Phone: +1 (000) 111 1111
+\item Email: \href{mailto:priveroramirez@anl.gov}{priveroramirez@anl.gov}
+% \item Phone: +1 (000) 111-1111
+\item Linkedin: \href{https://www.linkedin.com/in/pedrorrivero/}{pedrorrivero}
 \end{itemize}
 
 \end{alertblock}
 
-\begin{center}
-\begin{tabular}{ccc}
-\includegraphics[width=0.4\linewidth]{Figures/logo.png} & \hfill & \includegraphics[width=0.4\linewidth]{Figures/logo.png}
-\end{tabular}
-\end{center}
 
-%----------------------------------------------------------------------------------------
+%--------------------------------------------------------------------------------
 
 \end{column} % End of the third column
 
