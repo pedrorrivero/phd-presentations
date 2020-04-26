@@ -6,53 +6,90 @@
 #   |_|    |_|  \_\   https://github.com/pedrorrivero
 #
 
-## User interface, just set the main filename and it will do everything for you
-# If you have any extra code or images included list them in EXTRA_FILES
-# This should work as long as you have all the .tex, .sty and .bib files in
-# the same folder.
+## User interface, just set the main filename and it will do everything for you.
+# You can choose the engine for compilation. Default: pdflatex/xelatex.
+# Figures/logos must be placed in the Figures/Logos direrctories. These are
+# searched excluding any hidden files.
+# If you have any extra files such as listings include them in EXTRA.
 
-TEMP2 := $(shell mkdir make 2>/dev/null)
+ENGINE = pdflatex
+# ENGINE = xelatex
 
-MAINFILE = presentation
-EXTRA_FILES := $(shell echo LOGOS/* Figures/*)
-# EXTRA_FILES := $(shell echo LOGOS/*)
+MAINFILE = Presentation
+IMAGES := $(shell find Figures/* LOGOS/* -name "[^/.]*.*")
+EXTRA := $(shell echo '')
 MAKE_DIR = make
 
-## Inner workings
-TEX = $(shell echo *.tex)
-STY = $(shell echo *.sty)
+## Commands
+COMPILE_TEX = "${ENGINE} -output-directory='./${MAKE_DIR}/' ${MAINFILE}"
+COMPILE_BIB = "bibtex ./${MAKE_DIR}/${MAINFILE}"
 
-TRACKERS = $(shell echo $(TEX) $(STY))
 
-# .PHONY: all
-# all: $(MAINFILE).pdf
+## Filesystem
+TEX = $(shell find . -name "*.tex")	# Regular (La)TeX files
+STY = $(shell find . -name "*.sty")	# Style files
+CLS = $(shell find . -name "*.cls")	# Class files (in theory only one)
+BIB = $(shell find . -name "*.bib")	# Bibliography files
+BST = $(shell find . -name "*.bst")	# Bib. style files
 
-$(MAINFILE).pdf: $(TRACKERS) $(EXTRA_FILES)
-	@echo '----------------------'
-	@pdflatex -output-directory='./${MAKE_DIR}/' $(MAINFILE) 1> /dev/null
-		@echo 'First pdflatex pass completed...'
-	@pdflatex -output-directory='./${MAKE_DIR}/' $(MAINFILE) 1> /dev/null
-		@echo 'Second pdflatex pass completed...'
+LATEX = $(shell echo $(TEX) $(STY) $(CLS) $(BIB) $(BST))
+
+## Formulae
+$(MAINFILE).pdf: $(LATEX) $(IMAGES) $(EXTRA)
+	@mkdir ${MAKE_DIR} 2>/dev/null
+	@echo '----------- BUILD -----------'
+	@eval $(COMPILE_TEX) &> /dev/null
+	@echo "Initial ${ENGINE} pass completed..."
+	@eval $(COMPILE_TEX) &> /dev/null
+	@echo "Final ${ENGINE} pass completed..."
 	@mv -f ./${MAKE_DIR}/*.pdf ./
-		@echo 'SUCCES! $@ moved to parent directory'
-	@echo '----------------------'
+	@echo "SUCCES! File '$@' moved to parent directory"
 
-# .PHONY: push
-# push: $(MAINFILE).pdf
-# 	@echo '----------------------'
-# 	git push origin master
-# 	@echo '----------------------'
+$(BIB):
+	@bibtool --ignored.word{and} --ignored.word{or} --ignored.word{of} \
+		--ignored.word{to} --ignored.word{for} --ignored.word{in} \
+		--ignored.word{on} --ignored.word{at} --ignored.word{from} \
+		--ignored.word{y} --ignored.word{o} --ignored.word{de} \
+		--ignored.word{a} --ignored.word{para} --ignored.word{por} \
+		--ignored.word{en} --ignored.word{sobre} --ignored.word{desde} \
+		-f "%+n(author):%4D(year):%-4T(title)" -s $@ -o $@
+	@echo "Bibtex file '$@' correctly labeled and sorted"
+
+.PHONY: all
+all: bib $(MAINFILE).pdf clean
+
+.PHONY: bib
+bib:
+	@echo '----------- BIBTEX -----------'
+	@make -B $(BIB)	# Unconditionally make all targets
 
 .PHONY: clean
 clean:
-	@echo '----------------------'
-	-rm -f ${MAKE_DIR}/*
-	@echo '----------------------'
+	@echo '----------- CLEAN -----------'
+	-rm -rf ./${MAKE_DIR}/
 
 .PHONY: cleanall
 cleanall: clean
 	-rm -f *.pdf
 	-rm -f *.ps
 	-rm -f *.dvi
-	-rm -rf ./${MAKE_DIR}/
-	@echo '----------------------'
+
+.PHONY: debug
+debug:
+	@echo '----------- DEBUG -----------'
+	@echo "Type  R <return>  for running."
+	@echo "Type  H <return>  for immediate help."
+	@echo "Type  X <return>  for exiting."
+	@echo '-----------------------------'
+	@sleep 2
+	@-eval $(COMPILE_TEX) | grep -A 25 -B 5 -i -E 'Info:|Warning:|Error:'
+
+.PHONY: debib	# Debug bib
+debib:
+	@echo '----------- DEBIB -----------'
+	@echo "Type  R <return>  for running."
+	@echo "Type  H <return>  for immediate help."
+	@echo "Type  X <return>  for exiting."
+	@echo '-----------------------------'
+	@sleep 2
+	@-eval $(COMPILE_BIB) | grep -A 25 -B 5 -i -E 'Info:|Warning:|Error:'
