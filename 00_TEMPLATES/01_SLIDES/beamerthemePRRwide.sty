@@ -1,0 +1,340 @@
+%%    _____  _____
+%%   |  __ \|  __ \    AUTHOR: Pedro Rivero
+%%   | |__) | |__) |   ---------------------------------
+%%   |  ___/|  _  /    DATE: April 26, 2020
+%%   | |    | | \ \    ---------------------------------
+%%   |_|    |_|  \_\   https://github.com/pedrorrivero
+%%
+
+\ProvidesPackage{beamerthemePRRwide}[2020/05/26]
+
+%% ----------------------------------------------------------------------------
+%% Color definition and selection
+%% ----------------------------------------------------------------------------
+
+% Color definition
+\definecolor{DarkGrey}{RGB}{50,50,50}
+\definecolor{LightBlue}{RGB}{0,118,235}
+\definecolor{Purple}{RGB}{108,0,215}
+\definecolor{Orange}{RGB}{255,128,0}
+\definecolor{Green}{RGB}{0,164,0}
+\definecolor{Gold}{RGB}{235,185,50}
+\definecolor{IITred}{RGB}{205,39,19}
+\definecolor{UPMblue}{RGB}{0,60,179}
+\definecolor{Pegasusblue}{RGB}{0,102,153}
+\definecolor{Pegasuslightblue}{RGB}{0,136,204}
+\definecolor{UMBlue}{RGB}{40,55,85}
+\definecolor{UMMaize}{RGB}{235,185,50}
+\definecolor{ANLblue}{RGB}{0,118,235}
+
+% Color selection
+\colorlet{DetailColor}{IITred}
+\colorlet{BackgroundColor}{DarkGrey}
+
+
+%% ----------------------------------------------------------------------------
+%% Packages
+%% ----------------------------------------------------------------------------
+
+%% CTAN Packages
+\RequirePackage[T1]{fontenc}	% To select font encodings
+\RequirePackage[utf8]{inputenc}	% Translates various input encodings
+\RequirePackage{helvet}	% Loading Helvetica fonts
+\RequirePackage{multicol}	% For multicolum environments
+
+\RequirePackage{etoolbox}	% Tools for patching LaTeX commands and more
+\RequirePackage{ragged2e}	% For text alignment
+	\apptocmd{\frame}{}{\justifying}{} % Justify text
+
+\RequirePackage{tagging}	% To generate multiple documents from a single source
+\RequirePackage{pgfplots}	% Draws high-quality function plots
+	\pgfplotsset{compat=1.10}	% Set version compatibility of pgfplots
+\RequirePackage{tikz}	% To create graphics programmatically
+	\usetikzlibrary{calc}	% To make complex coordinate calculations
+\RequirePackage{media9}	% Interface to embed interactive objects (i.e. video)
+
+
+%% External Packages (have to be present in root directory)
+
+
+%% ----------------------------------------------------------------------------
+%% Functions and utilities
+%% ----------------------------------------------------------------------------
+
+% Double new line
+\newcommand\Newline{\newline\newline}
+
+% Section title
+\newcommand{\SectionTitle}[1]{
+	{ \textbf{ \begin{center}
+		\Huge \color{DetailColor} \underline{#1}
+	\end{center} }}
+}
+
+% Includes TOC at begin section
+%\AtBeginSection[]
+%{
+%  \begin{frame}
+%    \frametitle{Table of Contents}
+%    \tableofcontents[currentsection]
+%  \end{frame}
+%}
+
+% Final frame
+\newcommand\FinalFrame{
+	\begin{frame}[plain,t]
+		\vspace*{-4.5\baselineskip}
+		\begin{pgfpicture}
+			\pgf@relevantforpicturesizefalse
+			\pgftransformxshift{-\Gm@lmargin}
+			\pgftransformyshift{5.5pt}
+			\ColorFillBackground
+			\pgftext[at=\pgfpoint{.5\paperwidth}{-.45\paperheight},center,center]{
+				\pgfuseimage{closure-logo} }	% Closing image
+
+			% Closing text
+			% \pgftext[at=\pgfpoint{.5\paperwidth}{-.4\paperheight},center,center]{
+			% 	\Huge\structure{\textcolor{DetailColor!40!white}{Thank you!}} }
+		\end{pgfpicture}
+	\end{frame}
+}
+
+% Color fill background
+\newcommand\ColorFillBackground{
+	\pgfpathmoveto{\pgfpointorigin}
+	\pgfpathrectanglecorners
+		{\pgfpoint{0pt}{0pt}}{\pgfpoint{\paperwidth}{-\paperheight-5pt}}
+	\pgfsetfillcolor{BackgroundColor}
+	\pgfusepath{fill}
+	\pgftext[at=\pgfpoint{\paperwidth}{-\paperheight-4.4pt},right,base]{
+		\pgfuseimage{large-corner}
+	}	% Corner image
+}
+
+
+%% ----------------------------------------------------------------------------
+%% Image declaration
+%% ----------------------------------------------------------------------------
+
+\useoutertheme[width=.12\paperwidth]{sidebar}
+\setlength{\beamer@headheight}{.185\paperheight}
+% \setlength{\beamer@headheight}{\beamer@sidebarwidth}
+
+\pgfdeclareimage[width=.08\paperwidth]{main-logo}{Logos/MainLogo}
+\pgfdeclareimage[height=.08\paperwidth]{negative-logo}{Logos/NegativeLogo}
+\pgfdeclareimage[width=.48\paperwidth]{closure-logo}{Logos/ClosureLogo}
+\pgfdeclareimage[height=.5\paperheight]{large-corner}{Logos/Corner}
+\pgfdeclareimage[height=\beamer@headheight]{small-corner}{Logos/Corner}
+
+
+%% ----------------------------------------------------------------------------
+%% Outer theme
+%% ----------------------------------------------------------------------------
+
+%% Sidebar
+\setbeamertemplate{sidebar left}{%
+	\vskip5pt
+	\hskip2pt
+	\insertverticalnavigation{\beamer@sidebarwidth}%
+}
+
+%% Footline
+\setbeamertemplate{footline}[text line]{%
+	\insertshortauthor\strut\hfill
+	\insertshorttitle\hfill
+	%\insertshortdate\hspace{1em}
+	\insertframenumber/\inserttotalframenumber
+}
+\setbeamerfont{footline}{size=\fontsize{6}{12}\selectfont}
+
+%% Notitle
+\addtobeamertemplate{notitle}{}{%
+	\begin{pgfpicture}
+		\pgftext[at=\pgfpoint{\paperwidth}{-\beamer@headheight},right,base]{
+			\pgfuseimage{small-corner}}
+		\pgfsetcolor{white}
+		\pgfusepath{stroke}
+		\pgfsetcolor{DetailColor}
+		\pgfusepath{stroke}
+		\pgftext[at=\pgfpoint{.055\paperwidth}{-.97\paperheight},center,base]{
+			\pgfuseimage{main-logo} }
+	\end{tikzpicture}
+}
+
+%% Frametitle
+\addtobeamertemplate{frametitle}{}{%
+	\begin{pgfpicture}
+		\pgf@relevantforpicturesizefalse
+		\pgftransformxshift{-\Gm@lmargin}
+		\pgftransformyshift{\beamer@headheight+15pt}
+		\pgftext[at=\pgfpoint{\paperwidth}{-\beamer@headheight},right,base]{
+			\pgfuseimage{small-corner} }
+		\pgfpathmoveto{\pgfpoint{.12\paperwidth}{0pt}}
+		\pgfpathlineto{\pgfpoint{.12\paperwidth}{-\beamer@headheight}}
+		\pgfsetlinewidth{3.5pt}
+		\pgfsetinnerlinewidth{1pt}
+		\pgfsetinnerstrokecolor{DetailColor}
+		\pgfsetcolor{white}
+		\pgfusepath{stroke}
+		\pgfpathmoveto{\pgfpoint{.12\paperwidth}{-.215\paperheight}}
+		\pgfpathlineto{\pgfpoint{.12\paperwidth}{-.97\paperheight}}
+		\pgfsetlinewidth{1pt}
+		\pgfsetinnerlinewidth{0pt}
+		\pgfsetcolor{DetailColor}
+		\pgfusepath{stroke}
+		\pgftext[at=\pgfpoint{.055\paperwidth}{-.97\paperheight},center,base]{
+			\pgfuseimage{main-logo} }
+	\end{pgfpicture}%
+	\vskip-18pt%
+}
+
+%% Title page
+\setbeamertemplate{title page}{%
+	\usebeamertemplate{title background}%
+	\vskip .33\paperheight%
+	\begin{centering}
+		{\usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle}\par
+			\smallskip
+		{\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle}\par
+			\vspace{.10\paperheight}
+		{\insertauthor}\par
+			\vspace{.04\paperheight}
+		{\small\insertinstitute}\par
+			\vspace{.04\paperheight}
+		{\small\href{mailto:\mail}{\nolinkurl{\mail}}}\par
+			\vspace{.04\paperheight}
+			\vfill
+		{\small\emph{\insertdate}}\par
+	\end{centering}
+	\vskip .04\paperheight
+}
+
+%% Title background
+\setbeamertemplate{title background}{%
+	\vspace*{-4.5\baselineskip}
+	\begin{pgfpicture}
+
+		\pgf@relevantforpicturesizefalse
+		\pgftransformxshift{-\Gm@lmargin}
+		\pgftransformyshift{5.5pt}
+		\ColorFillBackground
+
+		% White bar across top
+		\pgfpathmoveto{\pgfpointorigin}
+		\pgfpathrectanglecorners
+			{\pgfpoint{0pt}{0pt}}{\pgfpoint{\paperwidth}{-.25\paperheight}}
+		\pgfsetfillcolor{white}
+		\pgfusepath{fill}
+
+		% DetailColor short bar up on left
+		\pgfpathrectanglecorners
+			{\pgfpoint{0pt}{0pt}}{\pgfpoint{.12\paperwidth}{-.183\paperheight}}
+		\pgfsetfillcolor{DetailColor}
+		\pgfusepath{fill}
+
+		% Negative logo
+		\pgftext[at=\pgfpoint{.055\paperwidth}{-.095\paperheight},center,center]{
+			\pgfuseimage{negative-logo} }
+
+		% BackgroundColor short bar on left
+		\pgfpathrectanglecorners
+			{\pgfpoint{0pt}{-.19\paperheight}}
+			{\pgfpoint{.12\paperwidth}{-.24\paperheight}}
+		\pgfsetfillcolor{BackgroundColor}
+		\pgfusepath{fill}
+
+		% Followed by DetailColor bar on right
+		\pgfpathrectanglecorners
+			{\pgfpoint{.12\paperwidth}{-.19\paperheight}}
+			{\pgfpoint{\paperwidth}{-.24\paperheight}}
+		\pgfsetfillcolor{DetailColor}
+		\pgfusepath{fill}
+
+		% A stroke down the middle (between the last two)
+		\pgfpathmoveto{\pgfpoint{.12\paperwidth}{-.19\paperheight}}
+		\pgfpathlineto{\pgfpoint{.12\paperwidth}{-.24\paperheight}}
+		\pgfsetlinewidth{3.5pt}
+		\pgfsetinnerlinewidth{1pt}
+		\pgfsetinnerstrokecolor{DetailColor}
+		\pgfsetrectcap
+		\pgfsetcolor{white}
+		\pgfusepath{stroke}
+
+		% A DetailColor stroke down parallel to the title
+		\pgfpathmoveto{\pgfpoint{.12\paperwidth}{-.30\paperheight}}
+		\pgfpathlineto{\pgfpoint{.12\paperwidth}{-.50\paperheight}}
+		\pgfsetlinewidth{1pt}
+		\pgfsetinnerlinewidth{0pt}
+		\pgfsetcolor{DetailColor}
+		\pgfusepath{stroke}
+
+		% A white stroke down parallel to the author
+		\pgfpathmoveto{\pgfpoint{.12\paperwidth}{-.55\paperheight}}
+		\pgfpathlineto{\pgfpoint{.12\paperwidth}{-.63\paperheight}}
+		\pgfsetlinewidth{1pt}
+		\pgfsetcolor{white}
+		\pgfusepath{stroke}
+
+		% A short white stroke down to hold the reference  link
+		\pgfpathmoveto{\pgfpoint{.12\paperwidth}{-.9\paperheight}}
+		\pgfpathlineto{\pgfpoint{.12\paperwidth}{-.93\paperheight}}
+		\pgfsetlinewidth{1pt}
+		\pgfsetcolor{white}
+		\pgfusepath{stroke}
+
+		% Reference link
+		\pgftext[at=\pgfpoint{.13\paperwidth}{-.922\paperheight},left,base]{
+			\scriptsize \website }
+
+	\end{pgfpicture}%
+}
+
+
+%% ----------------------------------------------------------------------------
+%% Inner Theme
+%% ----------------------------------------------------------------------------
+\useinnertheme{rectangles}
+\setbeamertemplate{navigation symbols}{}
+
+\setlength{\leftmargini}{.5em}
+\setlength{\leftmarginii}{1.0em}
+\setlength{\leftmarginiii}{1.5em}
+\setlength{\leftmarginiv}{2.0em}
+\setlength{\leftmarginv}{2.5em}
+\setlength{\leftmarginvi}{3.0em}
+%\setlength{\footnotesep}{1pt} % How to reduce space between text and footer?
+
+
+%% ----------------------------------------------------------------------------
+%% Formating: fonts and applied colors
+%% ----------------------------------------------------------------------------
+
+\usecolortheme[named=DetailColor]{structure}
+\usecolortheme{rose}
+\setbeamercolor{title page}{fg=white}
+
+\setbeamerfont{title}{size=\fontsize{14pt}{16}\selectfont}
+\setbeamerfont{subtitle}{size=\fontsize{10pt}{12}\selectfont}
+\setbeamerfont{frametitle}{size=\fontsize{13pt}{15}\selectfont}
+\setbeamerfont{section in sidebar}{series=\bfseries}
+\setbeamerfont{note page}{size=\fontsize{0.2cm}{0.1cm}}
+
+\setbeamercolor{title}{fg=DetailColor!40!white}
+\setbeamercolor{subtitle}{fg=DetailColor!40!white}
+\setbeamercolor{frametitle}{fg=DetailColor!40!white,bg=BackgroundColor}
+\setbeamercolor{section in sidebar}{fg=DetailColor}
+\setbeamercolor{subsection in sidebar}{fg=black}
+\setbeamercolor{block title}{bg=BackgroundColor!28!white,fg=BackgroundColor}
+\setbeamercolor{block body}{bg=DetailColor!15!white}
+\setbeamercolor{logo}{bg=DetailColor}
+
+
+%% ----------------------------------------------------------------------------
+%% END
+%% ----------------------------------------------------------------------------
+
+% ? -> This has to go here (end)
+\makeatletter
+\patchcmd{\endbeamer@frameslide}
+	{\ifx\beamer@frametitle\@empty}{\iffalse}{}{\errmessage{failed to patch}}
+\makeatother

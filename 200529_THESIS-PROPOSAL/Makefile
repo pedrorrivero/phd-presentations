@@ -36,6 +36,7 @@ LATEX = $(shell echo $(TEX) $(STY) $(CLS) $(BIB) $(BST))
 
 ## Formulae
 $(MAINFILE).pdf: $(LATEX) $(IMAGES) $(EXTRA)
+	@make clean 1> /dev/null	# Prevents non-zero return value issues with bibtex
 	@mkdir ${MAKE_DIR} 2>/dev/null
 	@echo '----------- BUILD -----------'
 	@eval $(COMPILE_TEX) &> /dev/null

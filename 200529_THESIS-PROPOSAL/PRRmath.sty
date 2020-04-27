@@ -1,0 +1,117 @@
+%% ----------------------------------------------------------------------------
+%%    _____  _____
+%%   |  __ \|  __ \    AUTHOR: Pedro Rivero
+%%   | |__) | |__) |   ---------------------------------
+%%   |  ___/|  _  /    DATE: March 4, 2020
+%%   | |    | | \ \    ---------------------------------
+%%   |_|    |_|  \_\   https://github.com/pedrorrivero
+%%
+%% ----------------------------------------------------------------------------
+%% Package for math, physics and sourcecode. It requires standard CTAN packages
+%% as well as external ones, and defines some new useful functionality
+%% ----------------------------------------------------------------------------
+
+\NeedsTeXFormat{LaTeX2e}[1995/12/01]
+\ProvidesPackage{PRRmath}[2020/03/04 v1.00 (P.Rivero)]
+
+%% ----------------------------------------------------------------------------
+%% Packages
+%% ----------------------------------------------------------------------------
+
+%% CTAN Packages
+\RequirePackage{amsmath}  % AMS basic package
+\RequirePackage{amssymb}  % AMS symbols
+\RequirePackage{mathtools}  % Extra mathematical tools
+\RequirePackage{dsfont} % Double stroke roman fonts
+% \RequirePackage{bm}	% \boldsymbol
+
+\RequirePackage{listings}	% For typesetting programming code
+
+\RequirePackage{physics}  % Physics math notation
+\RequirePackage{slashed}  % Introduces Feynman's slash notation
+
+
+%% External Packages (have to be present in root directory)
+% \RequirePackage[framed,autolinebreaks,useliterate]{mcode} % Matlab sourcecode
+
+
+%% ----------------------------------------------------------------------------
+%% Defines new useful custom commands
+%% ----------------------------------------------------------------------------
+
+%% Arrows
+\newcommand{\ra}{\rightarrow}
+\newcommand{\Ra}{\Rightarrow}
+\newcommand{\la}{\leftarrow}
+\newcommand{\La}{\Leftarrow}
+\newcommand{\lra}{\leftrightarrow}
+\newcommand{\LRa}{\Leftrightarrow}
+
+\newcommand{\ua}{\uparrow}
+\newcommand{\da}{\downarrow}
+\newcommand{\uda}{\updownarrow}
+
+\newcommand{\qra}{\quad \rightarrow \quad} % Spaced \rightarrow
+\newcommand{\qRa}{\quad \Rightarrow \quad} % Spaced \Rightarrow
+\newcommand{\qla}{\quad \leftarrow \quad} % Spaced \leftarrow
+\newcommand{\qLa}{\quad \Leftarrow \quad} % Spaced \Leftarrow
+\newcommand{\qlra}{\quad \leftrightarrow \quad} % Spaced \leftrightarrow
+\newcommand{\qLRa}{\quad \Leftrightarrow \quad}  % Spaced \Leftrightarrow
+
+%% Commutators
+\newcommand{\com}[2]{\comm{#1}{#2}_-} % Square brackets w/ minus sign subscript
+\newcommand{\acom}[2]{\comm{#1}{#2}_+}  % Square brackets w/ plus sign subscript
+
+%% Fock space bra-kets
+\newcommand{\ketf}[1]{\ket{#1}^{\text{F}}}
+\newcommand{\braf}[1]{\prescript{\text{F}}{}{\bra{#1}}}
+
+%% Math derivation endings
+\newcommand{\QED}{
+	\begin{flushright}
+		$\mathbb{Q.E.D.}\;\blacksquare$
+	\end{flushright}
+}
+
+\newcommand{\QEF}{
+	\begin{flushright}
+		$\mathbb{Q.E.F.}\;\blacksquare$
+	\end{flushright}
+}
+
+%% Definition equality symbols
+\newcommand{\trieqsym}{\triangleq}
+\newcommand{\coleqsym}{\vcentcolon=}
+\newcommand{\defeqsym}{\stackrel{\mathclap{\tiny\mbox{def}}}{=}}
+
+\newcommand{\defeq}{\trieqsym}	% Select the definiton equal symbol to use
+
+\newcommand{\qeq}{\overset{?}{=}}	% Questioned equality
+
+%% Definition zerodot
+\newcommand*{\zerodot}{%
+  \nfss@text{%
+    \sbox0{$\vcenter{}$}% math axis
+    \sbox2{0}%
+    \sbox4{0\/}%
+    \ooalign{%
+      0\cr
+      \hidewidth
+      \kern\dimexpr\wd4-\wd2\relax % compensate for slanted fonts
+      \raise\dimexpr(\ht2-\dp2)/2-\ht0\relax\hbox{%
+        \if b\expandafter\@car\f@series\@nil\relax
+          \mathversion{bold}%
+        \fi
+        $\cdot\m@th$%
+      }%
+      \hidewidth
+      \cr
+      \vphantom{0}% correct depth of final symbol
+    }%
+  }%
+}
+
+%% Definition binary, octal, and hexadecimal symbols
+\newcommand{\bin}{\mathtt{\zerodot b}}	% Alternatively bB
+\newcommand{\oct}{\mathtt{\zerodot o}} 	% Alternatively oO
+\newcommand{\hex}{\mathtt{\zerodot x}}	% Alternatively xX

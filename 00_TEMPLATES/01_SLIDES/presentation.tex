@@ -6,48 +6,51 @@
 %%   |_|    |_|  \_\   https://github.com/pedrorrivero
 %%
 
-%\documentclass[9pt, aspectratio=169]{beamer}
-\documentclass[9pt, handout, aspectratio=169]{beamer}		% For use when we want to skip \pause commands exporting
-\usetheme{PedroRiveroANLwide}
+% \documentclass[9pt, aspectratio=169]{beamer}
+\documentclass[9pt, handout, aspectratio=169]{beamer}	% Skip \pause commands
+\usetheme{PRRwide}
+\usepackage{PRRmath}
 
-%\setbeameroption{show notes}
-%\setbeameroption{show only notes}
-\setbeamerfont{note page}{size=\fontsize{0.2cm}{0.1cm}}
+% \setbeameroption{show notes}
+% \setbeameroption{show only notes}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%         TITLE          %%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% ----------------------------------------------------------------------------
+%% FRONT-MATTER
+%% ----------------------------------------------------------------------------
 
 \title{Quantum Computation and Information}
 \subtitle{A Gentle Introduction}
 \author{Pedro Rivero}
+\institute{Illinois Institute of Technology \\ Argonne National Laboratory}
 \newcommand{\mail}{priveroramirez@anl.gov}
-\date{\emph{\small{\today}}}
-\institute{Argonne National Laboratory\\ Illinois Institute of Technology\\
-\href{mailto:\mail}{\nolinkurl{\mail}}}
-\newcommand{\website}{www.phy.anl.gov}
+\date{\today}
+\newcommand{\website}{
+	\href{http://www.phy.anl.gov}
+	{www.phy.anl.gov}
+}
 
 \begin{document}
-\justify
-\setlength{\abovedisplayskip}{0pt}
-\setlength{\belowdisplayskip}{12pt}
-\setlength{\abovedisplayshortskip}{0pt}
-\setlength{\belowdisplayshortskip}{12pt}
+	\justify
+	\setlength{\abovedisplayskip}{0pt}
+	\setlength{\belowdisplayskip}{12pt}
+	\setlength{\abovedisplayshortskip}{0pt}
+	\setlength{\belowdisplayshortskip}{12pt}
 
-	\begin{frame}[plain,t]
-		\titlepage
-	\end{frame}
+\begin{frame}[plain,t]
+	\titlepage
+\end{frame}
 
-	\begin{frame}[c]{Contents Overview}
+\begin{frame}[c]{Contents Overview}
 %		\begin{multicols}{2}
 %  			\tableofcontents
 %		\end{multicols}
-		\tableofcontents
-	\end{frame}
+	\tableofcontents
+\end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%          BODY          %%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% ----------------------------------------------------------------------------
+%% MAIN-MATTER
+%% ----------------------------------------------------------------------------
 
 \section{Introduction}
 
@@ -67,7 +70,8 @@
 
 	\end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% ----------------------------------------------------------------------------
 
 	\subsection{Types of Logic}
 
@@ -97,7 +101,8 @@
 
 	\end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% ----------------------------------------------------------------------------
 
 	\begin{frame}{Quantum Logic}
 
@@ -125,7 +130,8 @@
 
 	\end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% ----------------------------------------------------------------------------
 
 	\subsection{Computer Science}
 
@@ -155,7 +161,8 @@
 
 	\end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% ----------------------------------------------------------------------------
 
 	\begin{frame}{Church-Turing Thesis}
 
@@ -181,7 +188,8 @@
 
 	\end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% ----------------------------------------------------------------------------
 
 	\begin{frame}{Algorithms, Circuits and Gates}
 
@@ -198,7 +206,8 @@
 
 	\end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% ----------------------------------------------------------------------------
 
 	\begin{frame}{Complexity I}
 
@@ -233,15 +242,17 @@
 
 		\vspace{-8pt}
 		\begin{align*}
-			\boldsymbol{P \subseteq NP \quad \Rightarrow \quad P \overset{?}{=} NP \quad } \\
+			\boldsymbol{P \subseteq NP \quad \Rightarrow \quad P \qeq NP \quad } \\
 			\text{\underline{Millenium Prize Problem} 1M\$}
 		\end{align*}
 		\vspace{-20pt}
 
 	\end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% ----------------------------------------------------------------------------
+
+%% ----------------------------------------------------------------------------
 
 \section{Quantum Information}
 
@@ -262,7 +273,8 @@
 
 	\end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% ----------------------------------------------------------------------------
 
 	\subsection{Example: Unitary Transformations}
 
@@ -273,7 +285,7 @@
 		\begin{align*}
 			&\action<2->{ \braket{0}{1} =0 \quad (\forall t) \quad \& \quad \ket{\Psi (t)} = U\ket{\Psi} } \\
 			 \\
-			&\action<3->{ \braket{0(t)}{1(t)} = \braketop{0}{U^\dagger U}{1} } \action<4->{ \equiv \braket{0}{1}=0 \quad } \action<5->{ \Rightarrow } \\
+			&\action<3->{ \braket{0(t)}{1(t)} = \mel{0}{U^\dagger U}{1} } \action<4->{ \equiv \braket{0}{1}=0 \quad } \action<5->{ \Rightarrow } \\
 			&\action<5->{ \Rightarrow U^\dagger U = \mathbb{I} \quad \mathbb{(Q.E.D.)} }
 		\end{align*}
 
@@ -283,7 +295,8 @@
 
 	\end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% ----------------------------------------------------------------------------
 
 	\subsection{No-Cloning Theorem}
 
@@ -304,7 +317,8 @@
 
 	\end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% ----------------------------------------------------------------------------
 
 	\begin{frame}{Formal Proof I}
 
@@ -324,7 +338,8 @@
 
 	\end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% ----------------------------------------------------------------------------
 
 	\begin{frame}{Formal Proof II}
 
@@ -332,7 +347,7 @@
 
 		\begin{align*}
 			&\braket{\Psi}{\Phi} = \bra{\Psi}_A\bra{e}_B\ket{\Phi}_A\ket{e}_B \equiv \bra{\Psi}_A\bra{e}_B U^\dagger U\ket{\Phi}_A\ket{e}_B \\
-			&= \braket{\Psi}{\Phi}\braketop{e}{U^\dagger U}{e} = \braket{\Psi}{\Phi} \braket{\Psi}{\Phi} \Rightarrow \\
+			&= \braket{\Psi}{\Phi}\mel{e}{U^\dagger U}{e} = \braket{\Psi}{\Phi} \braket{\Psi}{\Phi} \Rightarrow \\
 			\action<2->{ \\
 			&\Rightarrow \braket{\Psi}{\Phi} = ( \braket{\Psi}{\Phi} )^2 \Rightarrow
 			\begin{cases}
@@ -352,7 +367,8 @@
 
 	\end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% ----------------------------------------------------------------------------
 
 	\begin{frame}{Implications}
 
@@ -377,8 +393,10 @@
 
 	\end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% ----------------------------------------------------------------------------
+
+%% ----------------------------------------------------------------------------
 
 \section{Quantum Computation}
 
@@ -402,7 +420,8 @@
 
 	\end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% ----------------------------------------------------------------------------
 
 	\subsection{Hadamard Gate}
 
@@ -452,7 +471,8 @@
 
 	\end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% ----------------------------------------------------------------------------
 
 	\subsection{Deutsch’s Problem}
 
@@ -487,7 +507,8 @@
 
 	\end{frame}
 
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% ----------------------------------------------------------------------------
 
 	\begin{frame}{Deutsch’s Problem II}
 
@@ -530,7 +551,8 @@
 
 	\end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% ----------------------------------------------------------------------------
 
 	\begin{frame}{Grandiose Interpretation: Period Finding}
 
@@ -565,7 +587,8 @@
 
 	\end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% ----------------------------------------------------------------------------
 
 	\subsection{Prime Factorization: Shor's Algorithm}
 
@@ -603,7 +626,8 @@
 
 	\end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% ----------------------------------------------------------------------------
 
 	\begin{frame}{Shor's Algorithm}
 
@@ -625,7 +649,8 @@
 
 	\end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% ----------------------------------------------------------------------------
 
 	\subsection{C.T.T. Challenge}
 
@@ -648,7 +673,8 @@
 
 	\end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% ----------------------------------------------------------------------------
 
 	\subsection{Error Correction}
 
@@ -670,7 +696,8 @@
 
 	\end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% ----------------------------------------------------------------------------
 
 	\begin{frame}{Error Correction: Simple Method}
 
@@ -705,8 +732,10 @@
 
 	\end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% ----------------------------------------------------------------------------
+
+%% ----------------------------------------------------------------------------
 
 \section{Applications}
 
@@ -734,7 +763,8 @@
 
 	\end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% ----------------------------------------------------------------------------
 
 	\subsection{Quantum Gravity}
 
@@ -760,9 +790,10 @@
 
 	\end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%       REFERENCES       %%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% ----------------------------------------------------------------------------
+%% BACK-MATTER
+%% ----------------------------------------------------------------------------
 
 \section{References}
 %	\begin{frame}[allowframebreaks]{References}
