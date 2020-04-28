@@ -1,7 +1,7 @@
 %%    _____  _____
 %%   |  __ \|  __ \    AUTHOR: Pedro Rivero
 %%   | |__) | |__) |   ---------------------------------
-%%   |  ___/|  _  /    DATE: April 27, 2020
+%%   |  ___/|  _  /    DATE: April 28, 2020
 %%   | |    | | \ \    ---------------------------------
 %%   |_|    |_|  \_\   https://github.com/pedrorrivero
 %%
@@ -517,9 +517,122 @@
 
 \section{Solving the NJL model in $1+1$ dimensions}
 
+\begin{frame}{Solving the NJL model in $1+1$ dimensions}
+
+	The NJL \textbf{Lagrangian density} that we will make use of looks like:
+
+	\begin{gather*}
+		\mathcal{L}(x) =
+	    \bar{\psi}(x) \qty(i\slashed{\partial}-m) \psi(x) + \mathcal{L}_{I}(x) \\[10pt]
+		\mathcal{L}_{I}(x) =
+	    \frac{1}{2} G_{\pi} \qty[\bar{\psi}(x)\psi(x)]^2
+	\end{gather*}
+
+	From this expression for the Lagrangian density we can obtain the corresponding \textbf{Hamiltonian density} through the Legendre transform. In special, for $1+1$ dimensions:
+
+	\begin{align*}
+	  \mathcal{H} &\defeq
+	    \fdv{\mathcal{L}}{\qty(\partial_{0} \psi)} \qty(\partial_{0} \psi) +
+	    \qty(\partial_{0} \bar{\psi})
+	    \fdv{\mathcal{L}}{\qty(\partial_{0} \bar{\psi})} -
+	    \mathcal{L} \\
+	  &= \bar{\psi}(x)\qty(m - i\gamma^{1}\partial_{1})\psi(x) -
+    	\frac{1}{2} G_{\pi} \qty[\bar{\psi}(x)\psi(x)]^{2}
+	\end{align*}
+
+\end{frame}
+
 %% ----------------------------------------------------------------------------
 
-% \subsection{Analytical solution}
+\subsection{Analytical solution}
+
+\begin{frame}{Dressed mass and the gap equation}
+
+	\begin{multicols}{2}
+
+		The \textbf{bare and dressed masses} appear on the bare quark propagator $S_{0}$, and the NJL dressed quark propagator $S$ respectively:
+
+		\vspace{1em}
+
+		\begin{gather*}
+		  S_0^{-1} \defeq \slashed{p} - m + i\varepsilon \\[5pt]
+		  S^{-1} \equiv S^{-1}_\text{\tiny NJL} \defeq \slashed{p} - M + i\varepsilon
+		\end{gather*}
+
+		\columnbreak
+
+		\begin{center}
+			\includegraphics[width=.30\paperwidth]{Figures/NJL1-model-solving/gap-equation}
+		\end{center}
+
+	\end{multicols}
+
+	We can find a relationship between these two by solving the \textbf{gap equation}:
+
+	\begin{gather*}
+		S^{-1} =
+			S_{0}^{-1} - 2iG_{\pi} \int \frac{\dd[2]{p}}{\qty(2\pi)^{2}}
+			N_\text{color} N_\text{flavor} \text{Tr}_\text{\tiny{D}}\qty[S] \\
+	  M \simeq
+	    m + 4iG_\pi N_\text{color} N_\text{flavor}
+	    \int \frac{\dd[2]{p}}{(2\pi)^2} \frac{M}{p^2 - M^2}
+	\end{gather*}
+
+\end{frame}
+
+%% ----------------------------------------------------------------------------
+
+\begin{frame}[allowframebreaks]{Mass generation}
+
+	To solve this last expression we first perform a \textbf{Wick rotation} $p_0 \ra i p_2 \qRa (p_0)^2 \ra - (p_2)^2$, followed by a transformation to \textbf{polar coordinates}:
+
+	\begin{gather*}
+		M \simeq
+	    m + N_\text{color}  N_\text{flavor}
+	    \frac{G_\pi}{\pi} \int_{0}^{\infty} \frac{M}{p_E^2 + M^2} \dd{p_E^2}
+	\end{gather*}
+
+	Finally, to make the integral converge, we introduce \textbf{proper time regularization}:
+
+	\begin{gather*}
+	  \frac{1}{x^n} =
+	    \frac{1}{(n-1)!} \int_{0}^{\infty} \dd{\tau} \tau^{n-1} \exp[-\tau x] \ra
+	    \frac{1}{(n-1)!} \int_{1/\Lambda_{UV}^2}^{1/\Lambda_{IR}^2}
+	      \dd{\tau} \tau^{n-1} \exp[-\tau x] \\[5pt]
+	  M \simeq
+	    m + M N_\text{color} N_\text{flavor} \frac{G_\pi}{\pi}
+	    \int_{1/\Lambda_{UV}^2}^{1/\Lambda_{IR}^2} \frac{\dd{\tau}}{\tau}
+	    \exp[-\tau M^{2}]
+	\end{gather*}
+
+	Where $\Lambda_{IR}$ and $\Lambda_{UV}$ are the \textbf{infrared and ultraviolet cutoffs} respectively.
+
+\break
+
+	\begin{center}
+		\includegraphics[width=.5\paperwidth]{Figures/NJL1-model-solving/NJL1-dressed-mass-curves}
+	\end{center}
+
+	\vspace{-1em}
+
+	\begin{table}[!bp]
+	  \centering
+	  % \caption{Parameters used for solving the NJL model in $1+1$ dimensions.}
+	  \label{tab:NJL1-analytical-solution-parameters}
+	  \begin{tabular}{ c c c c c }
+	    \hline
+	    % \rule{0pt}{14pt}
+	    $N_\text{Dirac}$ & $N_\text{color}$ & $N_\text{flavor}$ &
+	    $\Lambda_{IR}$ & $\Lambda_{UV}$ \\
+	    \hline
+	    \hline
+	    % \rule{0pt}{14pt}
+	    $1+1 \ra 2$ & $1$ & $1$ & $0.240$ GeV & $0.645$ GeV \\
+	    \hline
+	  \end{tabular}
+	\end{table}
+
+\end{frame}
 
 %% ----------------------------------------------------------------------------
 
