@@ -18,8 +18,8 @@
 %% FRONT-MATTER
 %% ----------------------------------------------------------------------------
 
-\title{Quantum Computation and Information}
-\subtitle{A Gentle Introduction}
+\title{Quantum Computation for the Understanding of Mass}
+\subtitle{Simulating Quantum Field Theories}
 \author{Pedro Rivero}
 \institute{Illinois Institute of Technology \\ Argonne National Laboratory}
 \newcommand{\mail}{priveroramirez@hawk.iit.edu}
@@ -40,12 +40,12 @@
 	\titlepage
 \end{frame}
 
-\begin{frame}[c]{Contents Overview}
-%		\begin{multicols}{2}
-%  			\tableofcontents
-%		\end{multicols}
-	\tableofcontents
-\end{frame}
+% \begin{frame}[c]{Contents}
+% %		\begin{multicols}{2}
+% %  			\tableofcontents
+% %		\end{multicols}
+% 	\tableofcontents
+% \end{frame}
 
 
 %% ----------------------------------------------------------------------------
@@ -54,776 +54,515 @@
 
 \section{Introduction}
 
-	\begin{frame}{What is Quantum Computation?}
+\begin{frame}{Introduction}
 
-		Quantum Computation is the application of \textbf{Quantum Information Science (QIS)} to the development of machines capable of performing calculations based on quantum logic instead of the well know classical logic. It is thought to be fundamentally different and much more powerful.
+	Nature is described through the mathematical framework provided by \textbf{Quantum Field Theory}.
 
-		\begin{multicols}{2}
-
-		The usefulness of this kind of computation lays not only on the ability to engineer exponentially faster machines, but also on being able to create encryption systems which are fundamentally safe, and simulating nature at the atomic level for game-changing purposes.
-
-			\begin{center}
-		\includegraphics[width=.30\paperwidth]{Figures/Quantum_Chip}
-			\end{center}
-
-		\end{multicols}
-
-	\end{frame}
-
-
-%% ----------------------------------------------------------------------------
-
-	\subsection{Types of Logic}
-
-	\begin{frame}{Classical Logic}
-
-		Classical logic is described by what mathematicians call \textbf{Set Theory}, which is easily depicted by the intuitive \textbf{Venn Diagrams}. \emph{Phase Space} is indeed the infinite, continuous, multidimensional set of all the possible states of a classical system.
-
-		\medskip
-
-		In set theory, the combination of a set with the typical and intuitive logical rules conform what is commonly referred to as a \textbf{Boole Algebra}:
-
-		\begin{multicols}{2}
+	\begin{multicols}{2}
 
 		\begin{itemize}
-			\item \textbf{AND} $\quad \Rightarrow \quad A \cup B$
-			\item \textbf{OR} $\quad \Rightarrow \quad A \cap B$
-			\item \textbf{NOT} $\quad \Rightarrow \quad \overline{A}$
-			\item \textbf{XOR} $ \quad \Rightarrow \quad A \cap B - A \cup B$
+			\item<2-> The different implementations of Quantum Field Theory are referred to as quantum field theories themselves.
+			\item<3-> Quantum Chromodynamics (QCD) is the theory of the strong nuclear force.
+			\item<3-> QCD holds many mysteries (e.g. \textbf{mass generation} phenomena).
+			\item<4-> QCD is currently studied using brute-force numerics on the world’s largest supercomputers.
+			\item<4-> Many aspects of quantum field theories cannot be studied using classical computers.
 		\end{itemize}
-
-			\columnbreak
-			\begin{center}
-		\includegraphics[width=.34\paperwidth]{Figures/Venn_Diagrams}
-			\end{center}
-
-		\end{multicols}
-
-	\end{frame}
-
-
-%% ----------------------------------------------------------------------------
-
-	\begin{frame}{Quantum Logic}
-
-		Unlike its classical counterpart, quantum logic is described by the mathematical build known as \textbf{Vector Spaces}, namely \emph{\underline{Hilbert} \underline{Space}}. %characteristic of the so called \textbf{Theory of Distributions}.
-
-		\medskip
-		Because this logic is in itself different than classical logic, it has some special features:
-
-		\begin{multicols}{2}
-
-		\begin{itemize}
-			\item<2-> \textbf{Probabilistic measurement}
-			\item<3-> \textbf{Measurement causes disturbance}
-			\item<4-> \textbf{Superposition}
-			\item<5-> \textbf{Entanglement}
-			\item<6-> \textbf{Uncertainty principle}
-		\end{itemize}
-
-			\columnbreak
-			\begin{center}
-		\includegraphics[width=.28\paperwidth]{Figures/Hilbert_Space}
-			\end{center}
-
-		\end{multicols}
-
-	\end{frame}
-
-
-%% ----------------------------------------------------------------------------
-
-	\subsection{Computer Science}
-
-	\begin{frame}{Analog VS Digital}
-
-		There are several kinds of \emph{"Computers"}. We want to tell apart two major groups:
-
-		\smallskip
-		\begin{itemize}
-			\item \textbf{Analog Computers} $\quad \rightarrow \quad$ Solvers for tunable equations
-			\item \textbf{Digital Computers} $\quad \rightarrow \quad$ Binary States $+$ Boole Algebra
-		\end{itemize}
-
-		\begin{multicols}{2}
-
-			\vfill \color{white}{.}
-			\begin{center}
-		\includegraphics[width=.30\paperwidth]{Figures/Analog_Computer}
-			\end{center}
-
-			\columnbreak
-			\begin{center}
-		\includegraphics[width=.30\paperwidth]{Figures/Digital_Computer}
-			\end{center}
-
-		\end{multicols}
-
-	\end{frame}
-
-
-%% ----------------------------------------------------------------------------
-
-	\begin{frame}{Church-Turing Thesis}
-
-		This is \textbf{not a theorem}, but rather a \textbf{hypothesis} which has been tested and "verified" through experience.
-
-		\vspace{4pt}
-		\begin{block}{Church-Turing Thesis (CTT)}
-		\emph{"Ignoring resource limitations such as time or memory, every effective method of computation is either equivalent to or weaker than a Turing machine."}
-		\end{block}
-
-		\pause
-
-		\begin{multicols}{2}
-
-			Hence, digital computers are \textbf{general purpose} machines that will perform any computation that an analog computer can do, plus they will be able to account for \textbf{error correction}.
-
-			\columnbreak
-			\begin{center}
-		\includegraphics[width=.24\paperwidth]{Figures/AlanTuring}
-			\end{center}
-
-		\end{multicols}
-
-	\end{frame}
-
-
-%% ----------------------------------------------------------------------------
-
-	\begin{frame}{Algorithms, Circuits and Gates}
-
-		Computer programs are sequential \textbf{algorithms} often expressed as \textbf{flow charts}, also known as \textbf{circuits}. Along these circuits, the information will be affected by simple logical operations, called \textbf{gates}, as to obtain the required final result.
 
 		\begin{center}
-		\includegraphics[width=.34\paperwidth]{Figures/Digital_Gates}
+			\includegraphics[width=.40\paperwidth]{Figures/quantum-field-theory}
 		\end{center}
 
-		\pause
+	\end{multicols}
 
-		\vspace{4pt}
-		A digital computer will be able to run any sort of algorithm if this one is encoded using a \textbf{Turing Complete} programming language -- meaning that this language is equivalent to the set of rules used in Turing Machines -- as stated by the CTT.
-
-	\end{frame}
-
+\end{frame}
 
 %% ----------------------------------------------------------------------------
 
-	\begin{frame}{Complexity I}
+\begin{frame}{Objectives}
 
-		Mathematically, a computer program is simply a mapping of an n-bit input to an m-bit output; this can be expressed as:
+	An important path forward is to develop methods to simulate these models on quantum computers. This effort is only just beginning, however, performing calculations on a quantum computer is far from being a straightforward task; and it has only been achieved for relatively simple problems.
 
-		\begin{align*}
-			C_{n,m}:\lbrace 0,1 \rbrace^n \rightarrow \lbrace 0,1 \rbrace^m
-		\end{align*}
+	\medskip
 
-		Actually since the output is $m$ separate binary registers assembled together, any computer program is built from $m$ mappings of n-bit inputs to a single bit output:
+	\begin{itemize}
+		\item<2-> \textbf{Nambu--Jona-Lasino model} (NJL) in $1+1$ dimensions: an effective field theory, regarded as a low-energy approximation to QCD.
+		\item<3-> It retains certain key features of QCD, such as the so called Goldstone modes and \textbf{dynamical chiral symmetry breaking}; which in turn is responsible for the creation of dressed mass.
+		\item<4-> This model can be solved nonperturbatively through the standard leading order truncation; an important characteristic since verifying the solutions returned by any quantum computation is currently a major challenge.
+	\end{itemize}
 
-		\begin{align*}
-			C_{n}:\lbrace 0,1 \rbrace^n \rightarrow \lbrace 0,1 \rbrace
-		\end{align*}
-
-		\pause
-
-		Circuit \textbf{complexity} is obviously related to the size of the circuit (the number of gates) and the \textbf{depth} of the circuit, defined as the number of gates traversed in the longest pathway through the circuit.
-
-	\end{frame}
-
-	\begin{frame}{Complexity II}
-
-		\textbf{Computational complexity} is a branch of the theory of computation in theoretical computer science, that focuses on classifying computational problems according to their inherent difficulty, and relating those classes to each other. \pause
-
-		\begin{itemize}
-			\item \textbf{Class P} are problems which can be solved by a computer in Polynomial time; meaning that the amount of steps necessary to solve a problem scales up as a certain exponent of the number of bits in the input \emph{"n"}. (i.e. Find the biggest number from a given array) \pause
-			\item \textbf{Class NP} are problems for which any \underline{given solution} can be checked in polynomial time. (i.e. Sudokus, Prime factorization...) independently of the time it actually takes to solve them $\Rightarrow$ Good problems for \textbf{encryption systems}!
-		\end{itemize}
-
-		\pause
-
-		\vspace{-8pt}
-		\begin{align*}
-			\boldsymbol{P \subseteq NP \quad \Rightarrow \quad P \qeq NP \quad } \\
-			\text{\underline{Millenium Prize Problem} 1M\$}
-		\end{align*}
-		\vspace{-20pt}
-
-	\end{frame}
-
+\end{frame}
 
 %% ----------------------------------------------------------------------------
 
+\begin{frame}[c]{Contents}
+%		\begin{multicols}{2}
+%  			\tableofcontents
+%		\end{multicols}
+	\tableofcontents
+\end{frame}
+
+%% ----------------------------------------------------------------------------
 %% ----------------------------------------------------------------------------
 
-\section{Quantum Information}
+\section{Background in Quantum Computation}
 
-	\begin{frame}{Information Theory}
+\begin{frame}{Background in Quantum Computation}
 
-		Quantum Information looks at QM from the perspective of trying to determine which are the \textbf{constraints} on how nature conserves certain properties through different processes.
+	Before the abacus was invented, the only way of counting was through a "thermometer-like" scale. This device introduced the concept of \textbf{digits}, which was later adopted into our own language in the form of \textbf{numerals}. This meant that, instead of counting up to $N$ using $N$ elements, we could count using only $\text{log}_b (N)$ abacus elements ---where $b$ is the base of our number system (i.e. the amount of beads per row in the abacus).
 
 		\begin{multicols}{2}
 
-			The most basic unit of classical-information is called a \textbf{bit}. On the other hand, the most basic unit of quantum-information is called a \textbf{qubit} and it is nothing but the Hilbert space described by a basis of two distinguishable states.
+		 	Therefore, for $b\geq2$, the abacus introduced an \textbf{exponential decrease in resource requirements}.
+
+			\medskip
+
+			Quantum computers do something analogous. To represent the quantum state of a system made out of $N$ subsystems ---with $b$ degrees of freedom each--- we would usually need $b^N$ classical elements (i.e. numbers). By using quantum systems for this representation, we would only need $N$ quantum elements (i.e. each subsystem).
 
 			\columnbreak
+
 			\begin{center}
-		\includegraphics[width=.26\paperwidth]{Figures/Bloch_Sphere}
+				\includegraphics[width=.30\paperwidth]{Figures/abacus} \\
+				\vspace{10pt}
+				\includegraphics[width=.34\paperwidth]{Figures/qubits}
 			\end{center}
 
 		\end{multicols}
 
-	\end{frame}
-
-
-%% ----------------------------------------------------------------------------
-
-	\subsection{Example: Unitary Transformations}
-
-	\begin{frame}{Example: Unitary Transformations}
-
-		\textit{\underline{Example:} Preserving information about the distinguishability of two states (Spin-up VS Spin-down) through a transformation, leads to the necessary condition of \textbf{Unitarity}.}
-
-		\begin{align*}
-			&\action<2->{ \braket{0}{1} =0 \quad (\forall t) \quad \& \quad \ket{\Psi (t)} = U\ket{\Psi} } \\
-			 \\
-			&\action<3->{ \braket{0(t)}{1(t)} = \mel{0}{U^\dagger U}{1} } \action<4->{ \equiv \braket{0}{1}=0 \quad } \action<5->{ \Rightarrow } \\
-			&\action<5->{ \Rightarrow U^\dagger U = \mathbb{I} \quad \mathbb{(Q.E.D.)} }
-		\end{align*}
-
-		\action<6->{
-		From this \textbf{conservation of information} property, it is straight forward to prove that in general $\braket{\Phi}{\Psi}:= \text{const.} (\forall t)$, for any evolution $U$ and any quantum states $\ket{\Psi}$, $\ket{\Phi}$.
-		}
-
-	\end{frame}
-
+\end{frame}
 
 %% ----------------------------------------------------------------------------
 
-	\subsection{No-Cloning Theorem}
+\subsection{Quantum logic}
 
-	\begin{frame}{No-Cloning Theorem}
+\begin{frame}{Quantum logic}
 
-		\textbf{Classical information can be copied} at will. The laws of classical physics allow us to look at some information coded in classical states (i.e. orientation of an arrow) and prepare another classical system so that it perfectly resembles the first.
+	Formally speaking, the states of a quantum system will be represented as a vector in a Hilbert space; whereas the state of a classical system is simply an element of a set. This distinction, along with the probabilistic nature of quantum mechanics, makes the entire logical system describing quantum computers fundamentally different than \textbf{classical propositional logic} (i.e. Boolean algebra).
 
-		\begin{multicols}{2}
+	% Because these logical systems are so different from each other, if we are to take advantage of the power of quantum mechanics for performing computations, it is essential to “think” in quantum terms; and formulate the problems that we want to solve according to this new logic.
 
-			If we could \textbf{clone a quantum state}, then by measuring one of the copies we would be able to learn something about the other without disturbing it. So it has to be impossible in the quantum regime.
-
-			\columnbreak
-			\begin{center}
-		\includegraphics[width=.28\paperwidth]{Figures/clones}
-			\end{center}
-
-		\end{multicols}
-
-	\end{frame}
-
-
-%% ----------------------------------------------------------------------------
-
-	\begin{frame}{Formal Proof I}
-
-		To prove this we need to think of what a \textbf{cloning machine} is. It will be an apparatus with two slots $\lbrace A, B \rbrace$, such that in the beginning the quantum states for each slot are $\ket{\Psi}_A$ (the one we want to clone) and $\ket{e}_B$ a generic initialization state. After the process -- which has to be unitary -- we will need to get states $\ket{\Psi}_A$ and $\ket{\Psi}_B$ for each slot. In other words:
-
-		\begin{align*}
-			{ U\ket{\Psi}_A\ket{e}_B = \ket{\Psi}_A\ket{\Psi}_B }
-		\end{align*}
-
-		\pause
-
-		If we now check what happens for another generic state $\ket{\Phi}$, we will again have:
-
-		\begin{align*}
-			{ U\ket{\Phi}_A\ket{e}_B = \ket{\Phi}_A\ket{\Phi}_B }
-		\end{align*}
-
-	\end{frame}
-
-
-%% ----------------------------------------------------------------------------
-
-	\begin{frame}{Formal Proof II}
-
-		Taking the inner product of these two equations:
-
-		\begin{align*}
-			&\braket{\Psi}{\Phi} = \bra{\Psi}_A\bra{e}_B\ket{\Phi}_A\ket{e}_B \equiv \bra{\Psi}_A\bra{e}_B U^\dagger U\ket{\Phi}_A\ket{e}_B \\
-			&= \braket{\Psi}{\Phi}\mel{e}{U^\dagger U}{e} = \braket{\Psi}{\Phi} \braket{\Psi}{\Phi} \Rightarrow \\
-			\action<2->{ \\
-			&\Rightarrow \braket{\Psi}{\Phi} = ( \braket{\Psi}{\Phi} )^2 \Rightarrow
-			\begin{cases}
-				\braket{\Psi}{\Phi} = 0 \\
-				\braket{\Psi}{\Phi} = 1
-			\end{cases} }
-		\end{align*}
-
-		\action<3->{
-		Which means that we can only clone states that form a basis of the corresponding \textit{Hilbert Space} using such unitary transformation $U$. Therefore, \textbf{a single \textit{universal} transformation cannot clone a \textit{general} quantum state}. This is also true for non-unitary transformations.
-		}
-
-		\vspace{8pt}
-		\action<4->{
-		On the other hand, it is straight forward to show in the same manner that \textbf{quantum teleportation} is indeed allowed.
-		}
-
-	\end{frame}
-
-
-%% ----------------------------------------------------------------------------
-
-	\begin{frame}{Implications}
-
-		As a matter of fact, there is some deeper reason why this happens. Cloning quantum information will mean \textbf{superluminal communication} (faster than light) and viceversa.
-
-		\begin{multicols}{2}
-			\begin{center}
-		\includegraphics[width=.28\paperwidth]{Figures/Cloning_Superluminal}
-			\end{center}
-			\columnbreak
-			\begin{center}
-		\includegraphics[width=.28\paperwidth]{Figures/Superluminal_Cloning}
-			\end{center}
-		\end{multicols}
-
-		\pause
-
-		\begin{itemize}
-		\item By measuring on different bases we would be able to send a superluminal message. \pause
-		\item In some inertial reference frame, superluminal communication is the same as cloning.
-		\end{itemize}
-
-	\end{frame}
-
-
-%% ----------------------------------------------------------------------------
-
-%% ----------------------------------------------------------------------------
-
-\section{Quantum Computation}
-
-	\begin{frame}{General-Purpose Quantum Computers}
-
-		For this presentation, we are going to be interested in looking at \textbf{digital quantum computers}, how they work and what kind of applications they have. Some examples of qubits used are:
-
-		\pause
-		\vspace{8pt}
-		\begin{itemize}
-			\item \textbf{Current Loops in superconductors}: $\ket{\circlearrowleft}$ , $\ket{\circlearrowright}$
-			\item \textbf{Polarization}: $\ket{\updownarrow}$ , $\ket{\leftrightarrow}$
-			\item \textbf{Spin}: $\ket{\upharpoonleft}$ , $\ket{\downharpoonleft}$
-			\item \textbf{Energy levels in an atom}: $\ket{\circ}$ , $\ket{\odot}$
-			\item \textbf{Direction of propagation}: $\ket{\uparrow}$ , $\ket{\rightarrow}$
-		\end{itemize}
-
-		\pause
-		\vspace{8pt}
-		Another thing to notice is that \textbf{quantum gates} will only perform unitary transformations, and these transformations will be \textbf{reversible}; unlike classical gates.
-
-	\end{frame}
-
-
-%% ----------------------------------------------------------------------------
-
-	\subsection{Hadamard Gate}
-
-	\begin{frame}{Hadamard Gate}
-
-		The only, but probably one the most important gates that we want to introduce is the \textbf{Hadamard Gate}. This gate performs a $45º$ rotation followed by a reflection along the $45º$ axis. Intuitively, we will denote the resulting states $\ket{+}$ and $\ket{-}$.
+	\begin{multicols}{2}
 
 		\action<2->{
-		\begin{center}
-			\includegraphics[width=.44\paperwidth]{Figures/Hadamard_Rotation}
-		\end{center}
+			\underline{\textbf{CLASSICAL LOGIC}}\\
+			\small{\emph{Set Theory (Boolean algebra)}}
+
+			\medskip
+
+			\begin{itemize}
+				\item \textbf{AND} $\quad \Rightarrow \quad A \cup B$
+				\item \textbf{OR} $\quad \Rightarrow \quad A \cap B$
+				\item \textbf{NOT} $\quad \Rightarrow \quad \overline{A}$
+				\item \textbf{XOR} $ \quad \Rightarrow \quad A \cap B - A \cup B$
+			\end{itemize}
 		}
 
-		\vspace{-24pt}
-		\begin{multicols}{2}
-			\action<3->{
-			\begin{align*}
-				\hat{\text{H}} &=
-				\underbrace{
-				\begin{bmatrix}
-					0 & 1 \\
-					1 & 0
-				\end{bmatrix}
-				}_{\text{Reflection}}
-				\underbrace{
-				\frac{1}{\sqrt{2}}
-				\begin{bmatrix}
-					1 & -1 \\
-					1 & 1
-				\end{bmatrix}
-				}_{\text{Rotation}} = \\
-				&= \frac{1}{\sqrt{2}}
-				\begin{bmatrix}
-					1 & 1 \\
-					1 & -1
-				\end{bmatrix}
-			\end{align*}
-			}
-			\columnbreak
-			\action<2->{
-			\begin{center}
-				\includegraphics[width=.28\paperwidth]{Figures/Hadamard_Reflection}
-			\end{center}
-			}
-		\end{multicols}
-		\vspace{-28pt}
+		\columnbreak
 
-	\end{frame}
+		\action<3->{
+			\underline{\textbf{QUANTUM LOGIC}}\\
+			\small{\emph{Quantum Theory (Non-abelian)}}
 
+			\medskip
+
+			\begin{itemize}
+				\item \textbf{Probabilistic measurement}
+				\item \textbf{Measurement causes disturbance}
+				\item \textbf{Superposition}
+				\item \textbf{Entanglement}
+				\item \textbf{Uncertainty principle}
+			\end{itemize}
+		}
+
+	\end{multicols}
+
+\end{frame}
 
 %% ----------------------------------------------------------------------------
 
-	\subsection{Deutsch’s Problem}
+\begin{frame}{Bloch sphere representation of a qubit}
 
-	\begin{frame}{Deutsch’s Problem I}
+	\begin{multicols}{2}
 
-		Let's try to solve the following problem:
+		The basic unit of information in quantum mechanics is the \textbf{qubit}; a quantum system with only two distinguishable states: $\ket{0}$ and $\ket{1}$.
 
-		\vspace{8pt}
-		\textit{"Given a switch and a bulb, which is the most efficient way (fewer operations) of telling whether they are connected or not?"}
+		\medskip
 
-		\vspace{8pt}
-		\begin{multicols}{2}
-		\action<2->{\textbf{Classical:}}
-		\begin{enumerate}
-			\item<2-> \label{m1} Look at the states of the bulb and the switch once
-			\item<3-> Change the state of the switch
-			\item<4-> \label{m2} Look at the states of the bulb and the switch again
-			\item<5-> Compare \ref{m1} and \ref{m2}
-		\end{enumerate}
-		\vspace{4pt}
+		The main difference between bit and qubit lays in the fact that, when they are not being measured, quantum systems do not need to be in one of their so called, mutually incompatible, basis states; instead, they can be in any (normalized) \textbf{linear superposition} of them.
+
+		\medskip
+
+		A simple example of a qubit is a spin-$\frac{1}{2}$ particle; whose space of states is spanned by the spin up and spin down quantum basis. Inspired by this particular system, the qubit can be pictorially represented through the \textbf{Bloch sphere}.
+
+		% This allows us to visualize non-commutative quantum logic.
+
+		\columnbreak
+
 		\begin{center}
-			\action<6->{\textbf{\underline{2 MEASUREMENTS}}}
+			\includegraphics[width=.40\paperwidth]{Figures/quantum-background/bloch-sphere}
+		\end{center}
+
+	\end{multicols}
+
+\end{frame}
+
+%% ----------------------------------------------------------------------------
+
+\subsection{Quantum information}
+
+\begin{frame}{Quantum information}
+
+	In the same way that the device known as an abacus had its theoretical counterpart in positional number systems, quantum computers have Quantum Information Science (QIS); which help us understand the full capabilities of these new machines. Two very important insights extracted from QIS, and with direct applicability to quantum apparatuses are:
+
+	\medskip
+
+	\begin{itemize}
+		\item<2-> \textbf{Unitary quantum state transformations} (i.e. reversible):\\
+			\begin{gather*}
+			  \braket{\psi(t)}{\phi(t)} = \mel{\psi_0}{U^\dagger U}{\phi_0} \equiv
+			    \braket{\psi_0}{\phi_0} = 0 \qRa U^\dagger U \equiv \mathds{1}
+			\end{gather*}
+		\item<3-> \textbf{No-cloning theorem}:\\
+			\begin{gather*}
+			  U_\text{cloning} \qty(\ket{\psi}_A \otimes \ket{e}_B) =
+			    \ket{\psi}_A \otimes \ket{\psi}_B \qc
+				U_\text{cloning} \qty(\ket{\phi}_A \otimes \ket{e}_B) =
+			    \ket{\phi}_A \otimes \ket{\phi}_B \\
+			\end{gather*}
+			\vspace{-3em}
+			\begin{align*}
+				\braket{\psi}{\phi} &=
+					\qty(\braket{\psi}{\phi})_A \qty(\braket{e}{e})_B =
+					\qty(\bra{\psi}_A\otimes\bra{e}_B) \qty(\ket{\phi}_A\otimes\ket{e}_B) \\
+				&\equiv \qty(\bra{\psi}_A\otimes\bra{e}_B)
+						U_\text{cloning}^\dagger U_\text{cloning}
+						\qty(\ket{\phi}_A\otimes\ket{e}_B) =
+					\qty(\bra{\psi}_A\otimes\bra{\psi}_B)
+						\qty(\ket{\phi}_A\otimes\ket{\phi}_B) \\
+				&= \qty(\braket{\psi}{\phi})_A \qty(\braket{\psi}{\phi})_B =
+					\qty(\braket{\psi}{\phi})^2
+			\end{align*}
+	\end{itemize}
+
+\end{frame}
+
+%% ----------------------------------------------------------------------------
+
+\begin{frame}{Implications for quantum information technologies}
+
+	The fact that all transformations have to preserve information (i.e. entropy), imply that they are unitary. This is the only kind of transformations that a quantum computer will be able to reproduce ideally. On the other hand, the no-cloning theorem can be used to construct inherently secure communication and data storage systems. Furthermore, it means that \textbf{superluminal communication} is impossible:
+
+	\vspace{-2em}
+
+	\begin{multicols}{2}
+
+		\pause
+		\begin{center}
+			\includegraphics[width=.40\paperwidth]{Figures/quantum-background/superluminal-cloning-boost}
 		\end{center}
 
 		\columnbreak
-		\begin{center}
-			\includegraphics[width=.20\paperwidth]{Figures/Light_Bulb} \\
-			\includegraphics[width=.08\paperwidth]{Figures/Switch_ON} \\
-			\includegraphics[width=.08\paperwidth]{Figures/Switch_OFF}
-		\end{center}
-		\end{multicols}
-
-	\end{frame}
-
-
-%% ----------------------------------------------------------------------------
-
-	\begin{frame}{Deutsch’s Problem II}
-
-		\textbf{Quantum:} \\
-		We need to express the problem in a more mathematical way in order to tackle it.
-
-		\vspace{-6pt}
-		\begin{align*}
-			& f:\lbrace 0,1 \rbrace \rightarrow \lbrace 0,1 \rbrace \quad \Rightarrow \quad \underbrace{f(0)\neq f(1)}_{\text{Connected}}? \\
-			& \ket{x} \rightarrow \boxed{\text{\textbf{Switch}}} \rightarrow (-1)^{f(x)}\ket{x} \\
-		\end{align*}
-
-		\action<2->{
-		\vspace{-14pt}
-		Let's now try to use \textbf{superposition} to our advantage by introducing the Hadamard Gate:
-		}
-
-		\begin{align*}
-			\action<2->{ \ket{0} \rightarrow \boxed{\hat{\text{H}}} \rightarrow \ket{+} }
-			\action<3->{ \rightarrow \boxed{\text{\textbf{Switch}}} \rightarrow
-			\begin{Bmatrix}
-				\pm \ket{+} \\
-				\pm \ket{-}
-			\end{Bmatrix} }
-			\action<4->{ \rightarrow \boxed{\hat{\text{H}}} \rightarrow
-			\begin{Bmatrix}
-				\pm \ket{0} \\
-				\pm \ket{1}
-			\end{Bmatrix} }
-		\end{align*}
-
-		\vspace{-8pt}
-		\begin{center}
-			\action<5->{
-			\alert{\textbf{\underline{ONLY ONE MEASUREMENT}}} \\
-			{\small Reduction: $2 \rightarrow \log_2(2)=1$ }
-			}
-		\end{center}
-		\vspace{-14pt}
-
-	\end{frame}
-
-
-%% ----------------------------------------------------------------------------
-
-	\begin{frame}{Grandiose Interpretation: Period Finding}
-
-		It is difficult to see this right away from the example because of the reduced amount of possible states we are considering, but what we are truly doing is \textbf{finding the periodicity} of the the function $f(x)$ such that $f(x+T) = f(x)$. \\
 
 		\pause
-
-		\vspace{8pt}
-		Because we only have two possible states, it is easier to see it using \textbf{binary arithmetic}:
-
-		\begin{align*}
-		\begin{cases}
-			0 + 0 = 0 \quad & \text{(even)} \\
-			0 + 1 = 1 + 0 = 1 \quad & \text{(odd)} \\
-			1 + 1 = 0 \rightarrow 10 \quad & \text{(even)}
-		\end{cases}
-		\end{align*}
-
-		\pause
-
-		Therefore:
-
-		\begin{align*}
-		\text{If  }
-		\begin{Bmatrix}
-			f(0) \neq f(1) \quad \Rightarrow f(x) = f(x+0) \\
-			f(0) = f(1) \quad \Rightarrow f(x) = f(x+1)
-		\end{Bmatrix}
-		\Rightarrow \text{Periodicities } \lbrace 0,1 \rbrace
-		\end{align*}
-		\vspace{-20pt}
-
-	\end{frame}
-
-
-%% ----------------------------------------------------------------------------
-
-	\subsection{Prime Factorization: Shor's Algorithm}
-
-	\begin{frame}{Prime Factorization}
-
-		Prime factorization is thought to be a problem in the NP class. Checking a given answer is trivial, but performing the task \textbf{scales exponentially in time} with the size of the input -- at least using the best algorithm we have yet encountered: \textbf{Fast Fourier Transform (FFT)}. \\
-
-		\pause
-
-		\vspace{-12pt}
-		\textit{
-		\begin{small}
-		\begin{multicols}{2}
-			\begin{itemize}
-				\item For any given number $M$ such that $2^{n-1} \leq M \leq 2^n = N$
-				\item FFT splits M into its even/odd subproblems
-				\item Repeats the same with the subproblems until it is left with $N$ single elements
-				\item Recombines
-			\end{itemize}
-			\columnbreak
-			\begin{center}
-				\includegraphics[width=0.40\paperwidth]{Figures/FFT}
-			\end{center}
-		\end{multicols}
-		\end{small}
-		}
-
-		\pause
-
-		\vspace{-8pt}
 		\begin{center}
-			\alert{\textbf{\underline{\#OPERATIONS: $n \cdot N=n \cdot 2^n$}}}
-		\end{center}
-		\vspace{-10pt}
-
-	\end{frame}
-
-
-%% ----------------------------------------------------------------------------
-
-	\begin{frame}{Shor's Algorithm}
-
-		MIT Professor \textbf{Peter Shor} came up with a quantum algorithm which, similar to what happened in the \textit{Deutsch's Problem}, makes use of superposition to calculate and recombine all the different subproblems in the FFT, reducing the operational cost of each level from $N \rightarrow \log_2(N)=n$.
-
-		\vspace{-10pt}
-		\begin{center}
-			\includegraphics[width=0.46\paperwidth]{Figures/Q_FFT}
+			\includegraphics[width=.40\paperwidth]{Figures/quantum-background/superluminal-cloning-communication}
 		\end{center}
 
-		\pause
+	\end{multicols}
 
-		\vspace{-14pt}
-		\begin{center}
-			\alert{\textbf{\underline{\#OPERATIONS: $n \cdot n = n^2$}}} \\
-			{\small Prime Factorization: \textbf{NP} $\rightarrow$ \textbf{P} }
-		\end{center}
-		\vspace{-10pt}
-
-	\end{frame}
-
+\end{frame}
 
 %% ----------------------------------------------------------------------------
 
-	\subsection{C.T.T. Challenge}
+\subsection{Quantum circuits and quantum algorithms}
 
-	\begin{frame}{C.T.T. Challenge}
+\begin{frame}{Quantum circuits and quantum algorithms}
 
-	\action<1->{
-		\alert{
-		\textbf{\underline{Question:}} \textit{Does the Church-Turing Thesis extend to Quantum Computers?} In other other words, are all problems solvable by quantum computers also solvable by Turing machines? Given unlimited time and memory.
-		}
-	}
+	In order to work with quantum computers we need to be able to formulate how they operate in an abstract, mathematical way. There are a number of formulations that go by the name of \textbf{quantum computing models}; the main four of these being:
 
-	\action<2->{
-		\vspace{8pt}
-		\textbf{\underline{My current take:}} \textbf{YES}. As far as one can capture any logical statement on a Turing machine (more or less efficiently), and as far as we have been able to understand quantum mechanics logically (describing them with mathematics) we don’t know yet of any problem which a Turing machine cannot compute. \\
-	}
-	\action<3->{
-		\vspace{4pt}
-		A Quantum Computer can only compute things much more efficiently. Nevertheless, things like entanglement cannot be locally reproduced by a Turing machine \textbf{(Bell’s Theorem)}, although it can be globally described, and so the question is \underline{still unanswered}.
-	}
-
-	\end{frame}
-
-
-%% ----------------------------------------------------------------------------
-
-	\subsection{Error Correction}
-
-	\begin{frame}{Error Correction: Motivations}
-
-		Because of things like noise, we cannot expect to build qubits in a perfect and ideal way. We will have to account for the possible arising of \textbf{errors}. \\
-
-		\vspace{8pt}
-		 For this reason we distinguish between:
+	\begin{multicols}{2}
 		\begin{itemize}
-		 \item \textbf{Logical Qubits} $(\# \equiv L)$
-		 \item \textbf{Physical Qubits} $(\# \equiv P > L)$
+			\item Topological
+			\item Adiabatic
+			\columnbreak
+			\item One-way
+			\item Gate arrar or circuit based
+		\end{itemize}
+	\end{multicols}
+
+	\pause
+
+	They all differ in the basic elements in which any computation is divided, and therefore have a decisive role in the \textbf{hardware implementation} of these machines. Nonetheless, all of them have been proven theoretically equivalent to each other as well as to an universal quantum Turing machine.
+
+	\begin{multicols}{2}
+		\begin{itemize}
+			\item Josephson junctions
+			\item Ion traps
+			\columnbreak
+			\item Nuclear magnetic resonators
+			\item Optical cavities
+		\end{itemize}
+	\end{multicols}
+
+\end{frame}
+
+%% ----------------------------------------------------------------------------
+
+\begin{frame}{Quantum circuit formalism}
+
+	Due to its simplicity and similarity with classical models of computation, the most widespread of all is, by far, the \textbf{quantum circuit} or quantum gate array model. This model is made up of two kind of components: \emph{registers} and \emph{gates}.
+
+	\begin{multicols}{2}
+
+		\begin{center}
+			\includegraphics[width=.40\paperwidth]{Figures/quantum-background/circuit-gates-1}
+		\end{center}
+
+		\columnbreak
+
+		\begin{center}
+			\includegraphics[width=.40\paperwidth]{Figures/quantum-background/circuit-gates-2}
+		\end{center}
+
+	\end{multicols}
+
+\end{frame}
+
+%% ----------------------------------------------------------------------------
+
+\begin{frame}{Pauli measurements and the singlet state}
+
+	The final thiing we need to know about are measurements. \textbf{Pauli measurements} are made along the three primary axes of the Bloch sphere, allowing us to calculate the expectation value of \emph{Pauli observables} (i.e. tensor product combinations of the Pauli hermitian operators):
+
+	\begin{multicols}{2}
+
+		\begin{center}
+			\includegraphics[width=.40\paperwidth]{Figures/quantum-background/circuit-gates-pauli}
+		\end{center}
+
+		\columnbreak
+
+		\pause
+		\begin{center}
+			\includegraphics[width=.40\paperwidth]{Figures/quantum-background/circuit-gates-singlet}\\ \vspace{-2em}
+			$\ket{\text{\small singlet}} \defeq \frac{\ket{01}-\ket{10}}{\sqrt{2}}$
+		\end{center}
+
+	\end{multicols}
+
+\end{frame}
+
+%% ----------------------------------------------------------------------------
+
+\begin{frame}[allowframebreaks]{Deutsch-Jozsa algorithm}
+
+	\begin{multicols}{2}
+
+		\textbf{Deutsch’s problem} says that we are given a function $f: \qty{0,1}^n \ra \qty{0,1}$, and are told that the function is either constant or balanced (i.e. half of the inputs return 0 and the other half 1). The goal is to determine, with the smallest number of evaluations possible, whether the given function is one kind or the other.
+
+		\columnbreak
+
+		\begin{center}
+			\includegraphics[width=.40\paperwidth]{Figures/quantum-background/deutsch-jozsa-algorithm}
+		\end{center}
+
+	\end{multicols}
+
+	Using classical resources the only way to solve this problem is to repeatedly evaluate the function for different inputs. In the worst case scenario, we will need to perform $2^n/2+1$ evaluations, since it is always possible to obtain $2^n/2$ times the same number even if the function is balanced. However, making use of quantum superposition, we can find a way to solve this problem with just one evaluation. The key as to why this is possible is quantum superposition. By evaluating the target function for a superposition state, we are evaluating it simultaneously for all possible inputs. This is sometimes referred to as \textbf{quantum parallelism}.
+
+\break
+
+	The solution to this problem as expressed by the quantum circuit in the previous slide is known as the \textbf{Deutsch-Jozsa algorithm}:
+
+	\begin{multicols}{2}
+
+		\begin{gather*}
+		  \ket{\psi_0} = \ket{0}^{\otimes \qty(n+1)} \\[10pt]
+		  \ket{\psi_1} = \ket{0}^{\otimes n} \ket{1} \\[10pt]
+			H^{\otimes n} \ket{x} =
+		    \sum_{z \in \qty{0,1}^n} (-1)^{x \cdot z}
+				\frac{\ket{z}}{\sqrt{2^n}} \\[10pt]
+			\ket{\psi_2} =
+		    \sum_{x \in \qty{0,1}^n} \frac{\ket{x}}{\sqrt{2^n}}
+		    \qty[\frac{\ket{0}-\ket{1}}{\sqrt{2}}]
+		\end{gather*}
+
+		\columnbreak
+
+		\begin{gather*}
+		  \frac{\ket{0 \oplus f(x)}-\ket{1 \oplus f(x)}}{\sqrt{2}} =
+		    (-1)^{f(x)} \frac{\ket{0}-\ket{1}}{\sqrt{2}} \\[10pt]
+			\ket{\psi_3} =
+		    \sum_{x \in \qty{0,1}^n} \frac{(-1)^{f(x)} \ket{x}}{\sqrt{2^n}}
+		    \qty[\frac{\ket{0}-\ket{1}}{\sqrt{2}}] \\[10pt]
+			\ket{\psi_4} =
+		    \sum_{\substack{x \in \qty{0,1}^n \\ z \in \qty{0,1}^n}}
+		    \frac{(-1)^{x \cdot z +f(x)} \ket{z}}{2^n}
+		    \qty[\frac{\ket{0}-\ket{1}}{\sqrt{2}}]
+		\end{gather*}
+
+	\end{multicols}
+
+\end{frame}
+
+%% ----------------------------------------------------------------------------
+
+\begin{frame}[allowframebreaks]{Quantum Fourier transform}
+
+	The usual \textbf{Discrete Fourier Transform} (DFT) can be expressed as:
+
+	\medskip
+
+	\begin{align*}
+	  \ket{j} \qra&
+				\frac{1}{\sqrt{N}} \sum_{k=0}^{N-1} \exp[2\pi i \frac{jk}{N}] \ket{k} \\
+	    =& \frac{1}{2^{n/2}} \sum_{k_{n-1}=0}^{1} \cdots \sum_{k_{0}=0}^{1}
+	      \exp[2\pi ij \qty(\sum_{l=0}^{n-1} k_{l} 2^{l-n})]
+	      \ket{\bin k_{n-1} \dots k_{0}} \\
+	    =& \frac{1}{2^{n/2}} \sum_{k_{n-1}=0}^{1} \cdots \sum_{k_{0}=0}^{1}
+	      \qty{ \bigotimes_{l=1}^{n} \exp[2\pi ij k_{n-l} 2^{-l}]
+	      \ket{k_{n-l}} } \\
+	    =& \frac{1}{2^{n/2}} \bigotimes_{l=1}^{n}
+	      \qty{ \sum_{k_{n-l}=0}^{1} \exp[2\pi ij k_{n-l} 2^{-l}] \ket{k_{n-l}} }
+	    = \frac{1}{2^{n/2}} \bigotimes_{l=1}^{n}
+	      \qty{ \ket{0} + \exp[2\pi ij 2^{-l}] \ket{1} }
+	\end{align*}
+
+\break
+
+	\begin{gather*}
+		\ket{j} \ra
+			\frac{
+				\qty{\ket{0}+ e^{2\pi i \qty(\bin.j_{0})} \ket{1}} \otimes
+				\qty{\ket{0}+ e^{2\pi i \qty(\bin.j_{1}j_{0})} \ket{1}} \otimes
+				\cdots \otimes
+				\qty{\ket{0} + e^{2\pi i \qty(\bin.j_{n-1}j_{n-2} \dots j_{0})} \ket{1}}
+			}{2^{n/2}} \\[10pt]
+		R_{k} \defeq \mqty[1 & 0 \\ 0 & e^{2\pi i/2^k}]
+	\end{gather*}
+
+	\vspace{-2em}
+
+	\begin{center}
+		\includegraphics[width=.80\paperwidth]{Figures/quantum-background/quantum-fourier-transform}
+	\end{center}
+
+\break
+
+	The present circuit performs $k+1$ operations for each register $q_k$; which amount to a total of $\sum_{k=1}^{n}k=n\qty(n+1)/2$ operations plus, at most, $n/2$ SWAP gates. All in all, the complexity of the circuit is $\Theta\qty(n^2)$: exponentially faster than the FFT or any other known classical algorithm. Nonetheless, this technique cannot be used directly for computing the target transform; since we do not know how to recover the individual amplitudes from the quantum states. On top of that, there is no efficient general method for preapring the states to be transformed.
+
+	\medskip
+	\pause
+
+	This is a great example of an algorithm that presents huge savings compared to its classical analogs, but which cannot be generally used as much as we would like to due to our inability to extract the desirerd information. In some instances however, we can profit from this method to great deeds ---mainly as part of bigger algorithms. An important application is \textbf{Shor's factoring algorithm}, which can be used for efficiently finding the prime decomposition of any given number.
+
+\end{frame}
+
+%% ----------------------------------------------------------------------------
+
+\subsection{Applications}
+
+\begin{frame}{Applications}
+
+	Generally speaking, quantum computing is thought to be able to outperform classical processors, but not for all tasks. This raises the important question of determining which problems are easy to solve using quantum logic while remaining hard for classical approaches. As a matter of fact, we do not fully understand the extent to which there are problems of this kind; and many of the ones we suspect to be good candidates have no formal proof to back them up.\pause~So far, some of the applications that have been found are:
+
+	\begin{multicols}{3}
+
+		\begin{itemize}
+			\item Cryptography
+			\item Secure communications
+			\item Quantum randomness
 		\end{itemize}
 
-		\pause
+		\columnbreak
 
-		\vspace{8pt}
-		This is the main issue that Quantum Computation presents today, as errors spoil the robustness of the more simple computation techniques. Nevertheless, it has been proven that errors $\lesssim 0.01\%$ can be corrected using software and \textbf{quantum error-correction techniques} in order to obtain \textit{Full Quantum Computation}. This is called the \textbf{Fault-Tolerance Theorem}.
-
-	\end{frame}
-
-
-%% ----------------------------------------------------------------------------
-
-	\begin{frame}{Error Correction: Simple Method}
-
-		Let's write down some very simple error-correction techniques: \\
-
-		\vspace{10pt}
-		\textbf{Classical:} \\
-		\vspace{-10pt}
-		\begin{align*}
-		\text{Substitute:  }
-		\begin{cases}
-			\lbrace 0 \rbrace \rightarrow \lbrace 0 \rbrace \lbrace 0 \rbrace \lbrace 0 \rbrace \\
-			\lbrace 1 \rbrace \rightarrow \lbrace 1 \rbrace \lbrace 1 \rbrace \lbrace 1 \rbrace
-		\end{cases}
-		\end{align*}
-
-		\pause
-
-		\textbf{Quantum:} (No-Cloning, measurement disturbs, not discrete...) \\
-		\vspace{-4pt}
-		\begin{align*}
-		\text{Entangled \textbf{qutrits}:  }
-		\begin{cases}
-			\ket{0} \rightarrow \ket{0,0,0} + \ket{1,1,1} + \ket{2,2,2} \\
-			\ket{1} \rightarrow \ket{0,1,2} + \ket{1,2,0} + \ket{2,0,1} \\
-			\ket{2} \rightarrow \ket{0,2,1} + \ket{1,0,2} + \ket{2,1,0}
-		\end{cases}
-		\end{align*}
-
-		\vspace{-0pt}
-		Any single qutrit in the entangled picture has the exact same $1/3$ probability of being either $\lbrace 0,1,2 \rbrace$; no matter which original qutrit it corresponds to. Therefore, loosing one will not give out any information and our system will be secured from measurement disturbances. \textbf{Information is encoded in the entanglement}.
-
-	\end{frame}
-
-
-%% ----------------------------------------------------------------------------
-
-%% ----------------------------------------------------------------------------
-
-\section{Applications}
-
-	\begin{frame}{Applications: Brief List}
-
-		Some of the foreseeable applications of Quantum Computation which will have a revolutionary impact on society are:
-
-		\begin{multicols}{2}
-			\begin{itemize}
-				\item<2->{ Cryptography }
-				\item<3->{ Optimization Problems }
-				\item<4->{ Pattern Matching }
-				\item<4->{ Data Analysis }
-				\item<5->{ Deep Learning }
-				\item<5->{ Random Sampling Techniques }
-				\item<6->{ Quantum Simulations }
-				\item<6->{ Chemistry Simulations }
-				\item<6->{ Biology Simulations }
-			\end{itemize}
-
-			\columnbreak
-			\action<1->{
-			\includegraphics[width=0.38\paperwidth]{Figures/MIT_email} }
-		\end{multicols}
-
-	\end{frame}
-
-
-%% ----------------------------------------------------------------------------
-
-	\subsection{Quantum Gravity}
-
-	\begin{frame}{Quantum Gravity}
-
-		Some important historical facts to know are:
 		\begin{itemize}
-			\item \textbf{Stephen Hawking} $\rightarrow$ Blackhole entropy (information) is proportional to its surface
-			\item \textbf{Leonard Susskind} $\rightarrow$ Extended this notion to the Holographic Principle $\Rightarrow$ \underline{Q-gravity} emerges on the new dim.
+			\item Quantum sensing
+			\item Optimization
+			\item Algebra
 		\end{itemize}
 
-		\pause
+		\columnbreak
 
-		\begin{multicols}{2}
-			The closer the system is to the projecting surface, the smaller the area it will take to encode all of its information. \\
-			If it is in the exact center, the information gets distributed as in the quantum error-correcting technique we described, making information about gravity well encoded and protected.
-			\columnbreak
-			\begin{center}
-				\includegraphics[width=0.24\paperwidth]{Figures/Holographic}
-			\end{center}
-		\end{multicols}
-		\vspace{-20pt}
+		\begin{itemize}
+			\item Machine learning
+			\item Quantum games
+			\item Quantum simulation
+		\end{itemize}
 
-	\end{frame}
+	\end{multicols}
+
+	\pause
+
+	Quantum physics ---especially Quantum Field Theory--- is the ideal place to look for (relevant) problems which can be solved on a quantum computer while remaining intractable for classical machines; that also makes it the best choice for analyzing the computational power behind this new paradigm.
+
+\end{frame}
+
+
+%% ----------------------------------------------------------------------------
+%% ----------------------------------------------------------------------------
+
+\section{Solving the NJL model in $1+1$ dimensions}
+
+%% ----------------------------------------------------------------------------
+
+\subsection{Analytical solution}
+
+%% ----------------------------------------------------------------------------
+
+\subsection{Lattice formulation}
+
+%% ----------------------------------------------------------------------------
+
+\subsection{Fermion-qubit mapping}
+
+%% ----------------------------------------------------------------------------
+
+\subsection{Space parametrization and state preparation}
+
+%% ----------------------------------------------------------------------------
+
+\subsection{Ground state energy}
+
+
+%% ----------------------------------------------------------------------------
+%% ----------------------------------------------------------------------------
+
+\section{Conclusions and prospective work}
 
 
 %% ----------------------------------------------------------------------------
 %% BACK-MATTER
 %% ----------------------------------------------------------------------------
 
-\section{References}
-%	\begin{frame}[allowframebreaks]{References}
-	\begin{frame}{References}
+\section{Bibliography}
+%	\begin{frame}[allowframebreaks]{Bibliography}
+\begin{frame}{Bibliography}
 
-		\begin{thebibliography}{9}
-			\setbeamertemplate{bibliography item}[online]
-		\bibitem{hayden} \textbf{Hayden, P.} \emph{Quantum Computational Universe}
-			\setbeamertemplate{bibliography item}[book]
-		\bibitem{susskind_book} \textbf{Susskind, L. \& Friedman A.} \emph{Quantum Mechanics: The Theoretical Minimum}
-			\setbeamertemplate{bibliography item}[book]
-		\bibitem{nielsen} \textbf{Nielsen M.A. \& Chuang I.L.} \emph{Quantum Computation and Quantum Information}
-			\setbeamertemplate{bibliography item}[article]
-		\bibitem{ladd} \textbf{Lykken J.} \emph{Quantum Technologies for Quantum Science}
-			\setbeamertemplate{bibliography item}[book]
-		\bibitem{mermin} \textbf{Mermin N.D.} \emph{Quantum Computer Science: An Introduction}
-			\setbeamertemplate{bibliography item}[article]
-		\bibitem{ladd} \textbf{Ladd T.D. (et al.)} \emph{Quantum Computing}
+	\begin{thebibliography}{9}
+		\setbeamertemplate{bibliography item}[online]
+	\bibitem{hayden} \textbf{Hayden, P.} \emph{Quantum Computational Universe}
+		\setbeamertemplate{bibliography item}[book]
+	\bibitem{susskind_book} \textbf{Susskind, L. \& Friedman A.} \emph{Quantum Mechanics: The Theoretical Minimum}
+		\setbeamertemplate{bibliography item}[book]
+	\bibitem{nielsen} \textbf{Nielsen M.A. \& Chuang I.L.} \emph{Quantum Computation and Quantum Information}
+		\setbeamertemplate{bibliography item}[article]
+	\bibitem{ladd} \textbf{Lykken J.} \emph{Quantum Technologies for Quantum Science}
+		\setbeamertemplate{bibliography item}[book]
+	\bibitem{mermin} \textbf{Mermin N.D.} \emph{Quantum Computer Science: An Introduction}
+		\setbeamertemplate{bibliography item}[article]
+	\bibitem{ladd} \textbf{Ladd T.D. (et al.)} \emph{Quantum Computing}
 
-		\end{thebibliography}
+	\end{thebibliography}
 
-		\vspace{20pt}
-		\begin{small}
-		\begin{center}{
-		\color{gray}
-			\emph{"The only thing demonstrated by an impossibility proof is a lack of imagination."} \\
-			\textbf{– John Stewart Bell –} }
-		\end{center}
-		\end{small}
-	\end{frame}
+	\vspace{20pt}
+	\begin{small}
+	\begin{center}{
+	\color{gray}
+		\emph{"The only thing demonstrated by an impossibility proof is a lack of imagination."} \\
+		\textbf{– John Stewart Bell –} }
+	\end{center}
+	\end{small}
+\end{frame}
 
 \FinalFrame
 

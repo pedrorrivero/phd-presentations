@@ -102,10 +102,10 @@
 \newcommand\ColorFillBackground{
 	\pgfpathmoveto{\pgfpointorigin}
 	\pgfpathrectanglecorners
-		{\pgfpoint{0pt}{0pt}}{\pgfpoint{\paperwidth}{-\paperheight-5pt}}
+		{\pgfpoint{0pt}{5pt}}{\pgfpoint{\paperwidth}{-\paperheight}}
 	\pgfsetfillcolor{BackgroundColor}
 	\pgfusepath{fill}
-	\pgftext[at=\pgfpoint{\paperwidth}{-\paperheight-4.4pt},right,base]{
+	\pgftext[at=\pgfpoint{\paperwidth}{-\paperheight},right,base]{
 		\pgfuseimage{large-corner}
 	}	% Corner image
 }
@@ -184,7 +184,7 @@
 		\pgftext[at=\pgfpoint{.055\paperwidth}{-.97\paperheight},center,base]{
 			\pgfuseimage{main-logo} }
 	\end{pgfpicture}%
-	\vskip-18pt%
+	\vskip-15pt%
 }
 
 %% Title page
@@ -193,7 +193,7 @@
 	\vskip .33\paperheight%
 	\begin{centering}
 		{\usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle}\par
-			\smallskip
+			\medskip
 		{\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle}\par
 			\vspace{.10\paperheight}
 		{\insertauthor}\par
@@ -210,7 +210,7 @@
 
 %% Title background
 \setbeamertemplate{title background}{%
-	\vspace*{-4.5\baselineskip}
+	\vspace*{-1.05\beamer@headheight}
 	\begin{pgfpicture}
 
 		\pgf@relevantforpicturesizefalse
