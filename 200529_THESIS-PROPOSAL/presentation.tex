@@ -1,7 +1,7 @@
 %%    _____  _____
 %%   |  __ \|  __ \    AUTHOR: Pedro Rivero
 %%   | |__) | |__) |   ---------------------------------
-%%   |  ___/|  _  /    DATE: April 26, 2020
+%%   |  ___/|  _  /    DATE: April 27, 2020
 %%   | |    | | \ \    ---------------------------------
 %%   |_|    |_|  \_\   https://github.com/pedrorrivero
 %%
@@ -80,7 +80,7 @@
 
 \begin{frame}{Objectives}
 
-	An important path forward is to develop methods to simulate these models on quantum computers. This effort is only just beginning, however, performing calculations on a quantum computer is far from being a straightforward task; and it has only been achieved for relatively simple problems.
+	An important path forward is to develop methods to simulate these models on quantum computers. This effort is only just beginning, however, performing calculations on a quantum computer is far from being a straightforward task; and it has only been achieved for relatively simple problems. My goal will be to develop some of the techniques necessary to use quantum computers for this endeavor. We will do so by analyzing the following:
 
 	\medskip
 
@@ -218,8 +218,8 @@
 	\begin{itemize}
 		\item<2-> \textbf{Unitary quantum state transformations} (i.e. reversible):\\
 			\begin{gather*}
-			  \braket{\psi(t)}{\phi(t)} = \mel{\psi_0}{U^\dagger U}{\phi_0} \equiv
-			    \braket{\psi_0}{\phi_0} = 0 \qRa U^\dagger U \equiv \mathds{1}
+			  \braket{\psi_0}{\phi_0} \equiv \braket{\psi(t)}{\phi(t)} =
+					\mel{\psi_0}{U^\dagger U}{\phi_0} \qRa U^\dagger U \equiv \mathds{1}
 			\end{gather*}
 		\item<3-> \textbf{No-cloning theorem}:\\
 			\begin{gather*}
@@ -331,7 +331,7 @@
 
 \begin{frame}{Pauli measurements and the singlet state}
 
-	The final thiing we need to know about are measurements. \textbf{Pauli measurements} are made along the three primary axes of the Bloch sphere, allowing us to calculate the expectation value of \emph{Pauli observables} (i.e. tensor product combinations of the Pauli hermitian operators):
+	The final thing that we need to know about are measurements. \textbf{Pauli measurements} are made along the three primary axes of the Bloch sphere, allowing us to calculate the expectation value of \emph{Pauli observables} (i.e. tensor product combinations of the Pauli hermitian operators):
 
 	\begin{multicols}{2}
 
@@ -448,12 +448,26 @@
 
 \break
 
-	The present circuit performs $k+1$ operations for each register $q_k$; which amount to a total of $\sum_{k=1}^{n}k=n\qty(n+1)/2$ operations plus, at most, $n/2$ SWAP gates. All in all, the complexity of the circuit is $\Theta\qty(n^2)$: exponentially faster than the FFT or any other known classical algorithm. Nonetheless, this technique cannot be used directly for computing the target transform; since we do not know how to recover the individual amplitudes from the quantum states. On top of that, there is no efficient general method for preapring the states to be transformed.
+	We can now compare the complexity of this algorithm with its best classical counterparts. This is done by counting the number of gates in the circuit, where we have to remember the final SWAP gates omitted in the representation.
 
-	\medskip
-	\pause
+	\begin{multicols}{2}
+	\begin{centering}
 
-	This is a great example of an algorithm that presents huge savings compared to its classical analogs, but which cannot be generally used as much as we would like to due to our inability to extract the desirerd information. In some instances however, we can profit from this method to great deeds ---mainly as part of bigger algorithms. An important application is \textbf{Shor's factoring algorithm}, which can be used for efficiently finding the prime decomposition of any given number.
+		\underline{\textbf{FAST FOURIER TRANSFORM}}\\
+		\medskip
+		$N\log_2 N \equiv \Theta\qty(n2^n)$
+
+		\columnbreak
+
+		\underline{\textbf{QUANTUM FOURIER TRANSFORM}}\\
+		\medskip
+		$\sum_{k=1}^{n}k + \frac{n}{2} =
+			\frac{n\qty(n+1)}{2} + \frac{n}{2} \equiv \Theta\qty(n^2)$
+
+	\end{centering}
+	\end{multicols}
+
+	Nonetheless, this technique cannot be used directly for computing the target transform; since we do not know how to recover the individual amplitudes from the quantum states. On top of that, there is no efficient general method for preapring the states to be transformed. This is a great example of an algorithm that presents huge savings compared to its classical analogs, but which cannot be generally used as much as we would like to due to our inability to extract the desirerd information. In some instances however, we can profit from this method to great deeds ---mainly as part of bigger algorithms. An important application is \textbf{Shor's factoring algorithm}, which can be used for efficiently finding the prime decomposition of any given number.
 
 \end{frame}
 
@@ -505,7 +519,7 @@
 
 %% ----------------------------------------------------------------------------
 
-\subsection{Analytical solution}
+% \subsection{Analytical solution}
 
 %% ----------------------------------------------------------------------------
 
