@@ -638,9 +638,135 @@
 
 \subsection{Lattice formulation}
 
+\begin{frame}[allowframebreaks]{Lattice formulation}
+
+	We can define the Hamiltonian of the system as the integral over space of the Hamiltonian density:
+
+	\begin{gather*}
+	  H = \int \mathcal{H}(x) \dd{x}
+	    = \int \qty{\bar{\psi}(x)\qty(m-i\gamma^{1}\partial_{1})\psi(x) -
+	                \frac{1}{2}G_{\pi}\qty[\bar{\psi}(x)\psi(x)]^{2}} \dd{x}
+	\end{gather*}
+
+	For a basis where:
+
+	\begin{gather*}
+		\psi = \mqty[\psi_{+} \\ \psi_{-}] \qc
+	  \bar{\psi} \defeq \psi^{\dagger}\gamma^{0} \qc
+		\gamma^{0} = \mqty[1 & 0\\ 0 & -1] \qc
+	  \gamma^{1} = \mqty[0 & -1\\ 1 & 0]
+	\end{gather*}
+
+	We can write the kinetic term as:
+
+	\begin{gather*}
+	  \bar{\psi}\qty(-i\gamma^{1}\partial_{1})\psi =
+			\frac{i}{2} \qty{
+	      \qty[ \psi^{\dagger}_{+} \qty(\partial_{1}\psi_{-}) -
+	      \qty(\partial_{1}\psi^{\dagger}_{+}) \psi_{-} ] +
+	      \qty[ \psi^{\dagger}_{-} \qty(\partial_{1}\psi_{+}) -
+	      \qty(\partial_{1}\psi^{\dagger}_{-}) \psi_{+} ]
+	    }
+	\end{gather*}
+
+\break
+
+	The two groups in brackets are essentially equivalent to one another by virtue of exchanging positive and negative energy components. This is the motivation behind \textbf{staggered fermion lattices}, which use two computational lattice sites for each theoretical value of $\psi$.
+
+	\begin{figure}[!tbp]
+		\centering
+		\begin{minipage}[c]{.45\linewidth}
+			\centering
+			\includegraphics[width=\linewidth]{Figures/NJL1-model-solving/theoretical-fermion-lattice}
+		\end{minipage}
+	  \hspace{.025\linewidth}
+		\begin{minipage}[c]{.45\linewidth}
+			\centering
+			\includegraphics[width=\linewidth]{Figures/NJL1-model-solving/computational-fermion-lattice}
+		\end{minipage}
+		% \caption{Representations of a fermion lattice in $1+1$ dimensions, with periodic boundary conditions, and for $N=6$ theoretical lattice sites. (Left) Theoretical lattice. (Right) Staggered computational lattice.}
+	  % \label{fig:staggered-fermion-lattice}
+	\end{figure}
+
+\break
+
+	Sites in the staggered computational lattice are labeled using a parameter $n \in \mathds{Z}$ such that all evaluations of $\psi$ are made at integer multiples of the distance $a$:
+
+	\begin{gather*}
+	  \phi(n) \defeq \sqrt{a}
+	    \begin{cases}
+	      \psi_{+}\qty(\frac{n}{2}a) \qc &2 \mid n \\
+	      \psi_{-}\qty(\frac{n-1}{2}a) \qc &2 \nmid n
+	    \end{cases}
+	\end{gather*}
+
+	These newly defined operators obey the \textbf{canonical commutation relations for fermions}:
+
+	\begin{gather*} \label{eq:fermion-canonical-commutation-relations}
+	  \acom{\phi^{\dagger}(p)}{\phi(q)} = \delta_{pq} \qc
+	  \acom{\phi(p)}{\phi(q)} = 0
+	\end{gather*}
+
+	Finally, thanks to the periodic boundary conditions, we can write:
+
+	\begin{gather*}
+	  H_{N}^{(K)} =
+	    \frac{i}{a} \sum_{n=0}^{2N-1} \qty[
+	    \phi^{\dagger}(n)\phi(n+1) - \phi^{\dagger}(n+1)\phi(n)]
+	\end{gather*}
+
+\break
+
+	From this Hamiltonian, we can now recover the \textbf{masless Dirac equation} in the continuum limit; which serves as proof of correctness:
+
+	\begin{gather*}
+	  \dot{\phi}(n) = i\com{H_{N}^{(K)}}{\phi(n)} = \frac{\phi(n+1)-\phi(n-1)}{a}
+	\end{gather*}
+
+	In terms of the original fields, this is:
+
+	\begin{gather*}
+	  \dot{\psi_{+}} = \frac{\Delta \psi_{-}}{\Delta x} \qc
+	  \dot{\psi_{-}} = \frac{\Delta \psi_{+}}{\Delta x}
+	\end{gather*}
+
+	Lastly, taking the limit when $a \ra 0$:
+
+	\begin{gather*}
+	  \pderivative{t}\psi = \hat{\alpha_1}\pderivative{x}\psi \\
+	  \hat{\alpha_1} \defeq \gamma_{0}\gamma_{1} = \gamma^{0}\gamma_{1}
+	    = -\gamma^{0}\gamma^{1} = \mqty[0 & 1 \\ 1 & 0]
+	\end{gather*}
+
+\break
+
+	And it is now straight forward to obtain all other components of the Hamiltonian from the expressions in the Hamiltonian density, which are written in terms of \textbf{Dirac bilinears}.
+
+	\vspace{1em}
+
+	\begin{gather*}
+	  H_{N} = H_{N}^{(M)} + H_{N}^{(K)} + H_{N}^{(I)}
+	    \label{eq:NJL1-staggered-discretization} \\
+	  H_{N}^{(M)} =
+	    m \sum_{n=0}^{2N-1} (-1)^{n}\phi^{\dagger}(n)\phi(n) \\
+	  H_{N}^{(K)} =
+	    \frac{i}{a} \sum_{n=0}^{2N-1} \qty[
+	    \phi^{\dagger}(n)\phi(n+1) - \phi^{\dagger}(n+1)\phi(n)] \\
+	  H_{N}^{(I)} =
+	    - \frac{1}{2a} G_{\pi} \sum_{n=0}^{N-1} \qty[
+	      \phi^{\dagger}(2n)\phi(2n) - \phi^{\dagger}(2n+1)\phi(2n+1)
+	    ]^{2}
+	\end{gather*}
+
+\end{frame}
+
 %% ----------------------------------------------------------------------------
 
 \subsection{Fermion-qubit mapping}
+
+\begin{frame}{Fermion-qubit mapping}
+
+\end{frame}
 
 %% ----------------------------------------------------------------------------
 
