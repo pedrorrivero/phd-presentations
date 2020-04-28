@@ -766,7 +766,149 @@
 
 \begin{frame}{Fermion-qubit mapping}
 
+	Generally speaking, quantum computers cannot measure any given operator directly. Therefore, in order to simulate this or any other Hamiltonian in a quantum processor, one needs to efficiently map its component operators onto ones suitable for evaluation in such machines. The most commonly used of these sets are Pauli operators along with the identity: this is what we will use and refer to as the \textbf{Pauli set}.
+
+	\medskip
+
+	It turns out that, in one spatial dimension, spin-$\frac{1}{2}$ particles (i.e. qubits) behave much like fermions. This allows us to implement a mapping between one and the other. The \textbf{Jordan-Wigner transform} associates spin ``down'' and ``up'' with occupied and unoccupied fermion states (or vice versa). Particularly, we will choose:
+
+	\begin{align*}
+		\ket{\ua} \equiv \ket{0} &\qc
+			\ket{\da} \equiv \ket{1} \\
+    \ket{\da} \equiv \phi^{\dagger}\ket{0} &\qc
+			\ket{\ua} \equiv \phi\ket{1} \\[5pt]
+		\phi \ra \sigma^{+} &\qc \phi^{\dagger} \ra \sigma^{-}
+	\end{align*}
+
 \end{frame}
+
+%% ----------------------------------------------------------------------------
+
+\begin{frame}[allowframebreaks]{Jordan-Wigner transform}
+
+	To prove that this is valid, we can define the following equivalences by drawing inspiration from raising and lowering operators in angular momentum theory:
+
+	\begin{align*}
+		\sigma^{1} &\equiv \phi^{\dagger} + \phi \\
+		\sigma^{2} &\equiv i\qty(\phi^{\dagger} - \phi) \\
+		\sigma^{3} &\equiv 1 - 2\phi^{\dagger}\phi
+	\end{align*}
+
+	Making use of the properties of fermion creation and annihilation operators, comprised within their canonical commutation relations, these can be shown to behave algebraically like \textbf{Pauli matrices}:
+
+	\begin{align*}
+	  \com{\sigma^{p}}{\sigma^{q}} &= 2i\epsilon_{pqr}\sigma^{r} \\
+	  \acom{\sigma^{p}}{\sigma^{q}} &= 2\delta_{pq}
+	\end{align*}
+
+\break
+
+	We can recover the usual spin raising and lowering hermitian conjugate operators:
+
+	\begin{gather}
+	  \sigma^{\pm} \defeq \frac{1}{2}\qty(\sigma^{1} \pm i\sigma^{2})
+	\end{gather}
+
+	All this allows us to use these spins as a basic model for fermions:
+
+	\begin{gather} \label{eq:anticommutator-for-single-particle-jordan-wigner}
+	  \acom{\phi}{\phi^{\dagger}} = 1 \qra \acom{\sigma^{+}}{\sigma^{-}} = 1
+	\end{gather}
+
+	Unfortunately, this only works for single-fermion representations, and needs to be modified once we introduced more than one particle; since independent spins commute, while independent fermions anticommute.
+
+	\begin{gather*}
+	  \com{\sigma^{+}(p)}{\sigma^{-}(q)} = \delta_{pq} \qc
+	    \acom{\sigma^{+}(p)}{\sigma^{-}(q)} \neq \delta_{pq} \\
+	  \com{\phi(p)}{\phi^{\dagger}(q)} \neq \delta_{pq} \qc
+	    \acom{\phi(p)}{\phi^{\dagger}(q)} = \delta_{pq}
+	\end{gather*}
+
+\break
+
+	A way to fix this issue is by defining $N(l)=\phi^{\dagger}(l)\phi(l)$ as the hermitian number operator for state $l$, and attaching a so called unitary \textbf{string operator} $S(n)$ to the fermion operators:
+
+	\begin{gather*}
+		\begin{split}
+			S(n)\phi(n) &\ra \sigma^{+}(n) \\
+			\phi^{\dagger}(n)S^{\dagger}(n) &\ra \sigma^{-}(n)
+		\end{split} \\
+		S(n) = \exp[ -i\pi \sum_{l<n} \qty[N(l)+s(l)] ]
+	\end{gather*}
+
+	\vspace{-0.5em}
+
+	The $s(l)$ terms in the string operator are scalars associated to gauge transformations and do not add much to the transform. With this new mapping, Pauli matrices get redefined to:
+
+	\begin{align*}
+		\sigma^{1}(n) &\equiv
+			\phi^{\dagger}(n)S^{\dagger}(n) + S(n)\phi(n) \\
+		\sigma^{2}(n) &\equiv
+			i\qty[\phi^{\dagger}(n)S^{\dagger}(n) - S(n)\phi(n)] \\
+		\sigma^{3}(n) &\equiv
+			1 - 2\phi^{\dagger}(n)\phi(n)
+	\end{align*}
+
+\break
+
+	We now retrieve the correct statistics. Of course, we would like to express the string operator in terms of the Pauli set so that we can move it to the other side of the transformation. Fortunately, we can do so by expanding the number operators:
+
+	\begin{gather*}
+	  \exp[\pm i\pi \sum_{l<n} N(l)] =
+		  \prod_{l<n}\exp[\pm i\pi \phi^{\dagger}(l)\phi(l)] =
+		  \prod_{l<n}\qty[1-2\phi^{\dagger}(l)\phi(l)] =
+		  \prod_{l<n}\sigma^3(l) \\
+		S(n) = \prod_{l<n} e^{-i\pi s(l)} \sigma^3(l)
+	\end{gather*}
+
+	Finally, our choice of gauge will be such that $s(l) = s \in (-1,1]$ $\forall l$ and the string operator is hermitian for all values of $n$. All in all, this can be achieved by making $s=0$, which gives:
+
+	\begin{gather*}
+		\phi(n) \ra \qty[\prod_{l<n} \sigma^3(l)]\sigma^{+}(n) \qc
+		\phi^{\dagger}(n) \ra \qty[\prod_{l<n} \sigma^3(l)]\sigma^{-}(n)
+	\end{gather*}
+
+\end{frame}
+
+%% ----------------------------------------------------------------------------
+
+\begin{frame}[allowframebreaks]{Refactoring the NJL Hamiltonian}
+
+	Now that we have a way of converting from fermion to spin operators, we can apply it to the NJL Hamiltonian:
+
+	\begin{align*}
+	  H_{N}^{(M)} &\qra
+	    \frac{m}{2} \sum_{n=0}^{2N-1} (-1)^{n+1}\sigma^{3}(n) \\
+	  H_{N}^{(K)} &\qra
+	    \frac{i}{a} \sum_{n=0}^{2N-1}
+	    \qty[\sigma^{-}(n)\sigma^{+}(n+1) - \sigma^{-}(n+1)\sigma^{+}(n)] \\
+	  H_{N}^{(I)} &\qra
+	    \frac{G_{\pi}}{4a} \sum_{n=0}^{N-1} \qty[\sigma^{3}(2n)\sigma^{3}(2n+1) - N]
+	\end{align*}
+
+	We will only be interested in studying the \textbf{Chiral limit} (i.e. $m=0$), which justifies dropping the entire mass term. From the interaction Hamiltonian we will get an adiabatic modification term of the form $\frac{G_{\pi}N}{4a}$; this will also be dropped for the moment.
+
+\break
+
+	Hence, with periodic boundary conditions $\sigma^{p}(N)=\sigma^{p}(0)$ and expressed in quantum computing notation $\qty(\mathds{1}_{n},X_{n},Y_{n},Z_{n}) \equiv \sigma^{p}(n)$ for $p=\qty(0,1,2,3)$, our refactored Hamiltonian $P_{N} \defeq 2aH_{N}$ will be:
+
+	\begin{gather} \label{eq:NJL1-refactored-hamiltonian}
+	  P_{N} =
+	    \sum_{n=0}^{2N-1} \qty[X_{n+1} Y_{n} - Y_{n+1} X_{n}] +
+	      \frac{G_{\pi}}{2} \sum_{n=0}^{N-1} Z_{2n+1} Z_{2n}
+	\end{gather}
+
+	One important feature of this operator is that its size (i.e. number of terms) \textbf{grows polynomially} with the size of the system $N$. It is also interesting to notice that this operator can be expressed in a recursive layout:
+
+	\begin{align*}
+		P_{N+1} =& P_{N}
+				- Y_{2N-1} X_{0} + X_{2N-1} Y_{0} + Y_{2N+1} X_{0} - X_{2N+1} Y_{0} \\
+			&+ X_{2N} Y_{2N-1} - Y_{2N} X_{2N-1} + X_{2N+1} Y_{2N} - Y_{2N+1} X_{2N}
+				+ \frac{G_{\pi}}{2} \qty(Z_{2N+1} Z_{2N})
+	\end{align*}
+
+\end{frame}
+
 
 %% ----------------------------------------------------------------------------
 
