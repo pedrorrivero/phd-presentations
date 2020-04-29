@@ -1461,7 +1461,34 @@
 
 %% ----------------------------------------------------------------------------
 
-\begin{frame}{Ground state energy}
+\begin{frame}[allowframebreaks]{Ground state energy}
+
+	At long last, we have everything that we need to solve for the ground state energy of our system using a quantum computer. For simplicity, we will do so first through a \textbf{quantum simulator}.
+
+	\begin{center}
+		\includegraphics[width=.45\paperwidth]{Figures/NJL1-model-solving/G2}
+	\end{center}
+	\vspace{-2em}
+
+\break
+
+	\begin{figure}[!p]
+		\centering
+		\begin{minipage}[c]{.4\linewidth}
+			\centering
+			\includegraphics[width=.8\linewidth]{Figures/NJL1-model-solving/G2-err}
+		\end{minipage}
+		\hspace{.025\linewidth}
+		\begin{minipage}[c]{.4\linewidth}
+			\centering
+			\includegraphics[width=.8\linewidth]{Figures/NJL1-model-solving/G2-logerr}
+		\end{minipage} \\[-1em]
+		\begin{center}
+			\includegraphics[width=.7\paperwidth]{Figures/NJL1-model-solving/P2-tri-contour}
+		\end{center}
+		% \caption{Percentual error of the ground state energy results obtained from our quantum simulation with respect to the analytical solution and for different values of the coupling constant. (Left) Linear scale. (Right) Logarithmic scale.}
+	\end{figure}
+	\vspace{-2em}
 
 \end{frame}
 
@@ -1470,41 +1497,84 @@
 
 \section{Conclusions and prospective work}
 
+\begin{frame}{Conlcusions}
+
+	So far I have:
+
+	\begin{itemize}
+		\item Reproduced an instance of mass generation in QCD using the NJL model in $1+1$ dimensions, and found the critical value of the coupling constant at which it occurs.
+		\item Discretized a simple version of the NJL Hamiltonian using a staggered fermion lattice.
+		\item Mapped the resulting Hamultonian onto Pauli operators in order to work with it on a quantum processor.
+		\item Developed a custom ansatz for parametrizing certain regions of Hilbert space according to the symmetries of our problem.
+		\item Implemented a simplified version of said ansatz as a quantum circuit.
+		\item Introduced a new variational algorithm to obtain the minimum eigen value of an encoded operator and tested it against the VQE algorithm.
+		\item Used the OSR algorithm to solve for the ground state energy of the NJL Hamiltonian for differernt values of the coupling constant.
+	\end{itemize}
+
+\end{frame}
+
+%% ----------------------------------------------------------------------------
+
+\begin{frame}{Prospective work}
+
+	I still have not observed definite evidence of mass generation.
+
+	\medskip
+
+	\begin{itemize}
+		\item Implement the full parametrization and compare them with the analytical solution.
+		\item Perform these same calculations on actual quantum computers, analyzing any possible differences in the results.
+		\item Use a Hamiltonian with two flavors that explicitly contains chiral symmetry, and study properties of the resulting domains (e.g. chiral condensate) such as correlation lengths.
+		\item Build a new refactored Hamiltonian which exhibits the finite jumps for arbitrarily small changes in the coupling constant, and backwards engineer a continuum model of QCD.
+		\item Study the NJL model in higher dimensions up to full $3+1$ QCD.
+		\item Validate the techniques and results.
+		\item Describe the scalability of these methods: how fast resource requirements grow once we start increasing the complexity of the systems we are simulating.
+		\item Determine some of the limitations of state of the art, as well as short-term NISQ technology.
+		\item Develop a consistent notation for these applications of QIS.
+	\end{itemize}
+
+\end{frame}
+
 
 %% ----------------------------------------------------------------------------
 %% BACK-MATTER
 %% ----------------------------------------------------------------------------
 
-\section{Bibliography}
-%	\begin{frame}[allowframebreaks]{Bibliography}
-\begin{frame}{Bibliography}
+% \section{Bibliography}
+% %	\begin{frame}[allowframebreaks]{Bibliography}
+% \begin{frame}{Bibliography}
+%
+% 	\begin{thebibliography}{9}
+% 		\setbeamertemplate{bibliography item}[online]
+% 	\bibitem{hayden} \textbf{Hayden, P.} \emph{Quantum Computational Universe}
+% 		\setbeamertemplate{bibliography item}[book]
+% 	\bibitem{susskind_book} \textbf{Susskind, L. \& Friedman A.} \emph{Quantum Mechanics: The Theoretical Minimum}
+% 		\setbeamertemplate{bibliography item}[book]
+% 	\bibitem{nielsen} \textbf{Nielsen M.A. \& Chuang I.L.} \emph{Quantum Computation and Quantum Information}
+% 		\setbeamertemplate{bibliography item}[article]
+% 	\bibitem{ladd} \textbf{Lykken J.} \emph{Quantum Technologies for Quantum Science}
+% 		\setbeamertemplate{bibliography item}[book]
+% 	\bibitem{mermin} \textbf{Mermin N.D.} \emph{Quantum Computer Science: An Introduction}
+% 		\setbeamertemplate{bibliography item}[article]
+% 	\bibitem{ladd} \textbf{Ladd T.D. (et al.)} \emph{Quantum Computing}
+%
+% 	\end{thebibliography}
+%
+% 	\vspace{20pt}
+% 	\begin{small}
+% 	\begin{center}{
+% 	\color{gray}
+% 		\emph{"The only thing demonstrated by an impossibility proof is a lack of imagination."} \\
+% 		\textbf{– John Stewart Bell –} }
+% 	\end{center}
+% 	\end{small}
+% \end{frame}
 
-	\begin{thebibliography}{9}
-		\setbeamertemplate{bibliography item}[online]
-	\bibitem{hayden} \textbf{Hayden, P.} \emph{Quantum Computational Universe}
-		\setbeamertemplate{bibliography item}[book]
-	\bibitem{susskind_book} \textbf{Susskind, L. \& Friedman A.} \emph{Quantum Mechanics: The Theoretical Minimum}
-		\setbeamertemplate{bibliography item}[book]
-	\bibitem{nielsen} \textbf{Nielsen M.A. \& Chuang I.L.} \emph{Quantum Computation and Quantum Information}
-		\setbeamertemplate{bibliography item}[article]
-	\bibitem{ladd} \textbf{Lykken J.} \emph{Quantum Technologies for Quantum Science}
-		\setbeamertemplate{bibliography item}[book]
-	\bibitem{mermin} \textbf{Mermin N.D.} \emph{Quantum Computer Science: An Introduction}
-		\setbeamertemplate{bibliography item}[article]
-	\bibitem{ladd} \textbf{Ladd T.D. (et al.)} \emph{Quantum Computing}
-
-	\end{thebibliography}
-
-	\vspace{20pt}
-	\begin{small}
-	\begin{center}{
-	\color{gray}
-		\emph{"The only thing demonstrated by an impossibility proof is a lack of imagination."} \\
-		\textbf{– John Stewart Bell –} }
-	\end{center}
-	\end{small}
-\end{frame}
+%% ----------------------------------------------------------------------------
 
 \FinalFrame
+
+%% ----------------------------------------------------------------------------
+%% ----------------------------------------------------------------------------
 
 \end{document}
