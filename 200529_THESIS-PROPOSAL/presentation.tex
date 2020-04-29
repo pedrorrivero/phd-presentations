@@ -1348,6 +1348,122 @@
 
 \subsection{Ground state energy}
 
+\begin{frame}[allowframebreaks]{Variational quantum eigensolver algorithm}
+
+	We can now solve for the ground state energy of our system. This can be accomplished by making use of the hybrid quantum-classical algorithm known as the \textbf{Variational Quantum Eigensolver} (VQE); which is based in the \textbf{variational theorem of quantum mechanics}:
+
+	\begin{gather*}
+	  \ev{H}\!\qty(\theta^{n}) \equiv
+	    \ev{H}{\psi\qty(\theta^{n})} \geq
+	    \lambda_{\text{min}}
+	\end{gather*}
+
+	Evaluating the expectation value of the different components making up our Hamiltonian is done through a process known as \textbf{operator averaging}:
+
+	\begin{gather*}
+	  P_{N} = \sum_{p=1}^{\order{N^q}} w_{p} P_{N}^{p} \qRa
+	  \ev{P_{N}} = \sum_{p=1}^{\order{N^q}} w_{p} \ev{P_{N}^{p}}
+	\end{gather*}
+
+\break
+
+	\begin{center}
+		\includegraphics[width=.7\paperwidth]{Figures/NJL1-model-solving/VQE}
+	\end{center}
+
+\end{frame}
+
+%% ----------------------------------------------------------------------------
+
+\begin{frame}[allowframebreaks]{Optimal sampling regression algorithm}
+
+	The method that we have used to parametrize space will naturally return cycles in the the states that we are parametrizing. Such \textbf{periodic nature} will transfer to the expectation value function, which in turn allows us to consistently apply Fourier analysis to fully describe it:
+
+	\begin{gather*}
+	  f(\theta) \equiv a_0 + \sum_{s=1}^S \qty[a_s\cos(s\theta) + b_s\sin(s\theta)] \\
+	  \mqty[
+	    1 & \cos(\theta_1) & \sin(\theta_1) & \cos(2\theta_1)
+	      & \cdots & \sin(S\theta_1) \\
+	    1 & \cos(\theta_2) & \sin(\theta_2) & \cos(2\theta_2)
+	      & \cdots & \sin(S\theta_2) \\
+	    \vdots & \vdots & \vdots & \vdots & \ddots & \vdots \\
+	    1 & \cos(\theta_{2S+1}) & \sin(\theta_{2S+1}) & \cos(2\theta_{2S+1})
+	      & \cdots & \sin(S\theta_{2S+1})
+	  ]
+	  \mqty[
+	    a_0 \\ a_1 \\ b_1 \\ a_2 \\ \vdots \\ b_S
+	  ] =
+	  \mqty[
+	    f(\theta_1) \\ f(\theta_2) \\ \vdots \\ f(\theta_{2S+1})
+	  ] \\[5pt]
+	  Fc = f \qra F^{\dagger}Fc = F^{\dagger}f
+	\end{gather*}
+
+\break
+
+	Generally $S \ra \infty$, however, if the bandwidth is bounded, $S$ will be finite and it will be possible to evaluate this expression exactly. Theoretically, the power of this method is demonstrated through the \textbf{Nyquist-Shannon sampling theorem}; which states that if a function $f(\theta)$ contains no angular frequencies higher than $\omega_{\text{S}}$, it is completely determined by giving its ordinates at a series of points $1/2\omega_{\text{S}}$ apart:
+
+	\begin{gather*}
+	  \omega_{\text{sampling}} > 2\omega_{\text{S}}
+	\end{gather*}
+
+	Extending these results to higher dimensions is straight forward considering multidimensional Fourier series. In this case, we may have a different bandwidth $S_{q}$ for each parameter. Calling the total number of parameters $Q$, and the maximum bandwidth $S_{\text{max}}$, the total number of samples $T$ required by this method is:
+
+	\begin{gather*}
+	  T = \prod_{q=1}^{Q} \qty(2 S_{q} + 1) = \order{S_{\text{max}}^{Q}}
+	\end{gather*}
+
+\break
+
+	\begin{center}
+		\includegraphics[width=.7\paperwidth]{Figures/NJL1-model-solving/OSR}
+	\end{center}
+
+\break
+
+% Overall, what we are fleshing out is a connection between the topology of the quantum circuit and that of the domain space in our parametrization.
+
+\begin{figure}[!tbp]
+	\centering
+	\begin{minipage}[c]{.40\linewidth}
+		\centering
+		\includegraphics[width=\linewidth]{Figures/NJL1-model-solving/deuteron-VQE}
+	\end{minipage}
+	\hspace{.025\linewidth}
+	\begin{minipage}[c]{.40\linewidth}
+		\centering
+		\includegraphics[width=\linewidth]{Figures/NJL1-model-solving/deuteron-OSR}
+	\end{minipage}
+	\caption{Comparison between the VQE and OSR algorithms, when reproducing an external model with two parameters. (Left) Triangulation of the expectation value function from raw samples. (Right) Approximate function obtained through the Optimal Sampling Regression method with $S_q=S_{\text{max}}=2 ~\forall q$.}
+\end{figure}
+
+\vspace{-1em}
+
+\begin{table}[!bp]
+	\centering
+	% \caption{Comparison between results using the VQE and OSR algorithms.}
+	\begin{tabular}{ c c c c c }
+		\hline
+		% \rule{0pt}{14pt}
+		$N_\text{params}$ & VQE samples & OSR samples &
+		VQE error & OSR error \\
+		\hline
+		\hline
+		% \rule{0pt}{14pt}
+		$1$ & $24$ & $3$ & $3.5\%$ & $1.0\%$ \\
+		\hline
+		$2$ & $153$ & $25$ & $0.3\%$ & $0.2\%$ \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\end{frame}
+
+%% ----------------------------------------------------------------------------
+
+\begin{frame}{Ground state energy}
+
+\end{frame}
 
 %% ----------------------------------------------------------------------------
 %% ----------------------------------------------------------------------------
