@@ -1010,7 +1010,7 @@
 
 \begin{frame}[allowframebreaks]{Custom symmetry-based parametrization ansatz}
 
-	While extremely general, it is easy to notice that the implementation of any variant of the unitary coupled cluster ansatz is still cumbersome and can depend on a large number of parameters based on the chosen order of truncation. We will now introduce a new ansatz inspired by the shape of our refactored Hamiltonian. For this task, we will analyze the two distinct parts in our Hamiltonian independently; since these will dominate in two \textbf{different regimes}:
+	While general, it is easy to notice that the implementation of any variant of the unitary coupled cluster ansatz is still cumbersome and can depend on a large number of parameters based on the chosen order of truncation. We will now introduce a new ansatz inspired by the shape of our refactored Hamiltonian. For this task, we will analyze the two distinct parts in our Hamiltonian independently; since these will dominate in two \textbf{different regimes}:
 
 	\begin{multicols}{2}
 
@@ -1230,7 +1230,117 @@
 
 %% ----------------------------------------------------------------------------
 
-\begin{frame}{Parametrization ansatz implementation}
+\begin{frame}[allowframebreaks]{Parametrization ansatz implementation}
+
+	In order to implement this parametrization on any of the IBM-Q quantum computers, we need to be able to write it down as a quantum circuit. This means that it has to expressed through an unitary operator $U\qty(\theta, \eta)$ in the form:
+
+	\begin{gather}
+	  \ket{\text{SBP}_{2} \qty(\theta, \eta)} =
+	    U\qty(\theta, \eta) \ket{\text{SR}}
+	\end{gather}
+
+	At first we will only be interested in obtaining the ground state energy of our system for positive values of the coupling constant (i.e. we will only need the minimum eigenstates), this allows us to simplify even further the parametrization introduced in the previous section. This will allow us to reduce the subspace we are looking into from three dimensions down to two.
+
+	\begin{gather}
+	  \ket{\gamma} \equiv
+	    \ket{\gamma_{\text{min},2}^2} \defeq
+	    \frac{\ket{5} - \ket{10}}{\sqrt{2}} \equiv
+	    \ket{\text{SBP}_{2} \qty(0, \frac{\pi}{4})} \\
+	  \ket{\kappa} \defeq
+	    \frac{\ket{3}-\ket{6}-\ket{9}+\ket{12}}{2} \equiv
+	    \ket{\text{SBP}_{2} \qty(\frac{\pi}{2}, \frac{\pi}{4})}
+	\end{gather}
+
+\break
+
+	\begin{multicols}{2}
+
+		This will effectively cut down the degrees of freedom from two to just one (i.e. fixing $\eta=\pi/4$). However, having now only two distinguishable quantum states, we can choose to ease the parametrization to account for the entirety of the Hilbert space associated to the \textbf{qubit} they comprise; spuriously increasing the degrees of freedom back to two, but making the implementation as a quantum circuit conceptually easier.
+
+		\medskip
+
+		We will parametrize an \textbf{ancilla qubit}, and then map its basis states to the two basis states of the subspace that we are interested in exploring.
+
+		\columnbreak
+
+		\begin{center}
+			\includegraphics[width=.4\paperwidth]{Figures/NJL1-model-solving/bloch-sphere}
+		\end{center}
+
+	\end{multicols}
+
+\break
+
+	\begin{figure}[!p]
+		\centering
+		\begin{minipage}[c]{.45\linewidth}
+			\centering
+			\includegraphics[width=\linewidth]{Figures/NJL1-model-solving/ansatz-implementation-ancilla-mapping}
+		\end{minipage}
+		\hspace{.025\linewidth}
+		\begin{minipage}[c]{.45\linewidth}
+			\centering
+			\includegraphics[width=\linewidth]{Figures/NJL1-model-solving/ansatz-implementation-controlled-gammakappa}
+		\end{minipage}
+		\caption{(Left) Quantum circuit to map the ancilla qubit onto the target qubit Hilbert space in our system. (Right) Simplified controlled $\mathcal{K}\Gamma^{-1}$ gate.}
+	\end{figure}
+
+\break
+
+	\begin{figure}[!p]
+		\centering
+		\begin{minipage}[c]{.45\linewidth}
+			\centering
+			\includegraphics[width=\linewidth]{Figures/NJL1-model-solving/ansatz-implementation-base-state-preparation-gamma}
+		\end{minipage}
+	  \hspace{.025\linewidth}
+		\begin{minipage}[c]{.45\linewidth}
+			\centering
+			\includegraphics[width=\linewidth]{Figures/NJL1-model-solving/ansatz-implementation-base-state-reversing-gamma}
+		\end{minipage}
+		\caption{(Left) Preparation $\Gamma$ of state $\ket{\gamma}$. (Right) Quantum gate $\Gamma^{-1}$ for reversing state $\ket{\gamma}$.}
+	\end{figure}
+
+\break
+
+	\begin{figure}[!p]
+		\centering
+		\begin{minipage}[c]{.45\linewidth}
+			\centering
+			\includegraphics[width=\linewidth]{Figures/NJL1-model-solving/ansatz-implementation-base-state-preparation-kappa}
+		\end{minipage}
+	  \hspace{.025\linewidth}
+		\begin{minipage}[c]{.45\linewidth}
+			\centering
+			\includegraphics[width=\linewidth]{Figures/NJL1-model-solving/ansatz-implementation-base-state-reversing-kappa}
+		\end{minipage}
+		\caption{(Left) Preparation $\mathcal{K}$ of state $\ket{\kappa}$. (Right) Quantum gate $\mathcal{K}^{-1}$ for reversing state $\ket{\kappa}$.}
+	\end{figure}
+
+\break
+
+	\begin{multicols}{2}
+
+		This parametrization will work if we are interested in measuring in the computational basis only (i.e. Pauli-Z measurements). Nonetheless, if we change our basis before measuring (e.g. to Pauli-X or Pauli-Y) we are going to face a problem: the resulting states of our system will be entangled with the ancilla qubit, and so, states that should be indistinguishable from one another will turn out distinct; because of this, the probability distributions will not be correct.
+
+		\begin{gather*}
+		  \text{Pr} \qty(\ket{\psi}_{\text{distinct}}) =
+		    \norm{\psi_\gamma}^2 + \norm{\psi_\kappa}^2 \\
+		  \text{Pr} \qty(\ket{\psi}_{\text{indist}}) =
+		    \norm{\psi_\gamma + \psi_\kappa}^2 \\
+		  \text{Pr} \qty(\ket{\psi}_{\text{distinct}}) \geq
+		    \text{Pr} \qty(\ket{\psi}_{\text{indist}})
+		\end{gather*}
+
+		\columnbreak
+
+		Therefore, as a last step, we need to \textbf{break this entanglement}.
+
+		\begin{center}
+			\includegraphics[width=.4\paperwidth]{Figures/NJL1-model-solving/ansatz-implementation-circuit}
+		\end{center}
+
+	\end{multicols}
 
 \end{frame}
 
