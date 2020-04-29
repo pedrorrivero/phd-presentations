@@ -1,7 +1,7 @@
 %%    _____  _____
 %%   |  __ \|  __ \    AUTHOR: Pedro Rivero
 %%   | |__) | |__) |   ---------------------------------
-%%   |  ___/|  _  /    DATE: April 28, 2020
+%%   |  ___/|  _  /    DATE: April 29, 2020
 %%   | |    | | \ \    ---------------------------------
 %%   |_|    |_|  \_\   https://github.com/pedrorrivero
 %%
@@ -355,6 +355,7 @@
 
 \begin{frame}[allowframebreaks]{Deutsch-Jozsa algorithm}
 
+	\vspace{-0.5em}
 	\begin{multicols}{2}
 
 		\textbf{Deutsch’s problem} says that we are given a function $f: \qty{0,1}^n \ra \qty{0,1}$, and are told that the function is either constant or balanced (i.e. half of the inputs return 0 and the other half 1). The goal is to determine, with the smallest number of evaluations possible, whether the given function is one kind or the other.
@@ -367,7 +368,17 @@
 
 	\end{multicols}
 
-	Using classical resources the only way to solve this problem is to repeatedly evaluate the function for different inputs. In the worst case scenario, we will need to perform $2^n/2+1$ evaluations, since it is always possible to obtain $2^n/2$ times the same number even if the function is balanced. However, making use of quantum superposition, we can find a way to solve this problem with just one evaluation. The key as to why this is possible is quantum superposition. By evaluating the target function for a superposition state, we are evaluating it simultaneously for all possible inputs. This is sometimes referred to as \textbf{quantum parallelism}.
+	\begin{multicols}{2}
+
+		\underline{\textbf{CLASSICAL ALGORITHM}} \\[5pt]
+		In the worst case scenario, we will need to perform $2^n/2+1$ evaluations, since it is always possible to obtain $2^n/2$ times the same number even if the function is balanced.
+
+		\columnbreak
+
+		\underline{\textbf{QUANTUM ALGORITHM}} \\[5pt]
+		By evaluating the target function for a superposition state, we are evaluating it simultaneously for all possible inputs; and we can find the solution to this problem in just one pass. This is sometimes referred to as \textbf{quantum parallelism}.
+
+	\end{multicols}
 
 \break
 
@@ -401,73 +412,6 @@
 		\end{gather*}
 
 	\end{multicols}
-
-\end{frame}
-
-%% ----------------------------------------------------------------------------
-
-\begin{frame}[allowframebreaks]{Quantum Fourier transform}
-
-	The usual \textbf{Discrete Fourier Transform} (DFT) can be expressed as:
-
-	\medskip
-
-	\begin{align*}
-	  \ket{j} \qra&
-				\frac{1}{\sqrt{N}} \sum_{k=0}^{N-1} \exp[2\pi i \frac{jk}{N}] \ket{k} \\
-	    =& \frac{1}{2^{n/2}} \sum_{k_{n-1}=0}^{1} \cdots \sum_{k_{0}=0}^{1}
-	      \exp[2\pi ij \qty(\sum_{l=0}^{n-1} k_{l} 2^{l-n})]
-	      \ket{\bin k_{n-1} \dots k_{0}} \\
-	    =& \frac{1}{2^{n/2}} \sum_{k_{n-1}=0}^{1} \cdots \sum_{k_{0}=0}^{1}
-	      \qty{ \bigotimes_{l=1}^{n} \exp[2\pi ij k_{n-l} 2^{-l}]
-	      \ket{k_{n-l}} } \\
-	    =& \frac{1}{2^{n/2}} \bigotimes_{l=1}^{n}
-	      \qty{ \sum_{k_{n-l}=0}^{1} \exp[2\pi ij k_{n-l} 2^{-l}] \ket{k_{n-l}} }
-	    = \frac{1}{2^{n/2}} \bigotimes_{l=1}^{n}
-	      \qty{ \ket{0} + \exp[2\pi ij 2^{-l}] \ket{1} }
-	\end{align*}
-
-\break
-
-	\begin{gather*}
-		\ket{j} \ra
-			\frac{
-				\qty{\ket{0}+ e^{2\pi i \qty(\bin.j_{0})} \ket{1}} \otimes
-				\qty{\ket{0}+ e^{2\pi i \qty(\bin.j_{1}j_{0})} \ket{1}} \otimes
-				\cdots \otimes
-				\qty{\ket{0} + e^{2\pi i \qty(\bin.j_{n-1}j_{n-2} \dots j_{0})} \ket{1}}
-			}{2^{n/2}} \\[10pt]
-		R_{k} \defeq \mqty[1 & 0 \\ 0 & e^{2\pi i/2^k}]
-	\end{gather*}
-
-	\vspace{-2em}
-
-	\begin{center}
-		\includegraphics[width=.80\paperwidth]{Figures/quantum-background/quantum-fourier-transform}
-	\end{center}
-
-\break
-
-	We can now compare the complexity of this algorithm with its best classical counterparts. This is done by counting the number of gates in the circuit, where we have to remember the final SWAP gates omitted in the representation.
-
-	\begin{multicols}{2}
-	\begin{centering}
-
-		\underline{\textbf{FAST FOURIER TRANSFORM}}\\
-		\medskip
-		$N\log_2 N \equiv \Theta\qty(n2^n)$
-
-		\columnbreak
-
-		\underline{\textbf{QUANTUM FOURIER TRANSFORM}}\\
-		\medskip
-		$\sum_{k=1}^{n}k + \frac{n}{2} =
-			\frac{n\qty(n+1)}{2} + \frac{n}{2} \equiv \Theta\qty(n^2)$
-
-	\end{centering}
-	\end{multicols}
-
-	Nonetheless, this technique cannot be used directly for computing the target transform; since we do not know how to recover the individual amplitudes from the quantum states. On top of that, there is no efficient general method for preapring the states to be transformed. This is a great example of an algorithm that presents huge savings compared to its classical analogs, but which cannot be generally used as much as we would like to due to our inability to extract the desirerd information. In some instances however, we can profit from this method to great deeds ---mainly as part of bigger algorithms. An important application is \textbf{Shor's factoring algorithm}, which can be used for efficiently finding the prime decomposition of any given number.
 
 \end{frame}
 
@@ -838,7 +782,7 @@
 
 	\vspace{-0.5em}
 
-	The $s(l)$ terms in the string operator are scalars associated to gauge transformations and do not add much to the transform. With this new mapping, Pauli matrices get redefined to:
+	The $s(l)$ terms in the string operator are scalars associated to \textbf{gauge transformations} and do not add much to the transform. With this new mapping, Pauli matrices get redefined to:
 
 	\begin{align*}
 		\sigma^{1}(n) &\equiv
@@ -932,77 +876,6 @@
 		\end{center}
 
 	\end{multicols}
-
-\end{frame}
-
-%% ----------------------------------------------------------------------------
-
-\begin{frame}[allowframebreaks]{Unitary coupled cluster}
-
-	The motivation behind coupled cluster methods arises from the idea of explorinig only the regions of phase space close to an initial \textbf{reference state}. The choice of said reference state is of great importance for retreiving successful results. Let us begin by choosing the region of study in terms of \textbf{Hamming distance} (i.e. bit flips). This is sometimes called \textbf{configuration interaction} (CI). Using a notation where $\sigma^{p}_{n} \equiv \sigma^{p}(n)$ we can write any state one spin flip away from the initial reference state as:
-
-	\begin{gather*}
-	  \ket{\text{CI}_{1} \qty(z^{n})} \defeq
-	    \sum_{n} z^{n} \sigma^{+}_{n} \ket{\text{SR}}
-	\end{gather*}
-
-	\vspace{-1em}
-
-	This approach can be easily extended to account for more and more states:
-
-	\begin{gather*}
-	  \ket{\text{CI}_{k} \qty(\boldsymbol{z})} \defeq
-	    \sum_{j=1}^{k} T_{j} \qty(z^{n_1,\cdots,n_j}) \ket{\text{SR}} \\
-	  T_{j} \qty(z^{n_1,\cdots,n_j}) \defeq \sum_{n_1,\cdots,n_j}
-	    z^{n_1,\cdots,n_j} \sigma^{+}_{n_1} \! \cdots \sigma^{+}_{n_j}
-	\end{gather*}
-
-\break
-
-	However, this approach presents a number of deficiencies which render it non-optimal; the biggest one for us being that it presents no clear advatadge over classical state preparation. The idea behind \textbf{coupled cluster} (CC) consists on using the spin flips as generators instead:
-
-	\begin{gather*}
-	  \ket{\text{CC}_{k} \qty(\boldsymbol{z})} \defeq
-	    \exp[\sum_{j=1}^{k} T_{j} \qty(z^{n_1,\cdots,n_j})]
-	    \ket{\text{SR}}
-	\end{gather*}
-
-	In order to make this ansatz suitable for quantum processors, we need to express it in terms of unitary transformations. We have finally arrived at \textbf{unitary coupled cluster} (UCC):
-
-	\begin{gather*}
-	  \ket{\text{UCC}_{k} \qty(\boldsymbol{\theta},\boldsymbol{\eta})} \defeq
-	    \exp[
-	      \sum_{j=1}^{k} T_{j}^{-} \qty(\theta^{n_1,\cdots,n_j}) + i
-	      \sum_{j=1}^{k} T_{j}^{+} \qty(\eta^{n_1,\cdots,n_j})
-	    ]
-	    \ket{\text{SR}} \\
-	    T_{j}^{\pm} \qty(\theta^{n_1,\cdots,n_j}) \defeq
-	      \sum_{n_1,\cdots,n_j} \theta^{n_1,\cdots,n_j} \qty(
-	        \sigma^{+}_{n_1} \! \cdots \sigma^{+}_{n_j} \: \pm \:
-	        \sigma^{-}_{n_1} \! \cdots \sigma^{-}_{n_j}
-	      )
-	\end{gather*}
-
-\break
-
-	Another important version of this ansatz is developed in a \textbf{fermionic basis} (i.e. for parametrizing Fock space instead of Hilbert space), and replaces spin-flips with changes in the state of particles. This is interesting because, due to the non-locality of the Jordan-Wigner transform, if we were to apply the unitary coupled cluster parametrization directly onto the Jorda-Wigner's mapping image (i.e. Hilbert space), we might be exploring uninteresting regions of the domain (i.e. Fock space) ---such as those containing symmetry-broken states. On top of that, this method is usually developed so that it \textbf{conserves the total number of particles} in the system; which is predefined through the fermion reference (FR):
-
-	\begin{gather*}
-	  \ket{\text{FUCC}_{k} \qty(\boldsymbol{\theta},\boldsymbol{\eta})} \defeq
-	    \exp[
-	      \sum_{j=1}^{k} F_{j}^{-} \qty(\theta^{p_1,\cdots,p_j,q_1\cdots,q_j}) +i
-	      \sum_{j=1}^{k} F_{j}^{+} \qty(\eta^{p_1,\cdots,p_j,q_1\cdots,q_j})
-	    ]
-	    \ketf{\text{FR}}_{\mathcal{Q}} \\
-	    F_{j}^{\pm} \qty(\theta^{p_1,\cdots,p_j,q_1\cdots,q_j}) \defeq
-	      \sum_{\substack{q \in \mathcal{Q} \\ p \in \overline{\mathcal{Q}}}}
-	      \theta^{p_1,\cdots,p_j,q_1\cdots,q_j} \qty(
-	        \phi^{\dagger}_{p_1} \! \cdots \phi^{\dagger}_{p_j} \,
-	        \phi_{q_1} \! \cdots \phi_{q_j} \: \pm \:
-	        \phi^{\dagger}_{q_1} \! \cdots \phi^{\dagger}_{q_j} \,
-	        \phi_{p_1} \! \cdots \phi_{p_j}
-	      )
-	\end{gather*}
 
 \end{frame}
 
@@ -1407,7 +1280,7 @@
 	  \omega_{\text{sampling}} > 2\omega_{\text{S}}
 	\end{gather*}
 
-	Extending these results to higher dimensions is straight forward considering multidimensional Fourier series. In this case, we may have a different bandwidth $S_{q}$ for each parameter. Calling the total number of parameters $Q$, and the maximum bandwidth $S_{\text{max}}$, the total number of samples $T$ required by this method is:
+	Extending these results to \textbf{higher dimensions} is straight forward considering multidimensional Fourier series. In this case, we may have a different bandwidth $S_{q}$ for each parameter. Calling the total number of parameters $Q$, and the maximum bandwidth $S_{\text{max}}$, the total number of samples $T$ required by this method is:
 
 	\begin{gather*}
 	  T = \prod_{q=1}^{Q} \qty(2 S_{q} + 1) = \order{S_{\text{max}}^{Q}}
@@ -1575,6 +1448,144 @@
 \FinalFrame
 
 %% ----------------------------------------------------------------------------
+%% ----------------------------------------------------------------------------
+
+\begin{frame}[allowframebreaks]{Quantum Fourier transform}
+
+	The usual \textbf{Discrete Fourier Transform} (DFT) can be expressed as:
+
+	\medskip
+
+	\begin{align*}
+	  \ket{j} \qra&
+				\frac{1}{\sqrt{N}} \sum_{k=0}^{N-1} \exp[2\pi i \frac{jk}{N}] \ket{k} \\
+	    =& \frac{1}{2^{n/2}} \sum_{k_{n-1}=0}^{1} \cdots \sum_{k_{0}=0}^{1}
+	      \exp[2\pi ij \qty(\sum_{l=0}^{n-1} k_{l} 2^{l-n})]
+	      \ket{\bin k_{n-1} \dots k_{0}} \\
+	    =& \frac{1}{2^{n/2}} \sum_{k_{n-1}=0}^{1} \cdots \sum_{k_{0}=0}^{1}
+	      \qty{ \bigotimes_{l=1}^{n} \exp[2\pi ij k_{n-l} 2^{-l}]
+	      \ket{k_{n-l}} } \\
+	    =& \frac{1}{2^{n/2}} \bigotimes_{l=1}^{n}
+	      \qty{ \sum_{k_{n-l}=0}^{1} \exp[2\pi ij k_{n-l} 2^{-l}] \ket{k_{n-l}} }
+	    = \frac{1}{2^{n/2}} \bigotimes_{l=1}^{n}
+	      \qty{ \ket{0} + \exp[2\pi ij 2^{-l}] \ket{1} }
+	\end{align*}
+
+\break
+
+	\begin{gather*}
+		\ket{j} \ra
+			\frac{
+				\qty{\ket{0}+ e^{2\pi i \qty(\bin.j_{0})} \ket{1}} \otimes
+				\qty{\ket{0}+ e^{2\pi i \qty(\bin.j_{1}j_{0})} \ket{1}} \otimes
+				\cdots \otimes
+				\qty{\ket{0} + e^{2\pi i \qty(\bin.j_{n-1}j_{n-2} \dots j_{0})} \ket{1}}
+			}{2^{n/2}} \\[10pt]
+		R_{k} \defeq \mqty[1 & 0 \\ 0 & e^{2\pi i/2^k}]
+	\end{gather*}
+
+	\vspace{-2em}
+
+	\begin{center}
+		\includegraphics[width=.80\paperwidth]{Figures/quantum-background/quantum-fourier-transform}
+	\end{center}
+
+\break
+
+	We can now compare the complexity of this algorithm with its best classical counterparts. This is done by counting the number of gates in the circuit, where we have to remember the final SWAP gates omitted in the representation.
+
+	\begin{multicols}{2}
+	\begin{centering}
+
+		\underline{\textbf{FAST FOURIER TRANSFORM}}\\
+		\medskip
+		$N\log_2 N \equiv \Theta\qty(n2^n)$
+
+		\columnbreak
+
+		\underline{\textbf{QUANTUM FOURIER TRANSFORM}}\\
+		\medskip
+		$\sum_{k=1}^{n}k + \frac{n}{2} =
+			\frac{n\qty(n+1)}{2} + \frac{n}{2} \equiv \Theta\qty(n^2)$
+
+	\end{centering}
+	\end{multicols}
+
+	Nonetheless, this technique cannot be used directly for computing the target transform; since we do not know how to recover the individual amplitudes from the quantum states. On top of that, there is no efficient general method for preapring the states to be transformed. This is a great example of an algorithm that presents huge savings compared to its classical analogs, but which cannot be generally used as much as we would like to due to our inability to extract the desirerd information. In some instances however, we can profit from this method to great deeds ---mainly as part of bigger algorithms. An important application is \textbf{Shor's factoring algorithm}, which can be used for efficiently finding the prime decomposition of any given number.
+
+\end{frame}
+
+%% ----------------------------------------------------------------------------
+
+\begin{frame}[allowframebreaks]{Unitary coupled cluster}
+
+	The motivation behind coupled cluster methods arises from the idea of explorinig only the regions of phase space close to an initial \textbf{reference state}. The choice of said reference state is of great importance for retreiving successful results. Let us begin by choosing the region of study in terms of \textbf{Hamming distance} (i.e. bit flips). This is sometimes called \textbf{configuration interaction} (CI). Using a notation where $\sigma^{p}_{n} \equiv \sigma^{p}(n)$ we can write any state one spin flip away from the initial reference state as:
+
+	\begin{gather*}
+	  \ket{\text{CI}_{1} \qty(z^{n})} \defeq
+	    \sum_{n} z^{n} \sigma^{+}_{n} \ket{\text{SR}}
+	\end{gather*}
+
+	\vspace{-1em}
+
+	This approach can be easily extended to account for more and more states:
+
+	\begin{gather*}
+	  \ket{\text{CI}_{k} \qty(\boldsymbol{z})} \defeq
+	    \sum_{j=1}^{k} T_{j} \qty(z^{n_1,\cdots,n_j}) \ket{\text{SR}} \\
+	  T_{j} \qty(z^{n_1,\cdots,n_j}) \defeq \sum_{n_1,\cdots,n_j}
+	    z^{n_1,\cdots,n_j} \sigma^{+}_{n_1} \! \cdots \sigma^{+}_{n_j}
+	\end{gather*}
+
+\break
+
+	However, this approach presents a number of deficiencies which render it non-optimal; the biggest one for us being that it presents no clear advatadge over classical state preparation. The idea behind \textbf{coupled cluster} (CC) consists on using the spin flips as generators instead:
+
+	\begin{gather*}
+	  \ket{\text{CC}_{k} \qty(\boldsymbol{z})} \defeq
+	    \exp[\sum_{j=1}^{k} T_{j} \qty(z^{n_1,\cdots,n_j})]
+	    \ket{\text{SR}}
+	\end{gather*}
+
+	In order to make this ansatz suitable for quantum processors, we need to express it in terms of unitary transformations. We have finally arrived at \textbf{unitary coupled cluster} (UCC):
+
+	\begin{gather*}
+	  \ket{\text{UCC}_{k} \qty(\boldsymbol{\theta},\boldsymbol{\eta})} \defeq
+	    \exp[
+	      \sum_{j=1}^{k} T_{j}^{-} \qty(\theta^{n_1,\cdots,n_j}) + i
+	      \sum_{j=1}^{k} T_{j}^{+} \qty(\eta^{n_1,\cdots,n_j})
+	    ]
+	    \ket{\text{SR}} \\
+	    T_{j}^{\pm} \qty(\theta^{n_1,\cdots,n_j}) \defeq
+	      \sum_{n_1,\cdots,n_j} \theta^{n_1,\cdots,n_j} \qty(
+	        \sigma^{+}_{n_1} \! \cdots \sigma^{+}_{n_j} \: \pm \:
+	        \sigma^{-}_{n_1} \! \cdots \sigma^{-}_{n_j}
+	      )
+	\end{gather*}
+
+\break
+
+	Another important version of this ansatz is developed in a \textbf{fermionic basis} (i.e. for parametrizing Fock space instead of Hilbert space), and replaces spin-flips with changes in the state of particles. This is interesting because, due to the non-locality of the Jordan-Wigner transform, if we were to apply the unitary coupled cluster parametrization directly onto the Jorda-Wigner's mapping image (i.e. Hilbert space), we might be exploring uninteresting regions of the domain (i.e. Fock space) ---such as those containing symmetry-broken states. On top of that, this method is usually developed so that it \textbf{conserves the total number of particles} in the system; which is predefined through the fermion reference (FR):
+
+	\begin{gather*}
+	  \ket{\text{FUCC}_{k} \qty(\boldsymbol{\theta},\boldsymbol{\eta})} \defeq
+	    \exp[
+	      \sum_{j=1}^{k} F_{j}^{-} \qty(\theta^{p_1,\cdots,p_j,q_1\cdots,q_j}) +i
+	      \sum_{j=1}^{k} F_{j}^{+} \qty(\eta^{p_1,\cdots,p_j,q_1\cdots,q_j})
+	    ]
+	    \ketf{\text{FR}}_{\mathcal{Q}} \\
+	    F_{j}^{\pm} \qty(\theta^{p_1,\cdots,p_j,q_1\cdots,q_j}) \defeq
+	      \sum_{\substack{q \in \mathcal{Q} \\ p \in \overline{\mathcal{Q}}}}
+	      \theta^{p_1,\cdots,p_j,q_1\cdots,q_j} \qty(
+	        \phi^{\dagger}_{p_1} \! \cdots \phi^{\dagger}_{p_j} \,
+	        \phi_{q_1} \! \cdots \phi_{q_j} \: \pm \:
+	        \phi^{\dagger}_{q_1} \! \cdots \phi^{\dagger}_{q_j} \,
+	        \phi_{p_1} \! \cdots \phi_{p_j}
+	      )
+	\end{gather*}
+
+\end{frame}
+
 %% ----------------------------------------------------------------------------
 
 \end{document}
