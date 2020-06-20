@@ -6,8 +6,8 @@
 %%   |_|    |_|  \_\   https://github.com/pedrorrivero
 %%
 
-% \documentclass[9pt, aspectratio=169]{beamer}
-\documentclass[9pt, handout, aspectratio=169]{beamer}	% Skip \pause commands
+\documentclass[9pt, aspectratio=169]{beamer}
+% \documentclass[9pt, handout, aspectratio=169]{beamer}	% Skip \pause commands
 \usetheme{PRRwide}
 \usepackage{PRRmath}
 
@@ -60,7 +60,7 @@
 
 		\begin{itemize}
 			\item<2-> Quantum Chromodynamics (QCD) is the theory of the strong nuclear force, and it holds many mysteries such as \textbf{mass generation}.
-			\item<2-> QCD is currently studied using brute-force numerics on the world’s largest supercomputers, although many of its aspects cannot be reproduced by classical means.
+			\item<2-> QCD is currently studied using brute-force numerics on the world’s largest supercomputers, nonetheless many of its aspects cannot be reproduced by classical means.
 			\item<3-> The \textbf{NJL model} is an effective field theory regarded as a low-energy approximation to QCD. It retains certain key features like the so called Goldstone modes, and \textbf{dynamical chiral symmetry breaking}; and can also be solved nonperturbatively for verification.
 		\end{itemize}
 
@@ -180,6 +180,8 @@
 	                \frac{1}{2}G_{\pi}\qty[\bar{\psi}(x)\psi(x)]^{2}} \dd{x}
 	\end{gather*}
 
+	\pause
+
 	For a basis where:
 
 	\begin{gather*}
@@ -298,6 +300,8 @@
 	    \frac{G_{\pi}}{4a} \sum_{n=0}^{N-1} \qty[\sigma^{3}(2n)\sigma^{3}(2n+1) - N]
 	\end{align*}
 
+	\pause
+
 	With periodic boundary conditions $\sigma^{p}(N)=\sigma^{p}(0)$, and dropping the adiabatic modification term $\frac{G_{\pi}N}{4a}$, this Hamiltonian will adopt the following form in the \textbf{Chiral limit} (i.e. $m=0$):
 
 	\begin{gather*} \label{eq:NJL1-refactored-hamiltonian}
@@ -315,7 +319,7 @@
 
 \subsection{Space parametrization}
 
-\begin{frame}[allowframebreaks]{Space parametrization}
+\begin{frame}{Space parametrization I}
 
 	Once we have ways of measuring our Hamiltonian, we need to be able to explore different quantum states. This can be achieved by parametrizing the Hilbert/Fock space of states representing the system. To do this efficiently, we will analyze the two distinct parts in our Hamiltonian independently; since these will dominate in two \textbf{different regimes}:
 
@@ -341,6 +345,8 @@
 
 	\end{multicols}
 
+	\pause
+
 	Let us call each computational basis state by the decimal translation of its binary form:
 
 	\begin{gather*}
@@ -350,7 +356,9 @@
 	  \cdots
 	\end{gather*}
 
-\break
+\end{frame}
+
+\begin{frame}{Space parametrization II}
 
 	From the symmetries of these two terms for the case $N=2$, we can extract the following \textbf{symmetry-based parametrization ansatz} (SBP):
 
@@ -390,7 +398,7 @@
 
 \subsection{State preparation}
 
-\begin{frame}[allowframebreaks]{State preparation}
+\begin{frame}{State preparation I}
 
 	\vspace{-1em}
 	\begin{multicols}{2}
@@ -414,7 +422,7 @@
 		    \ket{\text{SBP}_{2} \qty(\frac{\pi}{2}, \frac{\pi}{4})}
 		\end{gather*}
 
-		\columnbreak
+		\columnbreak \pause
 
 		\begin{center}
 			\includegraphics[width=.4\paperwidth]{Figures/NJL1-model-solving/bloch-sphere}
@@ -422,7 +430,9 @@
 
 	\end{multicols}
 
-\break
+\end{frame}
+
+\begin{frame}{State preparation II}
 
 	\begin{figure}[!p]
 		\centering
