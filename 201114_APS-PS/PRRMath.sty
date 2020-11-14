@@ -1,0 +1,304 @@
+%% ----------------------------------------------------------------------------
+%%    _____  _____
+%%   |  __ \|  __ \    AUTHOR: Pedro Rivero
+%%   | |__) | |__) |   ---------------------------------
+%%   |  ___/|  _  /    DATE: July 14, 2020
+%%   | |    | | \ \    ---------------------------------
+%%   |_|    |_|  \_\   https://github.com/pedrorrivero
+%%
+%% ----------------------------------------------------------------------------
+%% Package for math, physics and sourcecode. It requires standard CTAN packages
+%% as well as external ones, and defines some new useful functionality
+%% ----------------------------------------------------------------------------
+%% MIT License
+%%
+%% Copyright (c) 2020 Pedro Rivero Ramírez
+%%
+%% Permission is hereby granted, free of charge, to any person obtaining a copy
+%% of this software and associated documentation files (the "Software"), to deal
+%% in the Software without restriction, including without limitation the rights
+%% to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+%% copies of the Software, and to permit persons to whom the Software is
+%% furnished to do so, subject to the following conditions:
+%%
+%% The above copyright notice and this permission notice shall be included in
+%% all copies or substantial portions of the Software.
+%%
+%% THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+%% IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+%% FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+%% AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+%% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+%% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+%% SOFTWARE.
+%% ----------------------------------------------------------------------------
+
+\def\packagename{PRRmath}
+\def\lastmodifieddate{2020/07/21}
+\def\versionnumber{1.1}
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{\packagename}
+	[\lastmodifieddate\space v\versionnumber\space(P.Rivero)]
+
+%% ----------------------------------------------------------------------------
+%% Packages
+%% ----------------------------------------------------------------------------
+
+%% CTAN Packages
+\RequirePackage{dsfont} % Double stroke roman fonts
+\RequirePackage{bm}	% \boldsymbol
+
+\RequirePackage[]{amsmath}	% AMS basic package
+														% (centertags option incompatible with cleveref)
+\RequirePackage{amssymb}  % AMS symbols
+\RequirePackage{mathtools}  % Extra mathematical tools
+\RequirePackage{commath}	% Extra functionality on integrals and differentials
+
+\RequirePackage{listings}	% For typesetting programming code
+\RequirePackage{color}	% For coloring -> used in code listings
+
+\RequirePackage{physics}  % Physics math notation
+\RequirePackage{slashed}  % Introduces Feynman's slash notation
+\RequirePackage{siunitx}	% SI units
+
+%% External Packages (have to be present in root directory)
+
+
+%% Beamer incompatible packages
+\ifcsname beamer@author\endcsname	% If beamer author exists (i.e. class=beamer)
+
+\else
+
+\fi
+
+%% ----------------------------------------------------------------------------
+%% Include units in equations (DOES NOT WORK!)
+%% ----------------------------------------------------------------------------
+
+% \sisetup{detect-all}
+% \makeatletter
+% \providecommand\add@text{}
+%
+% \newcommand\tagaddtext[1]{%
+% 	\gdef\add@text{#1\gdef\add@text{}}}%
+%
+% \renewcommand\tagform@[1]{%
+%   	\maketag@@@{\llap{\add@text\quad}(\ignorespaces#1\unskip\@@italiccorr)}%
+% }
+% \makeatother
+
+
+%% ----------------------------------------------------------------------------
+%% Defines new useful custom commands
+%% ----------------------------------------------------------------------------
+
+%% Arrows
+\newcommand{\ra}{\rightarrow}
+\newcommand{\Ra}{\Rightarrow}
+\newcommand{\la}{\leftarrow}
+\newcommand{\La}{\Leftarrow}
+\newcommand{\lra}{\leftrightarrow}
+\newcommand{\LRa}{\Leftrightarrow}
+
+\newcommand{\ua}{\uparrow}
+\newcommand{\da}{\downarrow}
+\newcommand{\uda}{\updownarrow}
+
+\newcommand{\qra}{\quad \rightarrow \quad} % Spaced \rightarrow
+\newcommand{\qRa}{\quad \Rightarrow \quad} % Spaced \Rightarrow
+\newcommand{\qla}{\quad \leftarrow \quad} % Spaced \leftarrow
+\newcommand{\qLa}{\quad \Leftarrow \quad} % Spaced \Leftarrow
+\newcommand{\qlra}{\quad \leftrightarrow \quad} % Spaced \leftrightarrow
+\newcommand{\qLRa}{\quad \Leftrightarrow \quad}  % Spaced \Leftrightarrow
+
+%% Material derivative
+\DeclareMathOperator{\material}{\mathcal{D}}
+\DeclareDocumentCommand\materialderivative{ s o m g g d() }
+{ % Material derivative
+	% s: star for \flatfrac flat derivative
+	% o: optional n for nth derivative
+	% m: mandatory (x in df/dx)
+	% g: optional (f in df/dx)
+	% g: optional (y in d^2f/dxdy)
+	% d: long-form d/dx(...)
+	\IfBooleanTF{#1}
+	{\let\fractype\flatfrac}
+	{\let\fractype\frac}
+	\IfNoValueTF{#4}
+	{
+		\IfNoValueTF{#6}
+		{\fractype
+			{\material \IfNoValueTF{#2}{}{^{#2}}}
+			{\material #3\IfNoValueTF{#2}{}{^{#2}}}
+		}
+		{\fractype
+			{\material \IfNoValueTF{#2}{}{^{#2}}}
+			{\material #3\IfNoValueTF{#2}{}{^{#2}}}
+		\argopen(#6\argclose)}
+	}
+	{
+		\IfNoValueTF{#5}
+		{\fractype
+			{\material \IfNoValueTF{#2}{}{^{#2}} #3}
+			{\material #4\IfNoValueTF{#2}{}{^{#2}}}
+		}
+		{\fractype{\material^2 #3}{\material #4 \material #5}}
+	}
+}
+\DeclareDocumentCommand\mderivative{}{\materialderivative} % Shorthand
+\DeclareDocumentCommand\mdv{}{\materialderivative} % Shorthand
+
+%% Commutators
+\newcommand{\com}[2]{\comm{#1}{#2}_-} % Square brackets w/ minus sign subscript
+\newcommand{\acom}[2]{\comm{#1}{#2}_+}  % Square brackets w/ plus sign subscript
+
+%% Fock space bra-kets
+\newcommand{\ketf}[1]{\ket{#1}^{\text{F}}}
+\newcommand{\braf}[1]{\prescript{\text{F}}{}{\bra{#1}}}
+
+%% Math derivation endings
+\newcommand{\QED}{
+	\begin{flushright}
+		$\mathbb{Q.E.D.}\;\blacksquare$
+	\end{flushright}
+}
+
+\newcommand{\QEF}{
+	\begin{flushright}
+		$\mathbb{Q.E.F.}\;\blacksquare$
+	\end{flushright}
+}
+
+%% Definition equality symbols
+\newcommand{\trieqsym}{\triangleq}
+\newcommand{\coleqsym}{\vcentcolon=}
+\newcommand{\defeqsym}{\stackrel{\mathclap{\tiny\mbox{def}}}{=}}
+
+\newcommand{\defeq}{\trieqsym}	% Select the definiton equal symbol to use
+\newcommand{\qeq}{\overset{?}{=}}	% Questioned equality
+
+%% Ceil and floor
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+
+%% Definition zerodot
+\newcommand*{\zerodot}{%
+  \nfss@text{%
+    \sbox0{$\vcenter{}$}% math axis
+    \sbox2{0}%
+    \sbox4{0\/}%
+    \ooalign{%
+      0\cr
+      \hidewidth
+      \kern\dimexpr\wd4-\wd2\relax % compensate for slanted fonts
+      \raise\dimexpr(\ht2-\dp2)/2-\ht0\relax\hbox{%
+        \if b\expandafter\@car\f@series\@nil\relax
+          \mathversion{bold}%
+        \fi
+        $\cdot\m@th$%
+      }%
+      \hidewidth
+      \cr
+      \vphantom{0}% correct depth of final symbol
+    }%
+  }%
+}
+
+%% Definition binary, octal, and hexadecimal symbols
+\newcommand{\bin}{\mathtt{\zerodot b}}	% Alternatively bB
+\newcommand{\oct}{\mathtt{\zerodot o}} 	% Alternatively oO
+\newcommand{\hex}{\mathtt{\zerodot x}}	% Alternatively xX
+
+%% Inline math symbols
+\DeclareSymbolFont{EulerExtension}{U}{euex}{m}{n}
+\DeclareMathSymbol{\intop}{\mathop}{EulerExtension}{"52}
+\DeclareMathSymbol{\ointop}{\mathop}{EulerExtension}{"48}
+
+% \chardef\permil="89	% Alternative way of declaring characters
+
+%% ----------------------------------------------------------------------------
+%% Code listings
+%% ----------------------------------------------------------------------------
+
+%% Java
+\lstdefinestyle{myJavaStyle}{
+	backgroundcolor=\color{white},
+	basicstyle=\footnotesize\ttfamily,
+	breakatwhitespace=false,	% If automatic breaks should only happen at whitespace
+	breaklines=true,	% Automatic line breaking
+		% caption=Sample sourcecode, % Caption
+	captionpos=t,	% Caption-position
+	commentstyle=\color{darkgreen},	% Comment style
+	deletekeywords={...},	% To delete keywords from the given language
+	escapeinside={\%*}{*)},	% To add LaTeX within your code
+	extendedchars=true,	% Non-ASCII characters (8-bits encodings only, no UTF-8)
+	frame=single,	% Frame around the code
+	keepspaces=true,	% Keep spaces in text (indentation) (possibly needs columns=flexible)
+	keywordstyle=\color{blue},
+	language=Java,
+	morekeywords={*,...},	% To add more keywords to the set
+	numbers=left,	% Line-numbers position (none, left, right)
+	numbersep=10pt,	% How far the line-numbers are from the code
+	numberstyle=\tiny\color{gray}\ttfamily,
+	rulecolor=\color{black},	% if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+	showspaces=false,	% Show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+	showstringspaces=false,	% Underline spaces within strings only
+	showtabs=false,	% Show tabs within strings adding particular underscores
+	stepnumber=1,	% Line-step between two line-numbers.
+	stringstyle=\color{red},	% String literal style
+	tabsize=2,	% Default tabsize (number of spaces)
+		% title=\lstname,	% Show the filename in title
+}
+
+%% Matlab
+\lstdefinestyle{myMatlabStyle}{
+ 	language=Matlab,
+ 	captionpos=t,
+ 	keywords={break,case,catch,continue,else,elseif,end,for,function,
+    				global,if,otherwise,persistent,return,switch,try,while},
+ 	basicstyle=\ttfamily,
+ 	keywordstyle=\color{blue},
+ 	commentstyle=\color{red},
+ 	stringstyle=\color{darkgreen},
+ 	numbers=left,
+ 	numberstyle=\ttfamily\tiny\color{gray},
+ 	stepnumber=1,
+ 	numbersep=10pt,
+ 	backgroundcolor=\color{white},
+ 	tabsize=4,
+ 	showspaces=false,
+ 	showstringspaces=false
+}
+
+%% Pseudo
+\lstdefinestyle{myPseudocodeStyle}{
+	captionpos=t,
+	numbers=left,
+	stepnumber=1,
+	numbersep=10pt,
+	numberstyle=\ttfamily\tiny\color{black},
+	basicstyle=\footnotesize\ttfamily,
+	keywordstyle=\color{black},
+	commentstyle=\color{black},
+	stringstyle=\color{black},
+	frame=single,
+	tabsize=2,
+	backgroundcolor=\color{palegray},
+}
+
+%% TXT
+\lstdefinestyle{myTxtStyle}{
+	captionpos=t,
+	numbers=left,
+	stepnumber=1,
+	numbersep=10pt,
+	numberstyle=\ttfamily\tiny\color{gray},
+	basicstyle=\footnotesize\ttfamily,
+	keywordstyle=\color{black},
+	commentstyle=\color{black},
+	stringstyle=\color{black},
+	frame=single,
+	tabsize=2,
+	backgroundcolor=\color{white},
+}
