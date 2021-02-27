@@ -2,7 +2,7 @@
 %%    _____  _____
 %%   |  __ \|  __ \    AUTHOR: Pedro Rivero
 %%   | |__) | |__) |   ---------------------------------
-%%   |  ___/|  _  /    DATE: December 1, 2020
+%%   |  ___/|  _  /    DATE: February 27, 2021
 %%   | |    | | \ \    ---------------------------------
 %%   |_|    |_|  \_\   https://github.com/pedrorrivero
 %%
@@ -12,7 +12,7 @@
 %% ----------------------------------------------------------------------------
 %% MIT License
 %%
-%% Copyright (c) 2020 Pedro Rivero Ramírez
+%% Copyright (c) 2021 Pedro Rivero Ramírez
 %%
 %% Permission is hereby granted, free of charge, to any person obtaining a copy
 %% of this software and associated documentation files (the "Software"), to deal
@@ -33,7 +33,7 @@
 %% SOFTWARE.
 %% ----------------------------------------------------------------------------
 
-\def\packagename{PRRtools}
+\def\packagename{PRtools}
 \def\lastmodifieddate{2020/07/21}
 \def\versionnumber{0.0}
 
@@ -95,7 +95,9 @@
 
 \@ifclassloaded{beamer}{
 	\RequirePackage{colortbl}	%
-}{}
+}{
+	\RequirePackage{hyperref} %
+}
 
 \@ifclassloaded{revtex4}{}{
 	\RequirePackage{multicol}	% For multicolum environments
@@ -145,7 +147,6 @@
 														% (centertags option incompatible with cleveref)
 \RequirePackage{listings}	% Typesetting programming code (Required by cleveref)
 
-\RequirePackage{hyperref}
 \RequirePackage[noabbrev]{cleveref} % Provides fancy cross-referencing support
 	\crefname{subsection}{subsection}{subsections}
 	\crefname{lstlisting}{listing}{listings}

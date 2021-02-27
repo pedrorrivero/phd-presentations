@@ -2,14 +2,14 @@
 ##    _____  _____
 ##   |  __ \|  __ \    AUTHOR: Pedro Rivero
 ##   | |__) | |__) |   ---------------------------------
-##   |  ___/|  _  /    DATE: December 3, 2020
+##   |  ___/|  _  /    DATE: February 27, 2021
 ##   | |    | | \ \    ---------------------------------
 ##   |_|    |_|  \_\   https://github.com/pedrorrivero
 ##
 ## ----------------------------------------------------------------------------
 ## MIT License
 ##
-## Copyright (c) 2020 Pedro Rivero Ramírez
+## Copyright (c) 2021 Pedro Rivero Ramírez
 ##
 ## Permission is hereby granted, free of charge, to any person obtaining a copy
 ## of this software and associated documentation files (the "Software"), to deal

@@ -2,7 +2,7 @@
 %%    _____  _____
 %%   |  __ \|  __ \    AUTHOR: Pedro Rivero
 %%   | |__) | |__) |   ---------------------------------
-%%   |  ___/|  _  /    DATE: December 1, 2020
+%%   |  ___/|  _  /    DATE: February 27, 2021
 %%   | |    | | \ \    ---------------------------------
 %%   |_|    |_|  \_\   https://github.com/pedrorrivero
 %%
@@ -12,7 +12,7 @@
 %% ----------------------------------------------------------------------------
 %% MIT License
 %%
-%% Copyright (c) 2020 Pedro Rivero Ramírez
+%% Copyright (c) 2021 Pedro Rivero Ramírez
 %%
 %% Permission is hereby granted, free of charge, to any person obtaining a copy
 %% of this software and associated documentation files (the "Software"), to deal
@@ -33,7 +33,7 @@
 %% SOFTWARE.
 %% ----------------------------------------------------------------------------
 
-\def\packagename{PRRmath}
+\def\packagename{PRmath}
 \def\lastmodifieddate{2020/07/21}
 \def\versionnumber{1.1}
 
@@ -158,7 +158,9 @@
 \newcommand{\braf}[1]{\prescript{\text{F}}{}{\bra{#1}}}
 
 %% Math environments
-\newtheorem{theorem}{Theorem}
+\@ifclassloaded{beamer}{}{
+	\newtheorem{theorem}{Theorem} % Beamer incomptible
+}
 
 %% Math derivation endings
 \newcommand{\QED}{
