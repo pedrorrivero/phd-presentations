@@ -8,7 +8,7 @@
 
 % \documentclass[9pt, aspectratio=169]{beamer}
 \documentclass[9pt, handout, aspectratio=169]{beamer}	% Skip \pause
-\usetheme[iit]{PRwide}
+\usetheme[anl]{PRwide}
 \usepackage{PRtools}
 \usepackage{PRmath}
 
@@ -20,14 +20,14 @@
 %% ----------------------------------------------------------------------------
 
 \title{An optimal quantum sampling regression algorithm for variational eigensolving in the low qubit number regime}
-\subtitle{APS Prairie Section}
+\subtitle{APS March Meeting 2021}
 \author{Pedro Rivero}
 \institute{Illinois Institute of Technology \\ Argonne National Laboratory}
 \newcommand{\mail}{priveroramirez@anl.gov}
 \date{\today}
 \newcommand{\website}{
-	\href{https://www.phy.anl.gov}
-	{www.phy.anl.gov}
+	\href{https://arxiv.org/abs/2012.02338}
+	{arXiv:2012.02338}
 }
 
 \begin{document}
@@ -118,7 +118,11 @@
 
 \begin{frame}{Low qubit number regime}
 
-	\vspace{1em}
+	\vspace{2em}
+	\begin{itemize}
+		\item Algorithmic complexity model:
+	\end{itemize}
+	\vspace{-2em}
 	\begin{gather*}
 		\frac{\textnormal{VQE}}{\textnormal{QSR}} = \qty(m n 2^{-n/r})^{p}
 	\end{gather*}
@@ -146,6 +150,22 @@
 
 	\begin{multicols}{2}
 
+		\begin{center}
+			Threshold \\
+			\includegraphics[width=.40\paperwidth]{Figures/threshold}
+		\end{center}
+
+		\columnbreak
+
+		\begin{center}
+			Efficiency \\
+			\includegraphics[width=.40\paperwidth]{Figures/efficiency}
+		\end{center}
+
+	\end{multicols}
+	\vspace{-3em}
+	\begin{multicols}{2}
+
 		\begin{gather*}
 			a \defeq \ceil*{- \frac{r}{\ln{2}} W_{-1}\qty(-\frac{\ln{2}}{mr})}
 		\end{gather*}
@@ -154,25 +174,11 @@
 
 		\begin{gather*}
 			E \approx \frac{1}{as\ln{2}} \qty(\frac{m}{s\ln{2}})^p
-    		\Gamma \qty(p+1, s\ln{2}, as\ln{2}) \label{eq:QSR-efficiency}
+				\Gamma \qty(p+1, s\ln{2}, as\ln{2}) \label{eq:QSR-efficiency}
 		\end{gather*}
 
 	\end{multicols}
 
-	\vspace{-2em}
-	\begin{multicols}{2}
-
-		\begin{center}
-			\includegraphics[width=.40\paperwidth]{Figures/threshold}
-		\end{center}
-
-		\columnbreak
-
-		\begin{center}
-			\includegraphics[width=.40\paperwidth]{Figures/efficiency}
-		\end{center}
-
-	\end{multicols}
 
 \end{frame}
 
@@ -184,10 +190,13 @@
 
 	\begin{multicols}{2}
 		\begin{itemize}
-			\item Reducing the amount of queries that need to be sent to a given quantum processor in order to carry out the optimization process.
+			% \item \textbf{Reduce the amount of queries} necessary to solve a given optimization problem.
 			\item \textbf{Oversampling} to attain higher precision.
-			\item \textbf{Undersampling} to boost performance get rid of unnecessary small-wavelength oscillations leading to burdensome local minima.
-			\item Low-resolution start-up supplement of VQE.
+			\item \textbf{Undersampling} to boost performance and get rid of small-wavelength oscillations leading to burdensome local minima.
+			\item VQE low-resolution start-up \textbf{supplement}.
+			\item \textbf{Proxy} to transition between simulators and real devices.
+			\item Improve convergence by removing the stochastic nature of the quantum expectation value function.
+			\item Avoid the exponential matrix formulation in classical computation.
 		\end{itemize}
 
 		\columnbreak
@@ -202,18 +211,6 @@
 
 %% ----------------------------------------------------------------------------
 
-\begin{frame}{Applications}
-
-	\begin{itemize}
-		\item Improve convergence by removing the stochastic nature of the quantum expectation value function, stemming out of our flawed sampling process (i.e. we have neither infinite precision nor time to calculate the exact expectation values)
-		\item \textbf{Proxy} to transition between simulators and real devices running VQE while analyzing global properties such as error propagation in the expectation value function.
-		\item Fully exploit the power of our ansatz classically, avoiding the usual exponential matrix formulation of quantum mechanics.
-	\end{itemize}
-
-\end{frame}
-
-%% ----------------------------------------------------------------------------
-
 \section{Banchmarking}
 
 \begin{frame}{Banchmarking (arXiv:1801.03897)}
@@ -223,14 +220,14 @@
 		\begin{center}
 			\textbf{VQE} \\
 			\texttt{ \small
-				GROUND-STATE ENERGY: \\
+				DEUTERON BINDING ENERGY: \\
 				Minimum \underline{'E3 = -2.0513 (MeV)'} \\
 				'[theta, eta] = [0.2819, 0.3040] (rad)' \\
 				>> ERROR = 0.3\% } \\
 			\smallskip
 			\includegraphics[width=.35\paperwidth]{Figures/deuteron-VQE} \\
 			\smallskip
-			\small{\emph{$183$ samples $\rightarrow$ $\sim 60$ queries (?)}}
+			\small{\emph{$183$ samples $\rightarrow$ $183$ queries}}
 		\end{center}
 
 		\columnbreak
@@ -238,7 +235,7 @@
 		\begin{center}
 			\textbf{QSR} \\
 			\texttt{ \small
-				GROUND-STATE ENERGY: \\
+				DEUTERON BINDING ENERGY: \\
 				Minimum \underline{'E3 = -2.0509 (MeV)'} \\
 				'[theta, eta] = [0.2688, 0.3631] (rad)' \\
 				>> ERROR = 0.2\% } \\

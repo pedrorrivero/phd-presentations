@@ -80,7 +80,7 @@
 ## ----------------------------------------------------------------------------
 
 ## User parameters (To expand each time use '=': e.g. INSTANCE = $(DIR_NAME))
-MAINFILE := Presentation
+MAINFILE := Poster
 INSTANCE = $(shell echo $(DIR_NAME) | sed -E 's/^[0-9]+_//')
 
 OTHERS := $(shell echo '')
@@ -239,10 +239,6 @@ Poster.pdf: $(LATEX) $(IMAGES) $(EXTRA)
 	@make clean 1> /dev/null	# Prevents non-zero return value issues with bibtex
 	@-mkdir ${MAKE_DIR} 2>/dev/null || true
 	@echo '------------ $(MAINFILE) ------------' | tr [:lower:] [:upper:]
-	@eval $(COMPILE_TEX) &> /dev/null
-	@echo "[  TEX  ]  ${SUCCESSFUL_TEX}"
-	@eval $(COMPILE_BIB) &> /dev/null
-	@echo "[  BST  ]  ${SUCCESSFUL_BST}"
 	@eval $(COMPILE_TEX) &> /dev/null
 	@echo "[  TEX  ]  ${SUCCESSFUL_TEX}"
 	@eval $(COMPILE_TEX) &> /dev/null
