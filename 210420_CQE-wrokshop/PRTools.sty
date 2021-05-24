@@ -1,0 +1,220 @@
+%% ----------------------------------------------------------------------------
+%%    _____  _____
+%%   |  __ \|  __ \    AUTHOR: Pedro Rivero
+%%   | |__) | |__) |   ---------------------------------
+%%   |  ___/|  _  /    DATE: February 27, 2021
+%%   | |    | | \ \    ---------------------------------
+%%   |_|    |_|  \_\   https://github.com/pedrorrivero
+%%
+%% ----------------------------------------------------------------------------
+%% Package to wrap latex-editing tools. It requires standard CTAN packages
+%% as well as external ones, and defines some new useful functionality
+%% ----------------------------------------------------------------------------
+%% MIT License
+%%
+%% Copyright (c) 2021 Pedro Rivero Ramírez
+%%
+%% Permission is hereby granted, free of charge, to any person obtaining a copy
+%% of this software and associated documentation files (the "Software"), to deal
+%% in the Software without restriction, including without limitation the rights
+%% to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+%% copies of the Software, and to permit persons to whom the Software is
+%% furnished to do so, subject to the following conditions:
+%%
+%% The above copyright notice and this permission notice shall be included in
+%% all copies or substantial portions of the Software.
+%%
+%% THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+%% IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+%% FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+%% AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+%% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+%% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+%% SOFTWARE.
+%% ----------------------------------------------------------------------------
+
+\def\packagename{PRtools}
+\def\lastmodifieddate{2020/07/21}
+\def\versionnumber{0.0}
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{\packagename}
+	[\lastmodifieddate\space v\versionnumber\space(P.Rivero)]
+
+%% ----------------------------------------------------------------------------
+%% Packages
+%% ----------------------------------------------------------------------------
+
+%% CTAN Packages
+\RequirePackage{tagging}	% To generate multiple documents from a single source
+\RequirePackage{etoolbox}	% For extra tools
+
+\RequirePackage{setspace}	% Allows for line spacing formating
+\RequirePackage{paralist}	% To modify enumeration items
+\RequirePackage{multirow} % Merge cells in different rows in table
+\RequirePackage{lscape} % Rotates the page contents but not the page number
+\RequirePackage{changepage}	% Change page layout in the middle of a document
+
+\RequirePackage{float}  % Improves floating objects. Introduces boxed float
+\RequirePackage{framed}	% For enclosing pieces of text
+\RequirePackage{subfig} % Subfigures
+\RequirePackage{tablists}	% Lists of short items (e.g. exercises in textbooks)
+
+\RequirePackage{soul} % Text highlight
+\RequirePackage{graphicx} % Provides optional arguments to \includegraphics
+\RequirePackage{color}  % Provides foreground and background colour management
+\RequirePackage{xwatermark} % Watermark
+
+\RequirePackage{blindtext}	% For dummy text autotype commands
+\RequirePackage[super]{nth}	% Provides command for writing ordinal numbers
+\RequirePackage{mfirstuc}	% To capitalize first letter
+	\MFUnocap{a}
+	\MFUnocap{an}
+	\MFUnocap{at}
+	\MFUnocap{from}
+	\MFUnocap{in}
+	\MFUnocap{of}
+	\MFUnocap{on}
+	\MFUnocap{the}
+	\MFUnocap{to}
+
+\RequirePackage{datetime2}  % Provides commands for formatting datetimes
+\RequirePackage{datetime2-calc}
+
+%% External Packages (have to be present in root directory)
+
+
+%% Class incompatible packages (beamer and revtex4)
+\ifboolexpr{   test {\@ifclassloaded{beamer}}
+            or test {\@ifclassloaded{revtex4}}}
+{
+	\RequirePackage[]{xcolor}
+}{
+	\RequirePackage[table]{xcolor}	% Coloring tables (requires color)
+}
+
+\@ifclassloaded{beamer}{
+	\RequirePackage{colortbl}	%
+}{
+	\RequirePackage{hyperref} %
+}
+
+\@ifclassloaded{revtex4}{}{
+	\RequirePackage{multicol}	% For multicolum environments
+	\RequirePackage{longtable}	% Allows tables that continue to the next page
+}
+
+
+%% ----------------------------------------------------------------------------
+%% Color definitions
+%% ----------------------------------------------------------------------------
+
+%% Dark
+\definecolor{darkgray}{RGB}{50,50,50}
+\definecolor{darkgreen}{HTML}{009900}
+\definecolor{darksilver}{RGB}{110,110,110}
+
+%% Light
+\definecolor{lightblue}{RGB}{0,118,235}
+\definecolor{lightgray}{HTML}{DCDCDC}
+\definecolor{lightgreen}{HTML}{90EE90}
+\definecolor{lightblue}{HTML}{88CCEE}
+
+%% Standard
+\definecolor{green}{RGB}{0,164,0}
+\definecolor{gold}{RGB}{235,185,50}
+\definecolor{orange}{RGB}{255,128,0}
+\definecolor{palegray}{HTML}{F4F4F4}
+\definecolor{purple}{RGB}{108,0,215}
+
+%% Institutional
+\definecolor{IITred}{RGB}{205,39,19}
+\definecolor{UPMblue}{RGB}{0,60,179}
+\definecolor{Pegasusblue}{RGB}{0,102,153}
+\definecolor{Pegasuslightblue}{RGB}{0,136,204}
+\definecolor{UMBlue}{RGB}{40,55,85}
+\definecolor{UMMaize}{RGB}{235,185,50}
+\definecolor{ANLblue}{RGB}{0,118,235}
+
+
+%% ----------------------------------------------------------------------------
+%% Modify references trough cleveref adding new fancyref styles for
+%% subsections, code listings and plural equations.
+%% For appendices look in the documentation.
+%% ----------------------------------------------------------------------------
+
+\RequirePackage[]{amsmath}	% AMS basic package (Required by cleveref)
+														% (centertags option incompatible with cleveref)
+\RequirePackage{listings}	% Typesetting programming code (Required by cleveref)
+
+\RequirePackage[noabbrev]{cleveref} % Provides fancy cross-referencing support
+	\crefname{subsection}{subsection}{subsections}
+	\crefname{lstlisting}{listing}{listings}
+	\crefname{step}{step}{steps}
+	\crefname{pluralequation}{equations}{equations}
+		\crefformat{pluralequation}{\cref@pluralequation@name~(#2#1#3)}
+		\Crefformat{pluralequation}{\Cref@pluralequation@name~(#2#1#3)}
+		\crefrangeformat{pluralequation}%
+			{\cref@pluralequation@name~(#3#1#4) to~(#5#2#6)}
+		\Crefrangeformat{pluralequation}%
+			{\Cref@pluralequation@name~(#3#1#4) to~(#5#2#6)}
+
+
+%% ----------------------------------------------------------------------------
+%% Defines new useful custom commands
+%% ----------------------------------------------------------------------------
+
+%% Figure environment
+\newenvironment{Figure}
+  {\par\medskip\noindent\minipage{\linewidth}}
+  {\endminipage\par\medskip}
+
+%% Command to emph and index at the same time
+\newcommand{\indemph}[1]{\emph{#1}\index{#1}}
+
+%% Commands to make watermark with name and version code (designed for 6 digits)
+\newcommand{\draftwatermark}[2]{
+	\newwatermark[allpages, color=lightgray, angle=+45, scale=8,
+								xpos=-19, ypos=+24, showpagecenter=false]{DRAFT}
+	\newwatermark[allpages, color=white, angle=-45, scale=0.6,
+								xpos=-75.5, ypos=-77.5]{\MakeUppercase{#1}}
+	\newwatermark[allpages, color=lightgray, angle=-45, scale=1.2,
+								xpos=-83.5, ypos=-85.5]{#2}
+}
+\newcommand{\versionwatermark}[1]{
+	\newwatermark[allpages, color=lightgray, angle=0, scale=1.2,
+								xpos=0, ypos=-124]{\textbf{#1}}
+}
+
+%% Command to build date based version (6 digits: YYMMDD)
+\DTMsavenow{dateversion}
+\newcommand{\dateversion}{%
+	\DTMtwodigits{\DTMfetchyear{dateversion}}%
+	\DTMtwodigits{\DTMfetchmonth{dateversion}}%
+	\DTMtwodigits{\DTMfetchday{dateversion}}%
+}
+
+%% Text highlight
+\newcommand{\defaulthlcolor}{yellow}
+\sethlcolor{\defaulthlcolor}
+\newcommand{\yhl}[1]{\sethlcolor{yellow}\hl{#1}\sethlcolor{\defaulthlcolor}}
+\newcommand{\ohl}[1]{\sethlcolor{orange}\hl{#1}\sethlcolor{\defaulthlcolor}}
+\newcommand{\ghl}[1]{\sethlcolor{green}\hl{#1}\sethlcolor{\defaulthlcolor}}
+\newcommand{\phl}[1]{\sethlcolor{pink}\hl{#1}\sethlcolor{\defaulthlcolor}}
+\newcommand{\bhl}[1]{\sethlcolor{blue}\hl{#1}\sethlcolor{\defaulthlcolor}}
+
+%% TO DO
+\newcommand{\todo}[1]{\phl{\bf#1}}
+
+%% Horizontal rule command with argument of linewidth
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}}
+
+%% Latin
+\newcommand\tetal{{{\rm et~al.}}}
+\newcommand\etal{\textit{et~al.}}
+\newcommand\eg{\textrm{e.g.}\ }
+\newcommand\ie{\textrm{i.e.}\ }
+
+%% LaTex and TeX symbols
+\newcommand{\latex}{\LaTeX\xspace}
+\newcommand{\tex}{\TeX\xspace}
