@@ -1,0 +1,76 @@
+%%    _____  _____
+%%   |  __ \|  __ \    AUTHOR: Pedro Rivero
+%%   | |__) | |__) |   ---------------------------------
+%%   |  ___/|  _  /    DATE: November 10, 2021
+%%   | |    | | \ \    ---------------------------------
+%%   |_|    |_|  \_\   https://github.com/pedrorrivero
+%%
+
+\begin{frame}[allowframebreaks]{Unitary coupled cluster}
+
+	The motivation behind coupled cluster methods arises from the idea of explorinig only the regions of phase space close to an initial \textbf{reference state}. The choice of said reference state is of great importance for retreiving successful results. Let us begin by choosing the region of study in terms of \textbf{Hamming distance} (i.e. bit flips). This is sometimes called \textbf{configuration interaction} (CI). Using a notation where $\sigma^{p}_{n} \equiv \sigma^{p}(n)$ we can write any state one spin flip away from the initial reference state as:
+
+	\begin{gather*}
+	  \ket{\text{CI}_{1} \qty(z^{n})} \defeq
+	    \sum_{n} z^{n} \sigma^{+}_{n} \ket{\text{SR}}
+	\end{gather*}
+
+	\vspace{-1em}
+
+	This approach can be easily extended to account for more and more states:
+
+	\begin{gather*}
+	  \ket{\text{CI}_{k} \qty(\boldsymbol{z})} \defeq
+	    \sum_{j=1}^{k} T_{j} \qty(z^{n_1,\cdots,n_j}) \ket{\text{SR}} \\
+	  T_{j} \qty(z^{n_1,\cdots,n_j}) \defeq \sum_{n_1,\cdots,n_j}
+	    z^{n_1,\cdots,n_j} \sigma^{+}_{n_1} \! \cdots \sigma^{+}_{n_j}
+	\end{gather*}
+
+\break
+
+	However, this approach presents a number of deficiencies which render it non-optimal; the biggest one for us being that it presents no clear advatadge over classical state preparation. The idea behind \textbf{coupled cluster} (CC) consists on using the spin flips as generators instead:
+
+	\begin{gather*}
+	  \ket{\text{CC}_{k} \qty(\boldsymbol{z})} \defeq
+	    \exp[\sum_{j=1}^{k} T_{j} \qty(z^{n_1,\cdots,n_j})]
+	    \ket{\text{SR}}
+	\end{gather*}
+
+	In order to make this ansatz suitable for quantum processors, we need to express it in terms of unitary transformations. We have finally arrived at \textbf{unitary coupled cluster} (UCC):
+
+	\begin{gather*}
+	  \ket{\text{UCC}_{k} \qty(\boldsymbol{\theta},\boldsymbol{\eta})} \defeq
+	    \exp[
+	      \sum_{j=1}^{k} T_{j}^{-} \qty(\theta^{n_1,\cdots,n_j}) + i
+	      \sum_{j=1}^{k} T_{j}^{+} \qty(\eta^{n_1,\cdots,n_j})
+	    ]
+	    \ket{\text{SR}} \\
+	    T_{j}^{\pm} \qty(\theta^{n_1,\cdots,n_j}) \defeq
+	      \sum_{n_1,\cdots,n_j} \theta^{n_1,\cdots,n_j} \qty(
+	        \sigma^{+}_{n_1} \! \cdots \sigma^{+}_{n_j} \: \pm \:
+	        \sigma^{-}_{n_1} \! \cdots \sigma^{-}_{n_j}
+	      )
+	\end{gather*}
+
+\break
+
+	Another important version of this ansatz is developed in a \textbf{fermionic basis} (i.e. for parametrizing Fock space instead of Hilbert space), and replaces spin-flips with changes in the state of particles. This is interesting because, due to the non-locality of the Jordan-Wigner transform, if we were to apply the unitary coupled cluster parametrization directly onto the Jorda-Wigner's mapping image (i.e. Hilbert space), we might be exploring uninteresting regions of the domain (i.e. Fock space) ---such as those containing symmetry-broken states. On top of that, this method is usually developed so that it \textbf{conserves the total number of particles} in the system; which is predefined through the fermion reference (FR):
+
+	\begin{gather*}
+	  \ket{\text{FUCC}_{k} \qty(\boldsymbol{\theta},\boldsymbol{\eta})} \defeq
+	    \exp[
+	      \sum_{j=1}^{k} F_{j}^{-} \qty(\theta^{p_1,\cdots,p_j,q_1\cdots,q_j}) +i
+	      \sum_{j=1}^{k} F_{j}^{+} \qty(\eta^{p_1,\cdots,p_j,q_1\cdots,q_j})
+	    ]
+	    \ketf{\text{FR}}_{\mathcal{Q}} \\
+	    F_{j}^{\pm} \qty(\theta^{p_1,\cdots,p_j,q_1\cdots,q_j}) \defeq
+	      \sum_{\substack{q \in \mathcal{Q} \\ p \in \overline{\mathcal{Q}}}}
+	      \theta^{p_1,\cdots,p_j,q_1\cdots,q_j} \qty(
+	        \phi^{\dagger}_{p_1} \! \cdots \phi^{\dagger}_{p_j} \,
+	        \phi_{q_1} \! \cdots \phi_{q_j} \: \pm \:
+	        \phi^{\dagger}_{q_1} \! \cdots \phi^{\dagger}_{q_j} \,
+	        \phi_{p_1} \! \cdots \phi_{p_j}
+	      )
+	\end{gather*}
+
+\end{frame}

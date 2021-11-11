@@ -1,0 +1,17 @@
+\beamer@sectionintoc {1}{The NJL model}{4}{0}{1}
+\beamer@subsectionintoc {1}{1}{Analytical solution}{7}{0}{1}
+\beamer@subsectionintoc {1}{2}{Lattice formulation}{9}{0}{1}
+\beamer@sectionintoc {2}{Fermion-qubit mappings}{17}{0}{2}
+\beamer@subsectionintoc {2}{1}{Jordan--Wigner mapping}{19}{0}{2}
+\beamer@subsectionintoc {2}{2}{Refactoring NJL}{22}{0}{2}
+\beamer@sectionintoc {3}{State preparation}{24}{0}{3}
+\beamer@subsectionintoc {3}{1}{HVA}{26}{0}{3}
+\beamer@sectionintoc {4}{Variational algorithms}{29}{0}{4}
+\beamer@subsectionintoc {4}{1}{VQE and SSVQE}{32}{0}{4}
+\beamer@sectionintoc {5}{Solving NJL}{35}{0}{5}
+\beamer@subsectionintoc {5}{1}{Ground/hadron states}{42}{0}{5}
+\beamer@subsectionintoc {5}{2}{Mass generation}{43}{0}{5}
+\beamer@sectionintoc {6}{QSR}{46}{0}{6}
+\beamer@subsectionintoc {6}{1}{Comparison}{50}{0}{6}
+\beamer@subsectionintoc {6}{2}{Applications}{53}{0}{6}
+\beamer@sectionintoc {7}{Conclusions and future research}{54}{0}{7}

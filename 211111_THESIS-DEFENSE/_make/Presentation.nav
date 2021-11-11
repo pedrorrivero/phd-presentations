@@ -1,0 +1,160 @@
+\headcommand {\slideentry {0}{0}{1}{1/1}{}{0}}
+\headcommand {\beamer@framepages {1}{1}}
+\headcommand {\slideentry {0}{0}{2}{2/2}{}{0}}
+\headcommand {\beamer@framepages {2}{2}}
+\headcommand {\slideentry {0}{0}{3}{3/3}{}{0}}
+\headcommand {\beamer@framepages {3}{3}}
+\headcommand {\beamer@sectionpages {1}{3}}
+\headcommand {\beamer@subsectionpages {1}{3}}
+\headcommand {\sectionentry {1}{The NJL model}{4}{The NJL model}{0}}
+\headcommand {\slideentry {1}{0}{1}{4/4}{}{0}}
+\headcommand {\beamer@framepages {4}{4}}
+\headcommand {\slideentry {1}{0}{2}{5/5}{}{0}}
+\headcommand {\beamer@framepages {5}{5}}
+\headcommand {\slideentry {1}{0}{2}{5/6}{}{0}}
+\headcommand {\beamer@framepages {5}{6}}
+\headcommand {\beamer@subsectionpages {4}{6}}
+\headcommand {\beamer@subsectionentry {0}{1}{1}{7}{Analytical solution}}
+\headcommand {\slideentry {1}{1}{1}{7/7}{Analytical solution}{0}}
+\headcommand {\beamer@framepages {7}{7}}
+\headcommand {\slideentry {1}{1}{1}{7/8}{Analytical solution}{0}}
+\headcommand {\beamer@framepages {7}{8}}
+\headcommand {\beamer@subsectionpages {7}{8}}
+\headcommand {\beamer@subsectionentry {0}{1}{2}{9}{Lattice formulation}}
+\headcommand {\slideentry {1}{2}{1}{9/9}{Lattice formulation}{0}}
+\headcommand {\beamer@framepages {9}{9}}
+\headcommand {\slideentry {1}{2}{1}{9/10}{Lattice formulation}{0}}
+\headcommand {\beamer@framepages {9}{10}}
+\headcommand {\slideentry {1}{2}{1}{9/11}{Lattice formulation}{0}}
+\headcommand {\beamer@framepages {9}{11}}
+\headcommand {\slideentry {1}{2}{1}{9/12}{Lattice formulation}{0}}
+\headcommand {\beamer@framepages {9}{12}}
+\headcommand {\slideentry {1}{2}{2}{13/13}{Lattice formulation}{0}}
+\headcommand {\beamer@framepages {13}{13}}
+\headcommand {\slideentry {1}{2}{2}{13/14}{Lattice formulation}{0}}
+\headcommand {\beamer@framepages {13}{14}}
+\headcommand {\slideentry {1}{2}{2}{13/15}{Lattice formulation}{0}}
+\headcommand {\beamer@framepages {13}{15}}
+\headcommand {\slideentry {1}{2}{2}{13/16}{Lattice formulation}{0}}
+\headcommand {\beamer@framepages {13}{16}}
+\headcommand {\beamer@sectionpages {4}{16}}
+\headcommand {\beamer@subsectionpages {9}{16}}
+\headcommand {\sectionentry {2}{Fermion-qubit mappings}{17}{Fermion-qubit mappings}{0}}
+\headcommand {\slideentry {2}{0}{1}{17/17}{}{0}}
+\headcommand {\beamer@framepages {17}{17}}
+\headcommand {\slideentry {2}{0}{2}{18/18}{}{0}}
+\headcommand {\beamer@framepages {18}{18}}
+\headcommand {\beamer@subsectionpages {17}{18}}
+\headcommand {\beamer@subsectionentry {0}{2}{1}{19}{Jordan--Wigner mapping}}
+\headcommand {\slideentry {2}{1}{1}{19/19}{Jordan--Wigner mapping}{0}}
+\headcommand {\beamer@framepages {19}{19}}
+\headcommand {\slideentry {2}{1}{1}{19/20}{Jordan--Wigner mapping}{0}}
+\headcommand {\beamer@framepages {19}{20}}
+\headcommand {\slideentry {2}{1}{1}{19/21}{Jordan--Wigner mapping}{0}}
+\headcommand {\beamer@framepages {19}{21}}
+\headcommand {\beamer@subsectionpages {19}{21}}
+\headcommand {\beamer@subsectionentry {0}{2}{2}{22}{Refactoring NJL}}
+\headcommand {\slideentry {2}{2}{1}{22/22}{Refactoring NJL}{0}}
+\headcommand {\beamer@framepages {22}{22}}
+\headcommand {\slideentry {2}{2}{1}{22/23}{Refactoring NJL}{0}}
+\headcommand {\beamer@framepages {22}{23}}
+\headcommand {\beamer@sectionpages {17}{23}}
+\headcommand {\beamer@subsectionpages {22}{23}}
+\headcommand {\sectionentry {3}{State preparation}{24}{State preparation}{0}}
+\headcommand {\slideentry {3}{0}{1}{24/24}{}{0}}
+\headcommand {\beamer@framepages {24}{24}}
+\headcommand {\slideentry {3}{0}{2}{25/25}{}{0}}
+\headcommand {\beamer@framepages {25}{25}}
+\headcommand {\beamer@subsectionpages {24}{25}}
+\headcommand {\beamer@subsectionentry {0}{3}{1}{26}{HVA}}
+\headcommand {\slideentry {3}{1}{1}{26/26}{HVA}{0}}
+\headcommand {\beamer@framepages {26}{26}}
+\headcommand {\slideentry {3}{1}{1}{26/27}{HVA}{0}}
+\headcommand {\beamer@framepages {26}{27}}
+\headcommand {\slideentry {3}{1}{1}{26/28}{HVA}{0}}
+\headcommand {\beamer@framepages {26}{28}}
+\headcommand {\beamer@sectionpages {24}{28}}
+\headcommand {\beamer@subsectionpages {26}{28}}
+\headcommand {\sectionentry {4}{Variational algorithms}{29}{Variational algorithms}{0}}
+\headcommand {\slideentry {4}{0}{1}{29/29}{}{0}}
+\headcommand {\beamer@framepages {29}{29}}
+\headcommand {\slideentry {4}{0}{2}{30/30}{}{0}}
+\headcommand {\beamer@framepages {30}{30}}
+\headcommand {\slideentry {4}{0}{2}{30/31}{}{0}}
+\headcommand {\beamer@framepages {30}{31}}
+\headcommand {\beamer@subsectionpages {29}{31}}
+\headcommand {\beamer@subsectionentry {0}{4}{1}{32}{VQE and SSVQE}}
+\headcommand {\slideentry {4}{1}{1}{32/32}{VQE and SSVQE}{0}}
+\headcommand {\beamer@framepages {32}{32}}
+\headcommand {\slideentry {4}{1}{2}{33/33}{VQE and SSVQE}{0}}
+\headcommand {\beamer@framepages {33}{33}}
+\headcommand {\slideentry {4}{1}{2}{33/34}{VQE and SSVQE}{0}}
+\headcommand {\beamer@framepages {33}{34}}
+\headcommand {\beamer@sectionpages {29}{34}}
+\headcommand {\beamer@subsectionpages {32}{34}}
+\headcommand {\sectionentry {5}{Solving NJL}{35}{Solving NJL}{0}}
+\headcommand {\slideentry {5}{0}{1}{35/35}{}{0}}
+\headcommand {\beamer@framepages {35}{35}}
+\headcommand {\slideentry {5}{0}{2}{36/36}{}{0}}
+\headcommand {\beamer@framepages {36}{36}}
+\headcommand {\slideentry {5}{0}{2}{36/37}{}{0}}
+\headcommand {\beamer@framepages {36}{37}}
+\headcommand {\slideentry {5}{0}{2}{36/38}{}{0}}
+\headcommand {\beamer@framepages {36}{38}}
+\headcommand {\slideentry {5}{0}{2}{36/39}{}{0}}
+\headcommand {\beamer@framepages {36}{39}}
+\headcommand {\slideentry {5}{0}{2}{36/40}{}{0}}
+\headcommand {\beamer@framepages {36}{40}}
+\headcommand {\slideentry {5}{0}{2}{36/41}{}{0}}
+\headcommand {\beamer@framepages {36}{41}}
+\headcommand {\beamer@subsectionpages {35}{41}}
+\headcommand {\beamer@subsectionentry {0}{5}{1}{42}{Ground/hadron states}}
+\headcommand {\slideentry {5}{1}{1}{42/42}{Ground/hadron states}{0}}
+\headcommand {\beamer@framepages {42}{42}}
+\headcommand {\beamer@subsectionpages {42}{42}}
+\headcommand {\beamer@subsectionentry {0}{5}{2}{43}{Mass generation}}
+\headcommand {\slideentry {5}{2}{1}{43/43}{Mass generation}{0}}
+\headcommand {\beamer@framepages {43}{43}}
+\headcommand {\slideentry {5}{2}{1}{43/44}{Mass generation}{0}}
+\headcommand {\beamer@framepages {43}{44}}
+\headcommand {\slideentry {5}{2}{1}{43/45}{Mass generation}{0}}
+\headcommand {\beamer@framepages {43}{45}}
+\headcommand {\beamer@sectionpages {35}{45}}
+\headcommand {\beamer@subsectionpages {43}{45}}
+\headcommand {\sectionentry {6}{QSR}{46}{QSR}{0}}
+\headcommand {\slideentry {6}{0}{1}{46/46}{}{0}}
+\headcommand {\beamer@framepages {46}{46}}
+\headcommand {\slideentry {6}{0}{2}{47/47}{}{0}}
+\headcommand {\beamer@framepages {47}{47}}
+\headcommand {\slideentry {6}{0}{2}{47/48}{}{0}}
+\headcommand {\beamer@framepages {47}{48}}
+\headcommand {\slideentry {6}{0}{2}{47/49}{}{0}}
+\headcommand {\beamer@framepages {47}{49}}
+\headcommand {\beamer@subsectionpages {46}{49}}
+\headcommand {\beamer@subsectionentry {0}{6}{1}{50}{Comparison}}
+\headcommand {\slideentry {6}{1}{1}{50/50}{Comparison}{0}}
+\headcommand {\beamer@framepages {50}{50}}
+\headcommand {\slideentry {6}{1}{1}{50/51}{Comparison}{0}}
+\headcommand {\beamer@framepages {50}{51}}
+\headcommand {\slideentry {6}{1}{2}{52/52}{Comparison}{0}}
+\headcommand {\beamer@framepages {52}{52}}
+\headcommand {\beamer@subsectionpages {50}{52}}
+\headcommand {\beamer@subsectionentry {0}{6}{2}{53}{Applications}}
+\headcommand {\slideentry {6}{2}{1}{53/53}{Applications}{0}}
+\headcommand {\beamer@framepages {53}{53}}
+\headcommand {\beamer@sectionpages {46}{53}}
+\headcommand {\beamer@subsectionpages {53}{53}}
+\headcommand {\sectionentry {7}{Conclusions and future research}{54}{Conclusions and future research}{0}}
+\headcommand {\slideentry {7}{0}{1}{54/54}{}{0}}
+\headcommand {\beamer@framepages {54}{54}}
+\headcommand {\slideentry {7}{0}{2}{55/55}{}{0}}
+\headcommand {\beamer@framepages {55}{55}}
+\headcommand {\slideentry {7}{0}{3}{56/56}{}{0}}
+\headcommand {\beamer@framepages {56}{56}}
+\headcommand {\slideentry {7}{0}{4}{57/57}{}{0}}
+\headcommand {\beamer@framepages {57}{57}}
+\headcommand {\beamer@partpages {1}{57}}
+\headcommand {\beamer@subsectionpages {54}{57}}
+\headcommand {\beamer@sectionpages {54}{57}}
+\headcommand {\beamer@documentpages {57}}
+\headcommand {\gdef \inserttotalframenumber {57}}

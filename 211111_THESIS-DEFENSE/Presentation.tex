@@ -1,0 +1,115 @@
+%%    _____  _____
+%%   |  __ \|  __ \    AUTHOR: Pedro Rivero
+%%   | |__) | |__) |   ---------------------------------
+%%   |  ___/|  _  /    DATE: November 10, 2021
+%%   | |    | | \ \    ---------------------------------
+%%   |_|    |_|  \_\   https://github.com/pedrorrivero
+%%
+
+% \documentclass[9pt, aspectratio=169]{beamer}
+\documentclass[9pt, handout, aspectratio=169]{beamer}	% Skip \pause commands
+\usetheme[iit, sectiontoc]{PRwide}
+\usepackage{PRmath}
+
+% \setbeameroption{show notes}
+% \setbeameroption{show only notes}
+
+%% ----------------------------------------------------------------------------
+%% FRONT-MATTER
+%% ----------------------------------------------------------------------------
+
+\title{Quantum Computation for the Understanding of Mass}
+\subtitle{Simulating Quantum Field Theories}
+\author{Pedro Rivero}
+\institute{Illinois Institute of Technology \\ Argonne National Laboratory}
+\newcommand{\mail}{priveroramirez@hawk.iit.edu}
+\date{\today}
+\newcommand{\website}{
+	\href{https://github.com/pedrorrivero}
+	{github.com/pedrorrivero}
+}
+
+\begin{document}
+	\justify
+	\setlength{\abovedisplayskip}{0pt}
+	\setlength{\belowdisplayskip}{12pt}
+	\setlength{\abovedisplayshortskip}{0pt}
+	\setlength{\belowdisplayshortskip}{12pt}
+
+\begin{frame}[plain,t]
+	\titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{Table of Contents}
+  \begin{multicols}{2}
+    \tableofcontents%[currentsection]
+  \end{multicols}
+\end{frame}
+
+
+%% ----------------------------------------------------------------------------
+%% MAIN-MATTER
+%% ----------------------------------------------------------------------------
+
+\input{./Content/00_introduction}
+\input{./Content/01_NJL}
+\input{./Content/02_mappings}
+\input{./Content/03_states}
+\input{./Content/04_algorithms}
+\input{./Content/05_results}
+\input{./Content/06_QSR}
+\input{./Content/07_conclusions}
+
+
+%% ----------------------------------------------------------------------------
+%% BACK-MATTER
+%% ----------------------------------------------------------------------------
+
+% \section{Bibliography}
+% %	\begin{frame}[allowframebreaks]{Bibliography}
+% \begin{frame}{Bibliography}
+%
+% 	\begin{thebibliography}{9}
+% 		\setbeamertemplate{bibliography item}[online]
+% 	\bibitem{hayden} \textbf{Hayden, P.} \emph{Quantum Computational Universe}
+% 		\setbeamertemplate{bibliography item}[book]
+% 	\bibitem{susskind_book} \textbf{Susskind, L. \& Friedman A.} \emph{Quantum Mechanics: The Theoretical Minimum}
+% 		\setbeamertemplate{bibliography item}[book]
+% 	\bibitem{nielsen} \textbf{Nielsen M.A. \& Chuang I.L.} \emph{Quantum Computation and Quantum Information}
+% 		\setbeamertemplate{bibliography item}[article]
+% 	\bibitem{ladd} \textbf{Lykken J.} \emph{Quantum Technologies for Quantum Science}
+% 		\setbeamertemplate{bibliography item}[book]
+% 	\bibitem{mermin} \textbf{Mermin N.D.} \emph{Quantum Computer Science: An Introduction}
+% 		\setbeamertemplate{bibliography item}[article]
+% 	\bibitem{ladd} \textbf{Ladd T.D. (et al.)} \emph{Quantum Computing}
+%
+% 	\end{thebibliography}
+%
+% 	\vspace{20pt}
+% 	\begin{small}
+% 	\begin{center}{
+% 	\color{gray}
+% 		\emph{"The only thing demonstrated by an impossibility proof is a lack of imagination."} \\
+% 		\textbf{– John Stewart Bell –} }
+% 	\end{center}
+% 	\end{small}
+% \end{frame}
+
+%% ----------------------------------------------------------------------------
+
+\FinalFrame
+
+
+%% ----------------------------------------------------------------------------
+%% EXTRA SLIDES
+%% ----------------------------------------------------------------------------
+
+% \input{./Content/91_QFT}
+% \input{./Content/92_UCC}
+% \input{./Content/93_symmetry-ansatz}
+
+
+%% ----------------------------------------------------------------------------
+
+\end{document}

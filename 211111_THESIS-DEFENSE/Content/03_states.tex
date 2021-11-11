@@ -1,0 +1,88 @@
+%%    _____  _____
+%%   |  __ \|  __ \    AUTHOR: Pedro Rivero
+%%   | |__) | |__) |   ---------------------------------
+%%   |  ___/|  _  /    DATE: November 10, 2021
+%%   | |    | | \ \    ---------------------------------
+%%   |_|    |_|  \_\   https://github.com/pedrorrivero
+%%
+
+\section{State preparation}
+
+%% ----------------------------------------------------------------------------
+%% ----------------------------------------------------------------------------
+
+\begin{frame}[allowframebreaks]{Space parametrization and state preparation}
+
+  We need to find ways of exploring different quantum states --- a process known as \textbf{state preparation}. In principle, with a good mapping, this can be achieved by parametrizing the Hilbert/Fock space of states representing the system, and finding a way to prepare the corresponding quantum state in the processor. Nonetheless:
+
+  \begin{itemize}
+    \item<2-> We are significantly constrained by the type of operations allowed on the qubits.
+    \item<3-> The dimension of the space at hand grows exponentially with the number of qubits used in the representation of the system.
+    \item<3-> We will be interested in finding a smaller subspace containing the solution to our problem.
+    \item<4-> Randomized, and other naive general approaches suffer from problems such as \textbf{barren-plateaus} and \textbf{suboptimal local minima}.
+    \item<4-> Useful to have some physical intuition to constrain the amount of states that we explore; which leads to problem specific ansatezs.
+    \item Typically divided in: (1) prepare initial state, and (2) perform a parametrized evolution.
+  \end{itemize}
+
+\end{frame}
+%% ----------------------------------------------------------------------------
+%% ----------------------------------------------------------------------------
+
+\subsection{HVA}
+
+%% ----------------------------------------------------------------------------
+%% ----------------------------------------------------------------------------
+
+\begin{frame}[allowframebreaks]{Hamiltonian Variational Ansatz (HVA)}
+
+  There is a family of circuits known as the Hamiltonian Variational Ansatz (HVA) --- also referred to as the QAOA ansatz --- which are based on \textbf{adiabatic state preparation}.
+
+  \begin{theorem}[Simplified adiabatic theorem]
+    Under a slowly changing Hamiltonian $H(t)$ with instantaneous eigenstates $\ket{n(t)}$ and corresponding energies $E_{n}(t)$, a quantum system initialized in a particular eigenstate $\ket{m(0)}$, will remain in the corresponding eigenstate $\ket{m(t)}$ during the evolution.
+    % Under a slowly changing Hamiltonian $H(t)$ with instantaneous eigenstates $\ket{n(t)}$ and corresponding energies $E_{n}(t)$, a quantum system evolves from the initial state ${|\psi (0)\rangle =\sum _{n}c_{n}(0)|n(0)\rangle }$ to the final state ${|\psi (t)\rangle =\sum _{n}c_{n}(t)|n(t)\rangle}$ where the coefficients undergo the change of phase ${c_{n}(t)=c_{n}(0)e^{i\theta _{n}(t)}e^{i\gamma _{n}(t)}}$.
+    % In particular, ${|c_{n}(t)|^{2}=|c_{n}(0)|^{2}}$, so if the system begins in an eigenstate of ${H(0)}$, it remains in an eigenstate of $H(t)$ during the evolution with a change of phase only.
+  \end{theorem}
+
+  Therefore, if we prepare an eigenstate $\ket{\varepsilon_0(0)}$ of one of the sub-Hamiltonians $H_0$, and slowly activate the others through activation parameters $\lambda_j(t)$, where $\lambda_j(0) = 0$, $\lambda_j(t \ra \infty) = 1$, and $\dot{\lambda}_j(t) \ll 1$; we will end up with the corresponding eigenstate $\ket{\varepsilon}$ for the entire Hamiltonian:
+
+  \begin{gather*}
+    \ket{\varepsilon} = \lim_{t \ra \infty}
+      \exp[-i t \qty(H_0 + \sum_{j=1} \lambda_j(t) H_j)]
+      \ket{\varepsilon_0(0)}
+  \end{gather*}
+
+%% ----------------------------------------------------------------------------
+\break
+%% ----------------------------------------------------------------------------
+
+  Particularly, making use of the non-commuting terms in the Hamiltonian and a simple \textbf{Trotter decomposition} we can simulate this process digitally:
+
+  \begin{gather*}
+    H =
+      \sum_{j}{H_j} \qc \com{H_j}{H_{k}} \neq 0 \quad\forall\, j \neq k \\[1em]
+    \ket{\psi} = \exp[-i t H(t)] \ket{\psi_0} \approx
+      \qty[ \prod_{k}^{p} \exp[-i \Delta t_k H(t_k)] ] \ket{\psi_0} =
+      \qty[ \prod_{k}^{p} \exp[-i \Delta t_k \sum_j \lambda_j(t_k) H_j] ]
+      \ket{\psi_0} \\
+    \ket{\psi} \approx \prod_{k}^{p}
+      \qty[\prod_{j} \exp[-i \Delta t_k \lambda_j(t_k) H_j]] \ket{\psi_0}
+  \end{gather*}
+
+%% ----------------------------------------------------------------------------
+\break
+%% ----------------------------------------------------------------------------
+
+  Which, by noticing that we can control both the time steps as well as the activation parameters at will, leads to the final form of the parameterization ansatz:
+
+  \begin{gather*}
+    \ket{\psi\qty(\theta)} \defeq \prod_{k}^{p}
+      \qty[\prod_{j} \exp(-i \theta_{jk} H_j)] \ket{\psi_0}
+  \end{gather*}
+
+  where $p$ is a variable parameter that stands for the depth of the ansatz. This technique is thought to possess \textbf{favorable properties} for solving optimization problems. Specifically, these circuits have been shown to display mild or entirely absent barren plateaus, as well as almost trap-free target landscapes.
+
+  \medskip
+
+  We also infer that the \textbf{initial state} $\ket{\psi_0}$ should be an eigenstate of one of the sub-Hamiltonians --- according to the output eigenstate that we want to obtain. Notice that this ansatz is indeed problem specific, since it depends on the Hamiltonian of the system of interest, and physically sound as well. Finally, most of the times it is enough to have $\com{H_j}{H_{j+1}} \neq 0 \ \forall j$.
+
+\end{frame}
