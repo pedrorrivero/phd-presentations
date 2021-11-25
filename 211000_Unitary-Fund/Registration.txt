@@ -1,0 +1,26 @@
+### Name
+Pedro Rivero
+
+### Email
+pedro.rivero.ramirez@gmail.com
+
+### Talk Title
+QRAND: A multi-platform and multi-protocol quantum random number generator for arbitrary probability distributions
+
+### Pick a time slot for the talk
+October 7, 2021 11:00
+
+### Abstract
+Random numbers are everywhere. 
+Computer algorithms, data encryption, physical simulations, and even the arts use them all the time. There is one problem though: it turns out that they are actually very difficult to produce in large amounts. Luckily, the probabilistic nature of quantum computers makes these devices particularly useful for the task. 
+QRAND introduces a versatile interface layer between NumPy and several quantum computing platforms (qiskit, cirq, qsharp...), along with some useful functionality that enables the production of quantum random numbers (QRN) according to different quantum protocols, and for a wide variety of probability distributions.
+
+### Speaker Bio
+Pedro Rivero is a Ph.D. candidate at Illinois Institute of Technology doing research on Quantum Field Theory simulation at Argonne National Laboratory. He is part of the Quantum Information Science and Engineering Network at the Chicago Quantum Exchange since 2020, and the main developer of QRAND.
+
+### Social Prfiles
+https://www.linkedin.com/in/pedrorrivero/
+https://github.com/pedrorrivero
+
+### Photo
+https://avatars.githubusercontent.com/u/52980156
